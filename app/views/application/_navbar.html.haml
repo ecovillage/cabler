@@ -1,0 +1,20 @@
+%nav.navbar{"aria-label" => "main navigation", :role => "navigation"}
+  .navbar-brand
+    %a.navbar-item{:href => "https://bulma.io"}
+      %img{:height => "28", :src => "", :width => "112"}/
+    %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "cablerNavbar", :role => "button"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+  #cablerNavbar.navbar-menu
+    .navbar-start
+      = link_to t('Home'), root_path, class: 'navbar-item'
+      = link_to t('Devices'), devices_path, class: 'navbar-item'
+      = link_to t('Locations'), locations_path, class: 'navbar-item'
+    -#.navbar-end
+    -#  .navbar-item
+    -#    .buttons
+    -#      %a.button.is-primary
+    -#        %strong Sign up
+    -#      %a.button.is-light
+    -#        Log in
