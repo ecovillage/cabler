@@ -1,0 +1,39 @@
+%table.label-table
+  %thead
+    %tr.device_head
+      %th
+        = @device.name
+    %tr.link_head
+      %th
+        Slot
+      %th
+        to
+  %tbody
+    - @device.slots.each do |slot|
+      - if slot.nil?
+        %tr
+          %td
+      - else
+        %tr
+          %td.own_slot
+            = slot.source_slot
+          %td
+            = slot.target_slot
+          %td
+            = slot.target_device&.name
+    -#- @device.links.each do |link|
+    -#  -#- own_end = (@device == link.one_end)
+    -#  %tr
+    -#    %td.own_slot
+    -#      = link.slot_one_end
+    -#    %td
+    -#      = link.slot_other_end
+    -#    %td
+    -#      = link.other_end&.name
+
+%br
+- if @device.unslotted_links.present?
+  %h2 Unclear
+  - @device.unslotted_links.each do |unslotted|
+    #{unslotted.one_end&.name} - #{unslotted.other_end&.name}
+    %br

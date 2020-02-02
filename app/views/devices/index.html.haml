@@ -8,7 +8,7 @@
       %th= t('model')
       %th= t('Kind')
       %th= t('# links (used)')
-      %th{:colspan => "3"}
+      %th{:colspan => "4"}
   %tbody
     - @devices.each do |device|
       %tr
@@ -27,6 +27,7 @@
         %td= link_to 'Show', device
         %td= link_to 'Edit', edit_device_path(device)
         %td= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Label', device_label_path(device)
 %br/
 
 = link_to 'New Device', new_device_path, class: 'button'

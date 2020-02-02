@@ -14,4 +14,20 @@
  *= require_self
  */
 
+table.label-table {
+  border: 2px solid black;
+  tr {
+    border-top: 1px solid black;
+  }
+  tr.device_head {
+    border-bottom: 3px solid black;
+  }
+  tr.link_head {
+    border-bottom: 2px solid black;
+  }
+  td.own_slot {
+    border-right: 4px solid black;
+  }
+}
+
 @import "bulma";
