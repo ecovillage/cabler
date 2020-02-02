@@ -1,0 +1,25 @@
+%h1.title Dashboard Cabler
+
+%h2.subtitle
+  #{@devices.count} Devices
+
+.tile.is-ancestor
+  - @devices.each do |device|
+    .tile
+      .box
+        = link_to device.name, device
+  .tile
+    .box
+      = link_to 'new device', new_device_path
+
+%h2.subtitle
+  #{@locations.count} Locations
+
+.tile.is-ancestor
+  - @locations.each do |location|
+    .tile
+      .box
+        = link_to location.name, location
+  .tile
+    .box
+      = link_to 'new location', new_location_path
