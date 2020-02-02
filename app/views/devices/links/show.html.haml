@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @link.name
+%p
+  %strong Location:
+  -#= @link.location_id
+= link_to 'Edit', edit_device_link_path(@device, @link)
+|
+= link_to 'Back', device_links_path(@device)

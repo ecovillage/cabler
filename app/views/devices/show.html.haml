@@ -1,0 +1,74 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @device.name
+%p
+  %strong Location:
+  - if @device.location
+    = link_to @device.location.name, @device.location
+%p
+  %strong Kind:
+  = @device.kind
+%p
+  %strong description:
+  = @device.description
+%p
+  %strong Number Links:
+  = @device.num_links
+%p
+  %strong Model
+  = @device.model
+%p
+  %strong Manufacturer
+  = @device.manufacturer
+
+- if @device.num_links.to_i > 0
+  %table
+    %thead
+      %tr
+        - (1..@device.num_links).each do |idx|
+          %th
+            = idx
+    %tbody
+      %tr
+        - (1..@device.num_links).each do |idx|
+          %td
+            show/add
+%h2 #{@device.links.count} Links
+%table
+  %thead
+    %tr
+      %th name
+      %th # this end
+      %th # other end
+      %th other end
+      %th
+  %tbody
+    - @device.links.find_each do |link|
+      -# Will be: from this port: to ... other port other device/location
+      - this_end = (link.one_end == @device) ? @device : link.other_end
+      - this_slot = (link.one_end == @device) ? link.slot_one_end : link.slot_other_end
+      - other_end = (link.other_end == @device) ? @device : link.other_end
+      - other_end_slot = (link.one_end == @device) ? link.slot_other_end : link.slot_one_end
+
+      %tr
+        %td= link.name
+        %td= this_slot
+        %td ->
+        %td= other_end_slot
+        %td
+          - if other_end
+            = link_to other_end.name, other_end
+            \
+            %small
+              (#{other_end.kind})
+            %small
+              (#{other_end.location&.name})
+        %td= link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }
+    
+
+= link_to 'Edit', edit_device_path(@device)
+|
+= link_to 'Create Link', new_device_link_path(@device)
+|
+= link_to 'Back', devices_path

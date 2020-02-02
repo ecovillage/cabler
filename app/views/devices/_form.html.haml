@@ -1,0 +1,41 @@
+= form_with(model: device, local: true) do |form|
+  - if device.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(device.errors.count, "error")
+        prohibited this device from being saved:
+      %ul
+        - device.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :location_id
+    = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new below)'
+    -# select
+  - if device.new_record?
+    .field
+      = form.label :or_new_location
+      = form.text_field :create_new_location
+  .field
+    = form.label :select_kind
+    -# TODO distinct
+    = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new below)'
+  .field
+    = form.label :kind
+    = form.text_field :kind
+  .field
+    = form.label :model
+    = form.text_field :model
+  .field
+    = form.label :num_links
+    = form.number_field :num_links
+  .field
+    = form.label :manufacturer
+    = form.text_area :manufacturer
+  .field
+    = form.label :description
+    = form.text_area :description
+  .actions
+    = form.submit
