@@ -1,5 +1,6 @@
-%h1 Editing Location
+%h1.title Editing Location
+
 = render 'form', location: @location
-= link_to 'Show', @location
-|
-= link_to 'Back', locations_path
+
+%br
+= link_to 'Abort', locations_path, class: 'button is-danger'

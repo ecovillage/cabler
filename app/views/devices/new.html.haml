@@ -1,3 +1,6 @@
-%h1 New Device
+%h1.title New Device
+
 = render 'form', device: @device
-= link_to 'Back', devices_path
+
+%br
+= link_to 'Abort', devices_path, class: 'button is-danger'

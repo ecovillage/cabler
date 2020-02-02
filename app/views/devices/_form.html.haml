@@ -8,34 +8,37 @@
         - device.errors.full_messages.each do |message|
           %li= message
   .field
-    = form.label :name
+    = form.label :name, class: :label
     = form.text_field :name
   .field
-    = form.label :location_id
-    = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new below)'
+    = form.label :location_id, class: :label
+    .select
+      = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new below)'
     -# select
   - if device.new_record?
     .field
-      = form.label :or_new_location
+      = form.label :or_new_location, class: :label
       = form.text_field :create_new_location
   .field
-    = form.label :select_kind
+    = form.label :select_kind, class: :label
     -# TODO distinct
-    = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new below)'
+    .select
+      = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new below)'
   .field
-    = form.label :kind
+    = form.label :kind, class: :label
     = form.text_field :kind
   .field
-    = form.label :model
+    = form.label :model, class: :label
     = form.text_field :model
   .field
-    = form.label :num_links
+    = form.label :num_links, class: :label
     = form.number_field :num_links
   .field
-    = form.label :manufacturer
+    = form.label :manufacturer, class: :label
     = form.text_area :manufacturer
   .field
-    = form.label :description
+    = form.label :description, class: :label
     = form.text_area :description
+
   .actions
-    = form.submit
+    = form.submit class: 'button is-primary'
