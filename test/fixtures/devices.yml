@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Blue Switch
+  #location: one
+  kind: Switch
+
+two:
+  name: MyString
+  location: two
+  kind: MyString
