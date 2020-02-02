@@ -1,4 +1,6 @@
-%p#notice= notice
+- if notice
+  %p#notice.notification= notice
+
 %h1.title
   = @device.name
 
@@ -36,11 +38,12 @@
             show/add
 %br
 %h2.subtitle #{@device.links.count} Links
-%table.table
+%table.table.is-fullwidth
   %thead
     %tr
       %th name
       %th # this end
+      %th
       %th # other end
       %th other end
       %th
@@ -54,7 +57,11 @@
       - other_end_slot = (link.one_end == @device) ? link.slot_other_end : link.slot_one_end
 
       %tr
-        %td= link.name
+        %td
+          = link.name
+          - if link.kind.present?
+            %small
+              (#{link.kind})
         %td= this_slot
         %td ->
         %td= other_end_slot
@@ -62,11 +69,15 @@
           - if other_end
             = link_to other_end.name, other_end
             \
-            %small
-              (#{other_end.kind})
-            %small
-              (#{other_end.location&.name})
-        %td= link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }
+            - if other_end.kind.present?
+              %small
+                (#{other_end.kind})
+            - if other_end.location&.name
+              %small
+                (#{other_end.location&.name})
+        %td
+          = link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'edit', edit_device_link_path(@device, link)
     
 
 = link_to 'Edit', edit_device_path(@device)

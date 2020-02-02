@@ -1,6 +1,6 @@
 = form_with(model: device, local: true) do |form|
   - if device.errors.any?
-    #error_explanation
+    #error_explanation.notification
       %h2
         = pluralize(device.errors.count, "error")
         prohibited this device from being saved:

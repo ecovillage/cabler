@@ -12,6 +12,11 @@
     = form.label :name, class: :label
     = form.text_field :name
   .field
+    = form.label :kind, class: :label
+    .select
+      = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
+    = form.text_field :kind
+  .field
     = form.label :slot_this_end, class: :label
     = form.text_field :slot_one_end
   .field

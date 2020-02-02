@@ -47,7 +47,7 @@ class Devices::LinksController < ApplicationController
   def update
     respond_to do |format|
       if @link.update(link_params)
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
+        format.html { redirect_to @device, notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
         format.html { render :edit }
@@ -78,6 +78,6 @@ class Devices::LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:device_id, :name, :other_end_id, :one_end_id, :slot_other_end, :slot_one_end)
+      params.require(:link).permit(:device_id, :name, :other_end_id, :one_end_id, :slot_other_end, :slot_one_end, :kind)
     end
 end

@@ -1,5 +1,6 @@
-%h1 Editing Link
+%h1.title Editing Link (from: #{@device.name})
 = render 'form', link: @link
-= link_to 'Show', @link
+
+= link_to 'Show', device_link_path(@device, @link)
 |
-= link_to 'Back', links_path
+= link_to 'Back', @device
