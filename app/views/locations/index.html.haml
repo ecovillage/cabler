@@ -1,16 +1,21 @@
 %p#notice= notice
-%h1 Locations
-%table
-  %thead
-    %tr
-      %th Name
-      %th{:colspan => "3"}
-  %tbody
+%h1.title Locations
+
+#locations.content
+  .tile.is-ancestor
     - @locations.each do |location|
-      %tr
-        %td= location.name
-        %td= link_to 'Show', location
-        %td= link_to 'Edit', edit_location_path(location)
-        %td= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Location', new_location_path
+      .tile.is-3
+        .card
+          %header.card-header
+            %p.card-header-title.is-centered
+              = location.name
+          .card-content
+            .content
+              = location.devices.count
+              devices
+          .card-footer
+            = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
+            = link_to 'Show', location, class: 'card-footer-item'
+            = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
+
+= link_to 'New Location', new_location_path, class: :button
