@@ -9,21 +9,22 @@
           %li= message
   -#= hidden_field device_id: @device.
   .field
-    = form.label :name
+    = form.label :name, class: :label
     = form.text_field :name
   .field
-    = form.label :slot_one_end
+    = form.label :slot_this_end, class: :label
     = form.text_field :slot_one_end
   .field
-    = form.label :slot_other_end
+    = form.label :slot_other_end, class: :label
     = form.text_field :slot_other_end
   .field
-    = form.label :other_end
+    = form.label :other_end_device, class: :label
+    .select
+      = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device, location or create above'
+  .field
+    = form.label :other_end, class: :label
     = form.text_field :other_end
-  .field
-    = form.label :other_end_device
-    = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device, location or create above'
-  .field
-    = form.label :other_end_location
+  -#.field
+  -#  = form.label :other_end_location, class: :label
   .actions
-    = form.submit
+    = form.submit class: "button is-primary"

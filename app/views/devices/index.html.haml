@@ -1,26 +1,32 @@
 %p#notice= notice
-%h1 Devices
-%table
+%h1.title Devices
+%table.table
   %thead
     %tr
       %th= t('Name')
       %th= t('Location')
       %th= t('model')
       %th= t('Kind')
-      %th= t('# links')
+      %th= t('# links (used)')
       %th{:colspan => "3"}
   %tbody
     - @devices.each do |device|
       %tr
-        %td= device.name
-        %td= device.location&.name
+        %td
+          = link_to device.name, device
+        %td
+          - if device.location
+            = link_to device.location.name, device.location
         %td
           = device.manufacturer
           = device.model
         %td= device.kind
-        %td= device.num_links
+        %td
+          = device.num_links
+          (#{device.links.count})
         %td= link_to 'Show', device
         %td= link_to 'Edit', edit_device_path(device)
         %td= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= link_to 'New Device', new_device_path
+
+= link_to 'New Device', new_device_path, class: 'button'

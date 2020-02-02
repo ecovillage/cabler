@@ -1,7 +1,7 @@
 %p#notice= notice
-%p
-  %strong Name:
+%h1.title
   = @device.name
+
 %p
   %strong Location:
   - if @device.location
@@ -10,7 +10,7 @@
   %strong Kind:
   = @device.kind
 %p
-  %strong description:
+  %strong Description:
   = @device.description
 %p
   %strong Number Links:
@@ -34,14 +34,16 @@
         - (1..@device.num_links).each do |idx|
           %td
             show/add
-%h2 #{@device.links.count} Links
-%table
+%br
+%h2.subtitle #{@device.links.count} Links
+%table.table
   %thead
     %tr
       %th name
       %th # this end
       %th # other end
       %th other end
+      %th
       %th
   %tbody
     - @device.links.find_each do |link|

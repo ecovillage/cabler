@@ -1,12 +1,26 @@
 %p#notice= notice
-%p
-  %strong Name:
+
+%h1.title
+  Location
   = @location.name
-%h2 #{@location.devices.count} Devices at this location:
-- @location.devices.find_each do |device|
-  = link_to device.name, device
-  %small
-    (#{device.kind})
+
+%h2.subtitle #{@location.devices.count} Devices at this location:
+
+.tile.is-ancestor
+  - @location.devices.find_each do |device|
+    .tile.is-3
+      .card
+        %header.card-header
+          %p.card-header-title.is-centered
+            = link_to device.name, device
+        .card-content
+          .content
+            - if device.kind.present?
+              %small
+                (#{device.kind})
+            = device.links.count
+            - if device.num_links
+              (of #{device.num_links})
   %br
 = link_to 'Edit', edit_location_path(@location)
 |

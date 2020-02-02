@@ -13,29 +13,27 @@
   .field
     = form.label :location_id, class: :label
     .select
-      = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new below)'
-    -# select
-  - if device.new_record?
-    .field
-      = form.label :or_new_location, class: :label
+      = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
+    - if device.new_record?
       = form.text_field :create_new_location
+    -#= form.label :or_new_location, class: :label
   .field
     = form.label :select_kind, class: :label
     -# TODO distinct
     .select
-      = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new below)'
-  .field
-    = form.label :kind, class: :label
+      = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new >)'
     = form.text_field :kind
+  -#.field
+  -#  = form.label :kind, class: :label
+  .field
+    = form.label :manufacturer, class: :label
+    = form.text_field :manufacturer
   .field
     = form.label :model, class: :label
     = form.text_field :model
   .field
     = form.label :num_links, class: :label
     = form.number_field :num_links
-  .field
-    = form.label :manufacturer, class: :label
-    = form.text_area :manufacturer
   .field
     = form.label :description, class: :label
     = form.text_area :description

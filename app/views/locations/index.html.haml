@@ -11,8 +11,12 @@
               = location.name
           .card-content
             .content
-              = location.devices.count
-              devices
+              %h5
+                = location.devices.count
+                devices
+              - location.devices.each do |device|
+                = device.name
+              = link_to 'Add device', new_device_path(location_id: location.id)
           .card-footer
             = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
             = link_to 'Show', location, class: 'card-footer-item'
