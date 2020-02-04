@@ -6,22 +6,36 @@
 
 %h2.subtitle #{@location.devices.count} Devices at this location:
 
-.tile.is-ancestor
+.columns.multiline
   - @location.devices.find_each do |device|
-    .tile.is-3
+    .column.is-3
       .card
         %header.card-header
           %p.card-header-title.is-centered
             = link_to device.name, device
         .card-content
           .content
+            - if device.manufacturer.present?
+              .manufacturer
+                = device.manufacturer
+            - if device.model.present?
+              .model
+                = device.model
             - if device.kind.present?
-              %small
+              %small.kind
                 (#{device.kind})
             = device.links.count
+            links
             - if device.num_links
               (of #{device.num_links})
-  %br
+        .card-footer
+          = link_to 'Edit', edit_device_path(device), class: 'card-footer-item is-6'
+  .column.is-3
+    .card
+      .card-content
+        .content
+          = link_to 'add device at this location', new_device_path(location: @location)
+
 = link_to 'Edit', edit_location_path(@location)
 |
 = link_to 'Back', locations_path

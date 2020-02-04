@@ -8,21 +8,26 @@
   %strong Location:
   - if @device.location
     = link_to @device.location.name, @device.location
-%p
-  %strong Kind:
-  = @device.kind
-%p
-  %strong Description:
-  = @device.description
-%p
-  %strong Number Links:
-  = @device.num_links
-%p
-  %strong Model
-  = @device.model
-%p
-  %strong Manufacturer
-  = @device.manufacturer
+- if @device.kind.present?
+  %p
+    %strong Kind:
+    = @device.kind
+- if @device.description.present?
+  %p
+    %strong Description:
+    = @device.description
+- if @device.num_links.present?
+  %p
+    %strong Number Links:
+    = @device.num_links
+- if @device.model.present?
+  %p
+    %strong Model:
+    = @device.model
+- if @device.manufacturer.present?
+  %p
+    %strong Manufacturer:
+    = @device.manufacturer
 
 - if @device.num_links.to_i > 0
   %table
@@ -74,7 +79,7 @@
                 (#{other_end.kind})
             - if other_end.location&.name
               %small
-                (#{other_end.location&.name})
+                (#{link_to other_end.location&.name, other_end.location})
         %td
           = link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }
           = link_to 'edit', edit_device_link_path(@device, link)

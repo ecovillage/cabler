@@ -1,25 +1,26 @@
 %p#notice= notice
 %h1.title Locations
 
-#locations.content
-  .tile.is-ancestor
-    - @locations.each do |location|
-      .tile.is-3
-        .card
-          %header.card-header
-            %p.card-header-title.is-centered
-              = location.name
-          .card-content
-            .content
-              %h5
-                = location.devices.count
-                devices
-              - location.devices.each do |device|
-                = device.name
-              = link_to 'Add device', new_device_path(location_id: location.id)
-          .card-footer
-            = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
-            = link_to 'Show', location, class: 'card-footer-item'
-            = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
+#locations.columns.is-multiline
+  - @locations.each do |location|
+    .column.is-one-third
+      .card
+        %header.card-header
+          %p.card-header-title.is-centered
+            = location.name
+        .card-content
+          .content
+            %h5
+              = location.devices.count
+              devices
+            - location.devices.each do |device|
+              = device.name
+            %br
+            = link_to 'Add device', new_device_path(location_id: location.id), class: :button
+        .card-footer
+          = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
+          = link_to 'Show', location, class: 'card-footer-item'
+          = link_to 'Add device', location, class: 'card-footer-item'
+          = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
 
 = link_to 'New Location', new_location_path, class: :button
