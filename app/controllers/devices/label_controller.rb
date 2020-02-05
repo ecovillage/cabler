@@ -1,4 +1,5 @@
 class Devices::LabelController < ApplicationController
+  before_action :authenticate_user!
 
   # GET /device/1/label
   def show

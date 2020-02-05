@@ -1,4 +1,6 @@
 class Devices::LinksController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_device#, only: [:show, :edit, :update, :destroy]#, :create, :new]
   before_action :set_link, only: [:show, :edit, :update, :destroy]
 
