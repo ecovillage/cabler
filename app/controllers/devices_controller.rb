@@ -15,6 +15,10 @@ class DevicesController < ApplicationController
   # GET /devices/new
   def new
     @device = Device.new
+    if params[:location]
+      @location = Location.find params[:location]
+      @device.location = @location
+    end
   end
 
   # GET /devices/1/edit
