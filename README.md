@@ -33,6 +33,8 @@ Own code (mostly `app/` and `test/`) is released under the AGPLv3+ (included as 
 
 Contributions are very welcome.  Copyright-transfer of modifications to Felix Wolfsteller is assumed.
 
+For fun, some of the files include comments to be compliant with [(FSFEs) reuse](https://reuse.software/).
+
 ## Documentation
 
 ### Stuff used

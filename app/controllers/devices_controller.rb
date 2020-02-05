@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Felix Wolfsteller
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 class DevicesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_device, only: [:show, :edit, :update, :destroy]
