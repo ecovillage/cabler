@@ -27,6 +27,8 @@ gem 'devise'
 gem "haml-rails", "~> 2.0"
 gem "bulma-rails", "~> 0.8"
 
+gem 'font-awesome-sass', '~> 5.12.0'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 
