@@ -11,10 +11,10 @@
       = link_to t('Home'), root_path, class: 'navbar-item'
       = link_to t('Devices'), devices_path, class: 'navbar-item'
       = link_to t('Locations'), locations_path, class: 'navbar-item'
-    -#.navbar-end
-    -#  .navbar-item
-    -#    .buttons
-    -#      %a.button.is-primary
-    -#        %strong Sign up
-    -#      %a.button.is-light
-    -#        Log in
+    .navbar-end
+      .navbar-item
+        .buttons
+          - if user_signed_in?
+            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
+          - else
+            = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'button'
