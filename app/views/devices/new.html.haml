@@ -1,4 +1,7 @@
-%h1.title New Device
+- if @location
+  %h1.title New Device at #{@location.name}
+- else
+  %h1.title New Device
 
 = render 'form', device: @device
 

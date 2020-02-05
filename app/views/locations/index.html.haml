@@ -20,7 +20,7 @@
         .card-footer
           = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
           = link_to 'Show', location, class: 'card-footer-item'
-          = link_to 'Add device', location, class: 'card-footer-item'
+          = link_to 'Add device', new_device_path(location_id: location.id), class: 'card-footer-item'
           = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
 
 = link_to 'New Location', new_location_path, class: :button

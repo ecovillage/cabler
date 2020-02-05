@@ -3,23 +3,23 @@
 %h2.subtitle
   #{@devices.count} Devices
 
-.tile.is-ancestor
+.columns.is-multiline
   - @devices.each do |device|
-    .tile
+    .column.is-2
       .box
         = link_to device.name, device
-  .tile
+  .column.is-2
     .box
       = link_to 'new device', new_device_path
 
 %h2.subtitle
   #{@locations.count} Locations
 
-.tile.is-ancestor
+.columns.is-multiline
   - @locations.each do |location|
-    .tile
+    .column.is-2
       .box
         = link_to location.name, location
-  .tile
+  .column.is-2
     .box
       = link_to 'new location', new_location_path

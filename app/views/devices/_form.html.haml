@@ -10,13 +10,16 @@
   .field
     = form.label :name, class: :label
     = form.text_field :name
-  .field
-    = form.label :location_id, class: :label
-    .select
-      = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
-    - if device.new_record?
-      = form.text_field :create_new_location
-    -#= form.label :or_new_location, class: :label
+  - if @location
+    = form.hidden_field(:location_id)
+  - else
+    .field
+      = form.label :location_id, class: :label
+      .select
+        = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
+      - if device.new_record?
+        = form.text_field :create_new_location
+      -#= form.label :or_new_location, class: :label
   .field
     = form.label :select_kind, class: :label
     -# TODO distinct
