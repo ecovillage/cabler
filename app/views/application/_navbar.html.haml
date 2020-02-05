@@ -1,4 +1,4 @@
-%nav.navbar{"aria-label" => "main navigation", :role => "navigation"}
+%nav.navbar.is-dark.is-spaced{"aria-label" => "main navigation", :role => "navigation"}
   .navbar-brand
     %a.navbar-item{:href => "https://bulma.io"}
       %img{:height => "28", :src => "", :width => "112"}/
@@ -9,8 +9,14 @@
   #cablerNavbar.navbar-menu
     .navbar-start
       = link_to t('Home'), root_path, class: 'navbar-item'
-      = link_to t('Devices'), devices_path, class: 'navbar-item'
-      = link_to t('Locations'), locations_path, class: 'navbar-item'
+      = link_to devices_path, class: 'navbar-item' do
+        %span.icon
+          %i.fa.fa-server
+        = t('Devices')
+      = link_to locations_path, class: 'navbar-item' do
+        %span.icon
+          %i.fa.fa-globe
+        = t('Locations')
     .navbar-end
       .navbar-item
         .buttons

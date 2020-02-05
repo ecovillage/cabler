@@ -2,11 +2,13 @@
   %p#notice.notification= notice
 
 %h1.title
+  %i.fa.fa-server
   = @device.name
 
 %p
   %strong Location:
   - if @device.location
+    %i.fa.fa-globe
     = link_to @device.location.name, @device.location
 - if @device.kind.present?
   %p
@@ -42,7 +44,9 @@
           %td
             show/add
 %br
-%h2.subtitle #{@device.links.count} Links
+%h2.subtitle
+  %i.fa.fa-network-wired
+  #{@device.links.count} Links
 %table.table.is-fullwidth
   %thead
     %tr

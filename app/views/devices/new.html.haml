@@ -1,7 +1,13 @@
 - if @location
-  %h1.title New Device at #{@location.name}
+  %h1.title
+    %span.icon
+      %i.fa.fa-hdd
+    New Device at #{@location.name}
 - else
-  %h1.title New Device
+  %h1.title
+    %span.icon
+      %i.fa.fa-hdd
+    New Device
 
 = render 'form', device: @device
 

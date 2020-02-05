@@ -1,6 +1,7 @@
 %p#notice= notice
 
 %h1.title
+  %i.fa.fa-map-marker
   Location
   = @location.name
 
@@ -12,6 +13,7 @@
       .card
         %header.card-header
           %p.card-header-title.is-centered
+            %i.fa.fa-hdd
             = link_to device.name, device
         .card-content
           .content

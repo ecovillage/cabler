@@ -1,4 +1,6 @@
-%h1.title Editing Link (from: #{@device.name})
+%h1.title
+  %i.fa.fa-ethernet
+  Editing Link (from: #{@device.name})
 = render 'form', link: @link
 
 = link_to 'Show', device_link_path(@device, @link)
