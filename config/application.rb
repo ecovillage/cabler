@@ -15,5 +15,12 @@ module Cabler
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # Needed for correct error field markup with bulma_form_builder
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      html_tag.gsub(/class="/, "class=\"field_with_errors ").html_safe
+      #%Q(<div class="field_with_errors">#{html_tag}</div>).html_safe
+    end
   end
+
 end
