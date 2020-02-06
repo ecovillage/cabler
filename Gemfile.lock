@@ -244,6 +244,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   bulma-rails (~> 0.8)
+  bulma_form_builder!
   byebug
   capybara (>= 2.15)
   devise

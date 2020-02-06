@@ -1,4 +1,4 @@
-= form_with(model: [@device, link], local: true) do |form|
+= form_with(model: [@device, link], local: true, builder: BulmaFormBuilder::FormBuilder) do |form|
   - if link.errors.any?
     #error_explanation
       %h2
@@ -7,29 +7,36 @@
       %ul
         - link.errors.full_messages.each do |message|
           %li= message
-  -#= hidden_field device_id: @device.
-  .field
-    = form.label :name, class: :label
-    = form.text_field :name
-  .field
-    = form.label :kind, class: :label
-    .select
-      = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
-    = form.text_field :kind
-  .field
-    = form.label :slot_this_end, class: :label
-    = form.text_field :slot_one_end
-  .field
-    = form.label :slot_other_end, class: :label
-    = form.text_field :slot_other_end
-  .field
-    = form.label :other_end_device, class: :label
-    .select
-      = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device, location or create above'
-  .field
-    = form.label :other_end, class: :label
-    = form.text_field :other_end
-  -#.field
-  -#  = form.label :other_end_location, class: :label
+  .columns
+    #from-link.column.is-5
+      -#= hidden_field device_id: @device.
+      .field
+        = form.label :name
+        = form.text_field :name
+      .field
+        = form.label :kind
+        .field.has-addons
+          %p.control
+            %span.select
+              = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
+          %p.control.is-expanded
+            = form.text_field :kind
+      .field
+        = form.label :slot_this_end
+        = form.text_field :slot_one_end, class: 'is-primary', help: 'the slot on this end'
+    #whitespace.column.is-2
+    #to-link.column.is-5
+      .field
+        = form.label :other_end_device
+        .select
+          = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device, location or create above'
+      .field
+        = form.label :other_end
+        = form.text_field :other_end
+      .field
+        = form.label :slot_other_end
+        = form.text_field :slot_other_end
+      -#.field
+      -#  = form.label :other_end_location
   .actions
     = form.submit class: "button is-primary"
