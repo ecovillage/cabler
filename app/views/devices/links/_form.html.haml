@@ -23,7 +23,10 @@
             = form.text_field :kind
       .field
         = form.label :slot_this_end
-        = form.text_field :slot_one_end, class: 'is-primary', help: 'the slot on this end', icon_left: 'fa fa-ethernet'
+        - if params[:slot]
+          = form.text_field :slot_one_end, help: 'the slot on this end', icon_left: 'fa fa-ethernet', readonly: 'readonly'
+        - else
+          = form.text_field :slot_one_end, help: 'the slot on this end', icon_left: 'fa fa-ethernet'
     #whitespace.column.is-2
     #to-link.column.is-5
       .field
@@ -33,7 +36,9 @@
             %span.select
               = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device (or create new->)'
           %p.control.is-expanded
-            = form.text_field :other_end
+            = form.text_field :other_end_device
+          %p.control
+            = form.text_field :slot_other_end, placeholder: "slot number"
         %p.help.is-danger
           Either select a location or a device
       .field
@@ -46,9 +51,9 @@
             = form.text_field :other_end_location
         %p.help.is-danger
           Either select a location or a device
-      .field
-        = form.label :slot_other_end
-        = form.text_field :slot_other_end, icon_left: 'fa fa-ethernet', help: 'the slot on the other end (if applicable)'
+      -#.field
+      -#  = form.label :slot_other_end
+      -#  = form.text_field :slot_other_end, icon_left: 'fa fa-ethernet', help: 'the slot on the other end (if applicable)'
       -#.field
       -#  = form.label :other_end_location
   .actions

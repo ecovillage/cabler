@@ -2,7 +2,7 @@ class LabeledDevice
   include ActiveModel::Model
 
   attr_accessor :device, :slots, :unslotted_links
-  delegate :name, to: :device
+  delegate :name, :num_links, to: :device
 
   #attr_accessor :device, :slots
   def initialize device: device

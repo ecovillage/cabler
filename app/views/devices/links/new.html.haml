@@ -1,3 +1,4 @@
 %h1.title New Link from #{@device.name} (#{@device.location&.name})
 = render 'form', device: @device, link: @link
--#= link_to 'Back', links_path
+
+= link_to 'Back to device', @device, class: 'button is-danger'

@@ -3,6 +3,8 @@ class DirectedLink
 
   attr_accessor :source_slot, :source_device, :target_slot, :target_device, :link
 
+  delegate :name, to: :link
+
   #def initialize source_slot: source_slot,
   #  source_device: source_device,
   #  target_slot: target_slot,

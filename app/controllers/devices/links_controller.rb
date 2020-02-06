@@ -22,6 +22,9 @@ class Devices::LinksController < ApplicationController
   # GET /links/new
   def new
     @link = @device.links.build
+    if params[:slot]
+      @link.slot_one_end = params[:slot]
+    end
   end
 
   # GET /links/1/edit
@@ -32,10 +35,33 @@ class Devices::LinksController < ApplicationController
   # POST /links.json
   def create
     @link = @device.link_one_ends.build(link_params)
+
+    puts [params.dig(:link, :other_end_device),
+        params.dig(:link, :other_end_device_id),
+        params.dig(:link, :other_end_location_id),
+        params.dig(:link, :other_end_location)].inspect
+
+    if [params.dig(:link, :other_end_device),
+        params.dig(:link, :other_end_device_id),
+        params.dig(:link, :other_end_location_id),
+        params.dig(:link, :other_end_location)].reject{|s|s.blank?}.compact.size > 1
+      @link.errors.add(:base, 'please select or add only either one location or device')
+      render :new and return
+    end
+
     if params.dig(:link, :other_end_device_id).present?
       @link.other_end = Device.find params.dig(:link, :other_end_device_id)
     end
-    #@link = Link.new(link_params)
+    if params.dig(:link, :other_end_device).present?
+      @link.other_end = Device.find_or_create_by name: params.dig(:link, :other_end_device)
+    end
+
+    if params.dig(:link, :other_end_location_id).present?
+      @link.other_end = Location.find params.dig(:link, :other_end_location_id)
+    end
+    if params.dig(:link, :other_end_location).present?
+      @link.other_end = Location.find_or_create_by name: params.dig(:link, :other_end_location)
+    end
 
     respond_to do |format|
       if @link.save

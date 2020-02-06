@@ -6,4 +6,6 @@ class Link < ApplicationRecord
   belongs_to :one_end, polymorphic: true, optional: true#, inverse_of: :link_one_end
 
   belongs_to :other_end, polymorphic: true, optional: true
+
+  validates :slot_one_end, :slot_other_end, numericality: { only_integer: true }, allow_blank: true
 end

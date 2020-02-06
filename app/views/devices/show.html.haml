@@ -1,6 +1,3 @@
-- if notice
-  %p#notice.notification= notice
-
 %h1.title
   %i.fa.fa-server
   = @device.name
@@ -32,17 +29,50 @@
     = @device.manufacturer
 
 - if @device.num_links.to_i > 0
-  %table
+  %table.table.is-narrow
     %thead
       %tr
-        - (1..@device.num_links).each do |idx|
-          %th
+        - (1..@labeled_device.num_links).each do |idx|
+          %th.has-text-centered
             = idx
     %tbody
       %tr
         - (1..@device.num_links).each do |idx|
           %td
-            show/add
+            .field.is-grouped.is-grouped-multiline
+              - if slot = @labeled_device.slots[idx]
+                - if slot.target_name
+                  %span.tag.is-info
+                    %span.icon.is-light
+                      - if slot.target_device.instance_of? Device
+                        %i.fa.fa-hdd
+                      - else
+                        %i.fa.fa-globe
+                    = slot.target_name
+
+                - if slot.target_device.instance_of? Device
+                  = slot.target_device&.next_end(from: slot.source_device)
+                - if slot.target_slot
+                  .tags.has-addons
+                    .tag
+                      %span.icon
+                        %i.fa.fa-ethernet
+                    .tag.is-link
+                      = slot.target_slot
+
+                - if slot.name.present?
+                  .tag.is-warning
+                    = slot.name
+
+                -#= @labeled_device.slots[idx-1]
+              - else
+                = link_to new_device_link_path(@device, slot: idx) do
+                  %button.button
+                    %i.fa.fa-plus
+
+%br
+
+
 %br
 %h2.subtitle
   %i.fa.fa-network-wired
@@ -56,13 +86,12 @@
       %th # other end
       %th other end
       %th
-      %th
   %tbody
     - @device.links.find_each do |link|
       -# Will be: from this port: to ... other port other device/location
       - this_end = (link.one_end == @device) ? @device : link.other_end
       - this_slot = (link.one_end == @device) ? link.slot_one_end : link.slot_other_end
-      - other_end = (link.other_end == @device) ? @device : link.other_end
+      - other_end = (link.other_end == @device) ? link.one_end : link.other_end
       - other_end_slot = (link.one_end == @device) ? link.slot_other_end : link.slot_one_end
 
       %tr
@@ -76,23 +105,25 @@
         %td= other_end_slot
         %td
           - if other_end
+            -#= debug other_end
             = link_to other_end.name, other_end
             \
-            - if other_end.kind.present?
+            - if (other_end.instance_of? Device) && other_end.kind.present?
               %small
                 (#{other_end.kind})
-            - if other_end.location&.name
+            - if (other_end.instance_of? Device) && other_end.location&.name
               %small
                 (#{link_to other_end.location&.name, other_end.location})
         %td
-          = link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }
-          = link_to 'edit', edit_device_link_path(@device, link)
+          = link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger'
+          = link_to 'edit', edit_device_link_path(@device, link), class: 'button is-warning'
     
 
-= link_to 'Edit', edit_device_path(@device)
+= link_to 'Edit', edit_device_path(@device), class: 'button'
 |
-= link_to 'Create Link', new_device_link_path(@device)
+= link_to 'Create Link', new_device_link_path(@device), class: 'button'
 |
-= link_to 'Show Label', device_label_path(@device)
-|
-= link_to 'Back', devices_path
+= link_to device_label_path(@device), class: 'button' do
+  %span.icon
+    %i.fa.fa-tags
+  =t('show label')

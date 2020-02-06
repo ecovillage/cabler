@@ -7,7 +7,7 @@ class Device < ApplicationRecord
   has_many_attached :images
 
   # only if not empty
-  validates :name, presence: true, length: { minimum: 2 }#, uniqueness: true
+  #validates :name, presence: true, length: { minimum: 2 }#, uniqueness: true
 
   validate :identifiable
 
@@ -23,6 +23,10 @@ class Device < ApplicationRecord
 
   def link
     link_one_ends
+  end
+
+  def next_end from: device_or_location
+    nil
   end
 end
 
