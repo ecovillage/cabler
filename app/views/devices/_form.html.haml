@@ -1,4 +1,4 @@
-= form_with(model: device, local: true) do |form|
+= form_with(model: device, local: true, builder: BulmaFormBuilder::FormBuilder) do |form|
   - if device.errors.any?
     #error_explanation.notification
       %h2
@@ -8,37 +8,37 @@
         - device.errors.full_messages.each do |message|
           %li= message
   .field
-    = form.label :name, class: :label
+    = form.label :name
     = form.text_field :name
   - if @location
     = form.hidden_field(:location_id)
   - else
     .field
-      = form.label :location_id, class: :label
+      = form.label :location_id
       .select
         = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
       - if device.new_record?
         = form.text_field :create_new_location
-      -#= form.label :or_new_location, class: :label
+      -#= form.label :or_new_location
   .field
-    = form.label :select_kind, class: :label
+    = form.label :select_kind
     -# TODO distinct
     .select
       = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new >)'
     = form.text_field :kind
   -#.field
-  -#  = form.label :kind, class: :label
+  -#  = form.label :kind
   .field
-    = form.label :manufacturer, class: :label
+    = form.label :manufacturer
     = form.text_field :manufacturer
   .field
-    = form.label :model, class: :label
+    = form.label :model
     = form.text_field :model
   .field
-    = form.label :num_links, class: :label
+    = form.label :num_links
     = form.number_field :num_links
   .field
-    = form.label :description, class: :label
+    = form.label :description
     = form.text_area :description
 
   .actions
