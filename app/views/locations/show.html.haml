@@ -37,8 +37,9 @@
         .card
           %header.card-header
             %p.card-header-title.is-centered
-              %i.fa.fa-hdd
-              = link_to device.name, device
+              = link_to device do
+                %i.fa.fa-hdd
+                = device.human_identifier
           .card-content
             .content
               - if device.manufacturer.present?

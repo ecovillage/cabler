@@ -119,46 +119,39 @@
       %th name
       %th
   %tbody
-    - @device.links.find_each do |link|
-      -# Will be: from this port: to ... other port other device/location
-      - this_end = (link.one_end == @device) ? @device : link.other_end
-      - this_slot = (link.one_end == @device) ? link.slot_one_end : link.slot_other_end
-      - other_end = (link.other_end == @device) ? link.one_end : link.other_end
-      - other_end_slot = (link.one_end == @device) ? link.slot_other_end : link.slot_one_end
-
+    - @connected_device.connections.each do |connection|
       %tr
         %td
-          = this_slot
-          - if link.kind.present?
+          = connection.source_slot
+          - if connection.kind.present?
             %small
-              (#{link.kind})
+              (#{connection.kind})
         %td ->
-        %td= other_end_slot
+        %td= connection.target_slot
         %td
-          - if other_end
-            -#= debug other_end
-            = link_to other_end.name, other_end
+          - if target = connection.target
+            = link_to target.human_identifier, target
             \
-            - if (other_end.instance_of? Device) && other_end.kind.present?
+            - if (target.instance_of? Device) && target.kind.present?
               %small
-                (#{other_end.kind})
-            - if (other_end.instance_of? Device) && other_end.location&.name
+                (#{target.kind})
+            - if (target.instance_of? Device) && target.location&.name
               %small
-                (#{link_to other_end.location&.name, other_end.location})
-              - if other_end.connector?
+                (#{link_to target.location&.name, target.location})
+              - if target.connector?
                 %span.icon
                   %i.fa.fa-link
                 %span.icon
                   %i.fa.fa-arrow-right
                 -#= other_end.next_end(from: @device, slot: other_end_slot)&.name
         %td
-          = link.name
+          = connection.name
         %td.actions.buttons
-          = link_to [@device, link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+          = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
             %span.icon
               %i.fa.fa-times
             = t('destroy')
-          = link_to edit_device_link_path(@device, link), class: 'button is-warning' do
+          = link_to edit_device_link_path(@device, connection.link), class: 'button is-warning' do
             %span.icon
               %i.fa.fa-edit
             = t('edit')
