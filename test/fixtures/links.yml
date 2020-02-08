@@ -5,3 +5,36 @@ one:
 
 two:
   name: Blue Cable
+
+tln1_ppb:
+  one_end: tln1 (Device)
+  other_end: ppb (Device)
+
+tln1_router:
+  one_end: router (Device)
+  other_end: tln1 (Device)
+  slot_one_end: 2
+  slot_other_end: 1
+
+ppb_tln1:
+  one_end: ppb (Device)
+  slot_one_end: 3
+  other_end: tln1 (Device)
+  slot_other_end: 2
+
+floor_tln1:
+  one_end: floor (Location)
+  other_end: tln1 (Device)
+  slot_other_end: 3
+
+ppb_ppo:
+  one_end: ppb (Device)
+  slot_one_end: 3
+  other_end: ppo (Device)
+  slot_other_end: 4
+
+tln2_ppo:
+  one_end: tln2 (Device)
+  slot_one_end: 1
+  other_end: ppo (Device)
+  slot_other_end: 4

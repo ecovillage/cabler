@@ -1,7 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: Basement
+  name: Ground Floor
 
 two:
   name: Upper Floor
+
+basement:
+  name: Basement
+
+office:
+  name: Office
+
+floor:
+  name: Floor

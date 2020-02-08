@@ -9,3 +9,30 @@ two:
   name: MyString
   location: two
   kind: MyString
+
+# More complex example, see README.md
+tln1:
+  manufacturer: T-Links
+  name: TL-N1
+  kind: Switch
+  location: basement
+
+tln2:
+  name: TL-N2
+  kind: Switch
+  location: office
+
+ppb:
+  kind: Patchpanel
+  connector: true
+  location: basement
+
+ppo:
+  kind: Patchpanel
+  connector: true
+  location: office
+
+router:
+  name: pfSense Router
+  kind: router
+  location: basement
