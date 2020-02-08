@@ -9,9 +9,9 @@ class Device < ApplicationRecord
   # only if not empty
   #validates :name, presence: true, length: { minimum: 2 }#, uniqueness: true
 
-  validate :identifiable
+  validate :identifiable?
 
-  def identifiable
+  def identifiable?
     if !(name.present? || model.present? || (model.present? || kind.present? && location.present?))
       errors.add(:name, "need something to identify this device (name, model or kind + location)")
     end
@@ -30,8 +30,5 @@ class Device < ApplicationRecord
     link_one_ends
   end
 
-  def next_end from: device_or_location
-    nil
-  end
 end
 
