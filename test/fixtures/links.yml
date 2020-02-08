@@ -25,7 +25,7 @@ ppb_tln1:
 floor_tln1:
   one_end: floor (Location)
   other_end: tln1 (Device)
-  slot_other_end: 3
+  slot_other_end: 5
 
 ppb_ppo:
   one_end: ppb (Device)
