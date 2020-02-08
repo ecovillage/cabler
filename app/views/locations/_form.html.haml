@@ -1,4 +1,4 @@
-= form_with(model: location, local: true) do |form|
+= form_with(model: location, local: true, builder: BulmaFormBuilder::FormBuilder) do |form|
   - if location.errors.any?
     #error_explanation
       %h2
@@ -8,8 +8,23 @@
         - location.errors.full_messages.each do |message|
           %li= message
   .field
-    = form.label :name, class: :label
+    = form.label :name
     = form.text_field :name
+
+  .field
+    = form.label :images, class: 'file-label'
+    = form.file_field :images, multiple: true
+
+  -# Will only work nicely with javascript
+  -#.file.has-name.is-fullwidth
+  -#  %label.file-label
+  -#    %input.file-input{type:"file", multiple: 'multiple', name:"location[images][]"}
+  -#    %span.file-cta
+  -#      %span.file-icon
+  -#        %i.fas.fa-upload
+  -#      %span.file-label
+  -#        Choose a file
+  -#    %span.file-name
 
   .actions
     = form.submit(class: "button is-primary")

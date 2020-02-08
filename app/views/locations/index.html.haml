@@ -8,6 +8,14 @@
         %header.card-header
           %p.card-header-title.is-centered
             = location.name
+        - if location.images.present?
+          .card-image
+            %figure.image.is-4by3
+              = image_tag location.images.first.variant(resize: '160x120').processed
+        - else
+          .card-image
+            %figure.image.is-4by3
+              = image_tag '', placeholder: 'none yet'
         .card-content
           .content
             %h5

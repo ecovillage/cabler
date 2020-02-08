@@ -12,4 +12,11 @@
 = render 'form', device: @device
 
 %br
-= link_to 'Abort', devices_path, class: 'button is-danger'
+.level
+  .level-left
+  .level-right
+    .level-item
+      = link_to devices_path, class: 'button is-danger' do
+        %span.icon
+          %i.fa.fa-times
+        = t('abort')

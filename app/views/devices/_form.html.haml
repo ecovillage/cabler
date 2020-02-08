@@ -7,39 +7,62 @@
       %ul
         - device.errors.full_messages.each do |message|
           %li= message
+  .columns
+    .column.is-5
+      .field
+        = form.label :name
+        = form.text_field :name
+      .field
+        = form.label :select_kind
+        -#.select
+        -#  = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new >)'
+        -#= form.text_field :kind
+        .field.has-addons
+          %p.control
+            %span.select
+              = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
+          %p.control.is-expanded
+            = form.text_field :kind
+        -# TODO distinct
+        -# TODO only when kinds present
+      .field
+        = form.label :manufacturer
+        = form.text_field :manufacturer
+      .field
+        = form.label :model
+        = form.text_field :model
+      .field
+        = form.label :num_links
+        = form.number_field :num_links
+      .field
+        .control
+          -#= form.label :connector
+          = form.check_box :connector, label: :connector
+    .column.is-2
+    .column.is-5
+      - if @location
+        = form.hidden_field(:location_id)
+      - else
+        .field
+          = form.label :location_id
+          -# TODO only when locations present
+          .select
+            = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
+          - if device.new_record?
+            = form.text_field :create_new_location
+          -#= form.label :or_new_location
+      .field
+        = form.label :url
+        = form.text_field :url
+      .field
+        = form.label :description
+        = form.text_area :description, size: '10'
+
   .field
-    = form.label :name
-    = form.text_field :name
-  - if @location
-    = form.hidden_field(:location_id)
-  - else
-    .field
-      = form.label :location_id
-      .select
-        = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
-      - if device.new_record?
-        = form.text_field :create_new_location
-      -#= form.label :or_new_location
-  .field
-    = form.label :select_kind
-    -# TODO distinct
-    .select
-      = form.select :other_kind, Device.pluck(:kind).uniq, prompt: 'select kind (or create new >)'
-    = form.text_field :kind
-  -#.field
-  -#  = form.label :kind
-  .field
-    = form.label :manufacturer
-    = form.text_field :manufacturer
-  .field
-    = form.label :model
-    = form.text_field :model
-  .field
-    = form.label :num_links
-    = form.number_field :num_links
-  .field
-    = form.label :description
-    = form.text_area :description
+    = form.label :images
+    = form.file_field :images, multiple: true
+
+  -# show the images
 
   .actions
     = form.submit class: 'button is-primary'

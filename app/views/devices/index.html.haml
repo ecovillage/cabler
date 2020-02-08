@@ -13,7 +13,7 @@
     - @devices.each do |device|
       %tr
         %td
-          = link_to device.name, device
+          = link_to device.human_identifier, device
         %td
           - if device.location
             = link_to device.location.name, device.location
@@ -24,10 +24,20 @@
         %td
           = device.num_links
           (#{device.links.count})
-        %td= link_to 'Show', device
-        %td= link_to 'Edit', edit_device_path(device)
-        %td= link_to 'Destroy', device, method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to 'Label', device_label_path(device)
+        %td
+          = link_to device, class: 'button is-link' do
+            = t('show')
+        %td
+          = link_to edit_device_path(device), class: 'button is-primary' do
+            = t('edit')
+        %td
+          = link_to device, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-dark' do
+            = t('destroy')
+        %td
+          = link_to device_label_path(device), class: 'button' do
+            %span.icon
+              %i.fas.fa-tags
+            Label
 %br/
 
 = link_to 'New Device', new_device_path, class: 'button'

@@ -1,14 +1,61 @@
 %p#notice= notice
 
-%h1.title
-  %i.fa.fa-map-marker
-  Location
-  = @location.name
+.level
+  .level-left
+    %h1.title
+      %i.fa.fa-map-marker
+      Location
+      = @location.name
+  .level-right
+    = link_to edit_location_path(@location), class: 'button level-item' do
+      %span.icon
+        %i.fa.fa-edit
+      =t('edit')
 
-%h2.subtitle #{@location.devices.count} Devices at this location:
 
-.columns.multiline
-  - @location.devices.find_each do |device|
+%section
+  - if @location.images
+    %h2.subtitle Images
+    - @location.images.each do |image|
+      = link_to url_for(image), target: '_new' do
+        %figure
+          = image_tag image.variant(resize_to_fill: [180,120]).processed
+    -#= link_to 'Add image', ''
+
+%br
+%section
+  %h2.subtitle
+    %span.icon
+      %i.fa.fa-server
+    = @location.devices.count
+    = Device.model_name.human(count: @location.devices.count).capitalize
+    at this location
+  
+  .columns.multiline
+    - @location.devices.find_each do |device|
+      .column.is-3
+        .card
+          %header.card-header
+            %p.card-header-title.is-centered
+              %i.fa.fa-hdd
+              = link_to device.name, device
+          .card-content
+            .content
+              - if device.manufacturer.present?
+                .manufacturer
+                  = device.manufacturer
+              - if device.model.present?
+                .model
+                  = device.model
+              - if device.kind.present?
+                %small.kind
+                  (#{device.kind})
+              = device.links.count
+              links
+              - if device.num_links
+                (of #{device.num_links})
+          .card-footer
+            = link_to 'Edit', edit_device_path(device), class: 'card-footer-item is-6'
     .column.is-3
       .card
         %header.card-header
