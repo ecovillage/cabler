@@ -54,7 +54,7 @@ Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/loc
 |    |2+--+       | 2 +--+       | 2 |     |
 |    |3|          | 3 |  +------>+ 3 +-----+----------+
 |    +-+          | 4 |          | 4 |     |          |
-|              -- + 5 |          | 5 |     |          |
+|              +--+ 5 |          | 5 |     |          |
 |              |  +---+          | 6 |     |          |
 |              |                 +---+     |          |
 |              |                           |          |
