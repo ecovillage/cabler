@@ -5,7 +5,7 @@ class ConnectedDevice
   include ActiveModel::Model
 
   attr_accessor :device
-  delegate :name, to: :device
+  delegate :name, :human_identifier, to: :device
 
   def devices_on_path port:
     connections = connections_at(port: port)

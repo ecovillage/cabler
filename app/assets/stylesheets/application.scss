@@ -28,6 +28,15 @@ table.label-table {
   td.own_slot {
     border-right: 4px solid black;
   }
+  td.target_slot {
+    border-right: 1px solid black;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
+  td.target {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
 }
 
 @import "bulma";

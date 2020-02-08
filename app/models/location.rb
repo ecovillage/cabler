@@ -15,4 +15,8 @@ class Location < ApplicationRecord
   end
 
   validates :name, presence: true, uniqueness: true
+
+  def human_identifier
+    name
+  end
 end

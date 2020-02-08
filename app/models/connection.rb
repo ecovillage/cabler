@@ -3,6 +3,8 @@ class Connection
 
   attr_accessor :link, :source_slot, :source, :target_slot, :target
 
+  delegate :name, to: :link
+
   def initialize link:, source:
     @source = source
     @link = link
@@ -25,8 +27,23 @@ class Connection
     else
       target_device = ConnectedDevice.new(device: target)
       connections = target_device.connections_at port: target_slot, incoming_link: @link
-      railse ConnectionBranches.new("next hop unclear") if connections.length > 1
+      raise ConnectionBranches.new("next hop unclear") if connections.length > 1
       connections.first.link
+    end
+  end
+
+  def next_connection
+    if target.instance_of? Location
+      return nil
+    elsif !target&.connector?
+      nil
+    else
+      target_device = ConnectedDevice.new(device: target)
+      connections = target_device.connections_at port: target_slot, incoming_link: @link
+      raise ConnectionBranches.new("next hop unclear") if connections.length > 1
+      return nil if connections.empty?
+
+      connection = connections.first
     end
   end
 end

@@ -14,6 +14,6 @@ class Devices::LabelController < ApplicationController
   private
   def set_device
     device = Device.find params[:device_id]
-    @device = LabeledDevice.new(device: device)
+    @device = ConnectedDevice.new(device: device)
   end
 end

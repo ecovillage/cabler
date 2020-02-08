@@ -25,6 +25,12 @@ class DeviceTest < ActiveSupport::TestCase
   end
 
   test "human identifier uses model + kind + location if name not present" do
+    device = Device.new(name: '', model: 'TL2', manufacturer: 'Toolo')
+    assert_equal 'TL2', device.human_identifier
+
+    device = Device.new(name: nil, model: 'TL2', manufacturer: 'Toolo')
+    assert_equal 'TL2', device.human_identifier
+
     device = Device.new(model: 'TL2', manufacturer: 'Toolo')
     assert_equal 'TL2', device.human_identifier
 

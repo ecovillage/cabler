@@ -1,38 +1,33 @@
 %table.label-table
   %thead
     %tr.device_head
-      %th
-        = @device.name
+      %th(colspan=3)
+        = @device.human_identifier
     %tr.link_head
-      %th
+      %th.target_slot
         Slot
       %th
         to
   %tbody
-    - @device.slots.each do |slot|
-      - if slot.nil?
+    - @device.connections.sort_by{|c|c.source_slot}.each do |connection|
+      - if connection.nil?
         %tr
           %td
       - else
         %tr
           %td.own_slot
-            = slot.source_slot
-          %td
-            = slot.target_slot
-          %td
-            = slot.target_device&.name
-    -#- @device.links.each do |link|
-    -#  -#- own_end = (@device == link.one_end)
-    -#  %tr
-    -#    %td.own_slot
-    -#      = link.slot_one_end
-    -#    %td
-    -#      = link.slot_other_end
-    -#    %td
-    -#      = link.other_end&.name
-
+            = connection.source_slot
+          %td.target_slot
+            = connection.target_slot
+          %td.target
+            = connection.target&.human_identifier || "[#{connection.name}]"
+            - if next_connection = connection.next_connection
+              (->#{next_connection.target.human_identifier})
+              - if next_connection = next_connection.next_connection
+                (->#{next_connection.target.human_identifier})
+              
 %br
-- if @device.unslotted_links.present?
+- if @device.connections.select{|c|c.source_slot.nil?}.present?
   %h2 Unclear
   - @device.unslotted_links.each do |unslotted|
     #{unslotted.one_end&.name} - #{unslotted.other_end&.name}
