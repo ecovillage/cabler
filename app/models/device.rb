@@ -18,7 +18,8 @@ class Device < ApplicationRecord
   end
 
   def human_identifier
-    name || [kind, model, location&.name].compact.join(' ')
+    return name if name.present?
+    [kind, model, location&.name].compact.join(' ')
   end
 
   def links

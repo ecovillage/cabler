@@ -13,7 +13,7 @@
         .box
           %span.icon.has-text-link
             %i.fa.fa-hdd
-          = link_to device.name, device
+          = link_to device.human_identifier, device
     .column.is-2
       .box.has-background-light
         = link_to new_device_path, class: 'has-text-dark' do
