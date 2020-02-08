@@ -1,5 +1,14 @@
 %p#notice= notice
-%h1.title Locations
+.level
+  .level-left
+    %h1.title
+      %i.fa.fa-globe
+      Locations
+  .level-right
+    = link_to new_location_path, class: 'button level-item' do
+      %span.icon
+        %i.fa.fa-plus
+      =t('add location')
 
 #locations.columns.is-multiline
   - @locations.each do |location|
@@ -20,10 +29,10 @@
           .content
             %h5
               = location.devices.count
-              devices
+              = Device.model_name.human(count: location.devices.count).capitalize
             - location.devices.each do |device|
-              = device.name
-            %br
+              = device.human_identifier
+              %br
             = link_to 'Add device', new_device_path(location_id: location.id), class: :button
         .card-footer
           = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'

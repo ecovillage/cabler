@@ -3,4 +3,8 @@
 = render 'form', location: @location
 
 %br
-= link_to 'Abort', locations_path, class: 'button is-danger'
+.level
+  .level-left
+  .level-right
+    = link_to locations_path, class: 'button is-danger' do
+      =t('abort')

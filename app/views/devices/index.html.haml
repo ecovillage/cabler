@@ -1,5 +1,16 @@
 %p#notice= notice
-%h1.title Devices
+
+.level
+  .level-left
+    %h1.title
+      %i.fa.fa-server
+      Devices
+  .level-right
+    = link_to new_device_path, class: 'button level-item' do
+      %span.icon
+        %i.fa.fa-plus
+      =t('add device')
+
 %table.table.is-fullwidth
   %thead
     %tr

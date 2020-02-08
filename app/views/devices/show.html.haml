@@ -153,7 +153,7 @@
                 -#= other_end.next_end(from: @device, slot: other_end_slot)&.name
         %td
           = link.name
-        %td.actions
+        %td.actions.buttons
           = link_to [@device, link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
             %span.icon
               %i.fa.fa-times

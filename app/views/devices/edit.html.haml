@@ -2,6 +2,11 @@
 
 = render 'form', device: @device
 
-= link_to 'Show', @device
-|
-= link_to 'Back', devices_path
+.level
+  .level-left
+  .level-right.buttons
+    = link_to @device, class: 'button' do
+      = t('abort and show')
+
+    = link_to devices_path, class: 'button is-danger' do
+      = t('abort')
