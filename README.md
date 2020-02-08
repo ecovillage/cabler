@@ -46,14 +46,14 @@ Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/loc
   - Switch TL-N1 (3) connected to Floor
 
 ```
-+-----------------+location: basement+------+
++-----------------+location: basement+-----+
 |    router       Switch         Patchpanel|
-|    pfSense      TL-N1          P-B       |
-|    +-+          +---+          +---+     |
-<----+1|  +------>+ 1 |          | 1 |     |
-|    |2+--+       | 2 +--+       | 2 |     |
-|    |3|          | 3 |  +------>+ 3 +-----+----------+
-|    +-+          | 4 |          | 4 |     |          |
+|    pfSense      TL-N1           P-B      |
+|    +---+        +---+          +---+     |
+<----+ 1 |  +---->+ 1 |          | 1 |     |
+|    | 2 +--+     | 2 +--+       | 2 |     |
+|    | 3 |        | 3 |  +------>+ 3 +-----+----------+
+|    +---+        | 4 |          | 4 |     |          |
 |              +--+ 5 |          | 5 |     |          |
 |              |  +---+          | 6 |     |          |
 |              |                 +---+     |          |
@@ -62,7 +62,7 @@ Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/loc
                |                                      |
                |           +-----+location: office+---+-+
                v           |   Switch      Patchpanel | |
- +--+location: floor+--+   |   TL-N2       P-O        | |
+ +--+location: floor+--+   |   TL-N2        P-O       | |
  |                     |   |   +---+       +---+      | |
  +---------------------+   |   | 1 |       | 1 |      | |
                            |   | 2 +<---+  | 2 |      | |
