@@ -33,7 +33,7 @@ class DeviceTest < ActiveSupport::TestCase
 
     device.location = locations(:one)
     device.model = nil
-    assert_equal 'Switch Basement', device.human_identifier
+    assert_equal 'Switch Ground Floor', device.human_identifier
   end
 
 end
