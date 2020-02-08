@@ -1,6 +1,13 @@
-%h1.title
-  %i.fa.fa-server
-  = @device.human_identifier
+.level
+  .level-left
+    %h1.title
+      %i.fa.fa-server
+      = @device.human_identifier
+  .level-right
+    = link_to edit_device_path(@device), class: 'button level-item' do
+      %span.icon
+        %i.fa.fa-edit
+      =t('edit')
 
 .columns
   .column
@@ -9,7 +16,7 @@
       %p
         %strong Location:
         %i.fa.fa-globe
-          = link_to @device.location.name, @device.location
+        = link_to @device.location.name, @device.location
     - if @device.kind.present?
       %p
         %strong Kind:
@@ -33,7 +40,7 @@
     - if @device.url.present?
       %p
         %strong URL
-        = link_to @device.url, @device.url
+        = link_to @device.url, @device.url, target: '_new'
   .column
     - if @device.images
       %h2.subtitle Images
@@ -52,41 +59,48 @@
 
 - if @device.num_links.to_i > 0
   %section.section
-    .columns.is-multiline
-      - (1..@device.num_links).each do |idx|
-        .column.is-2.box
-          %h3.title.has-text-centered.is-5=idx
+    .table-container
+      %table.table
+        %thead
+          %tr
+            - (1..@device.num_links).each do |idx|
+              %td=idx
+        %tbody
+          %tr
+            - (1..@device.num_links).each do |idx|
+              - connections = @connected_device.connections_at(port: idx)
+              - if connections.present?
+                %td
+                  - connections.each do |connection|
+                    - if connection.target&.human_identifier
+                      %span.tags.has-addons
+                        %span.tag.is-info
+                          %span.icon.is-light
+                            - if connection.target.instance_of? Device
+                              %i.fa.fa-hdd
+                            - else
+                              %i.fa.fa-globe
+                          = connection.target.human_identifier
+                        - if connection.target_slot
+                          %span.tag
+                            %span.icon
+                              %i.fa.fa-ethernet
+                          .tag.is-link
+                            = connection.target_slot
 
-          .field.is-grouped.is-grouped-multiline
-            - if connections = @connected_device.connections_at(port: idx)
-              - connections.each do |connection|
-                - if connection.target&.human_identifier
-                  %span.tag.is-info
-                    %span.icon.is-light
-                      - if connection.target.instance_of? Device
-                        %i.fa.fa-hdd
-                      - else
-                        %i.fa.fa-globe
-                    = connection.target.human_identifier
+                    - if next_connection = connection.next_connection
+                      = render partial: 'links/link_tag', locals: {connection: next_connection}
 
-                = connection.next_connection
-                - if connection.target_slot
-                  .tags.has-addons
-                    .tag
-                      %span.icon
-                        %i.fa.fa-ethernet
-                    .tag.is-link
-                      = connection.target_slot
+                    - if connection.name.present?
+                      .tag.is-warning
+                        = connection.name
+              - else
+                %td
+                  = link_to new_device_link_path(@device, slot: idx) do
+                    %button.button
+                      %i.fa.fa-plus
 
-                - if connection.name.present?
-                  .tag.is-warning
-                    = connection.name
 
-                -#= @labeled_device.slots[idx-1]
-            - else
-              = link_to new_device_link_path(@device, slot: idx) do
-                %button.button
-                  %i.fa.fa-plus
 
 %br
 
@@ -136,19 +150,35 @@
                   %i.fa.fa-link
                 %span.icon
                   %i.fa.fa-arrow-right
-                = other_end.next_end(from: @device, slot: other_end_slot)&.name
+                -#= other_end.next_end(from: @device, slot: other_end_slot)&.name
         %td
           = link.name
         %td.actions
-          = link_to 'Destroy', [@device, link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger'
-          = link_to 'edit', edit_device_link_path(@device, link), class: 'button is-warning'
+          = link_to [@device, link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+            %span.icon
+              %i.fa.fa-times
+            = t('destroy')
+          = link_to edit_device_link_path(@device, link), class: 'button is-warning' do
+            %span.icon
+              %i.fa.fa-edit
+            = t('edit')
+    %tr
+      %td
+        = link_to 'add link', new_device_link_path(@device), class: 'button'
+      %td
+      %td
+      %td
+      %td
+      %td
     
 
-= link_to 'Edit', edit_device_path(@device), class: 'button'
+.buttons
+  = link_to edit_device_path(@device), class: 'button' do
+    %span.icon
+      %i.fa.fa-edit
+    = t('edit')
 
-= link_to 'Create Link', new_device_link_path(@device), class: 'button'
-
-= link_to device_label_path(@device), class: 'button' do
-  %span.icon
-    %i.fa.fa-tags
-  =t('show label')
+  = link_to device_label_path(@device), class: 'button' do
+    %span.icon
+      %i.fa.fa-tags
+    =t('show label')
