@@ -1,25 +1,43 @@
 %h1.title Dashboard Cabler
 
-%h2.subtitle
-  #{@devices.count} Devices
-
-.columns.is-multiline
-  - @devices.each do |device|
+%section.devices
+  %h2.subtitle
+    %span.icon
+      %i.fa.fa-server
+    = @devices.count
+    = Device.model_name.human(count: @devices.count).capitalize
+  
+  .columns.is-multiline
+    - @devices.each do |device|
+      .column.is-2
+        .box
+          %span.icon.has-text-link
+            %i.fa.fa-hdd
+          = link_to device.name, device
     .column.is-2
-      .box
-        = link_to device.name, device
-  .column.is-2
-    .box
-      = link_to 'new device', new_device_path
-
-%h2.subtitle
-  #{@locations.count} Locations
-
-.columns.is-multiline
-  - @locations.each do |location|
+      .box.has-background-light
+        = link_to new_device_path, class: 'has-text-dark' do
+          %span.icon
+            %i.fa.fa-hdd
+          = t('.new_device')
+%br
+%section.locations
+  %h2.subtitle
+    %span.icon
+      %i.fa.fa-globe
+    = @locations.count
+    = Location.model_name.human(count: @locations.count).capitalize
+  
+  .columns.is-multiline
+    - @locations.each do |location|
+      .column.is-2
+        .box
+          %span.icon.has-text-link
+            %i.fa.fa-map-marker
+          = link_to location.name, location
     .column.is-2
-      .box
-        = link_to location.name, location
-  .column.is-2
-    .box
-      = link_to 'new location', new_location_path
+      .box.has-background-light
+        = link_to new_location_path, class: 'has-text-dark' do
+          %span.icon
+            %i.fa.fa-map-marker
+          = t('.new_location')

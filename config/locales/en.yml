@@ -30,4 +30,15 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  dashboard:
+    show:
+      new_device: New Device
+      new_location: New Location
+  activerecord:
+    models:
+      device:
+        one: device
+        other: devices
+      location:
+        one: location
+        other: locations
