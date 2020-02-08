@@ -17,6 +17,10 @@ class Device < ApplicationRecord
     end
   end
 
+  def human_identifier
+    name || [kind, model, location&.name].compact.join(' ')
+  end
+
   def links
     Link.where(one_end: self).or(Link.where(other_end: self))
   end
