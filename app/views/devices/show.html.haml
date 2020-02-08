@@ -53,36 +53,36 @@
 - if @device.num_links.to_i > 0
   %section.section
     .columns.is-multiline
-      - (1..@labeled_device.num_links).each do |idx|
+      - (1..@device.num_links).each do |idx|
         .column.is-2.box
           %h3.title.has-text-centered.is-5=idx
 
           .field.is-grouped.is-grouped-multiline
-            - if slot = @labeled_device.slots[idx]
-              - if slot.target_name
-                %span.tag.is-info
-                  %span.icon.is-light
-                    - if slot.target_device.instance_of? Device
-                      %i.fa.fa-hdd
-                    - else
-                      %i.fa.fa-globe
-                  = slot.target_name
+            - if connections = @connected_device.connections_at(port: idx)
+              - connections.each do |connection|
+                - if connection.target&.human_identifier
+                  %span.tag.is-info
+                    %span.icon.is-light
+                      - if connection.target.instance_of? Device
+                        %i.fa.fa-hdd
+                      - else
+                        %i.fa.fa-globe
+                    = connection.target.human_identifier
 
-              - if slot.target_device.instance_of? Device
-                = slot.target_device&.next_end(from: slot.source_device, slot: slot.target_slot)
-              - if slot.target_slot
-                .tags.has-addons
-                  .tag
-                    %span.icon
-                      %i.fa.fa-ethernet
-                  .tag.is-link
-                    = slot.target_slot
+                = connection.next_connection
+                - if connection.target_slot
+                  .tags.has-addons
+                    .tag
+                      %span.icon
+                        %i.fa.fa-ethernet
+                    .tag.is-link
+                      = connection.target_slot
 
-              - if slot.name.present?
-                .tag.is-warning
-                  = slot.name
+                - if connection.name.present?
+                  .tag.is-warning
+                    = connection.name
 
-              -#= @labeled_device.slots[idx-1]
+                -#= @labeled_device.slots[idx-1]
             - else
               = link_to new_device_link_path(@device, slot: idx) do
                 %button.button
