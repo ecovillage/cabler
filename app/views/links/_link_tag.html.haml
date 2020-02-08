@@ -1,0 +1,16 @@
+.tags.has-addons
+  .tag.is-light
+    = connection.source_slot
+  .tag
+    %span.icon
+      %i.fa.fa-ethernet
+  .tag.is-link
+    - if connection.target.instance_of? Device
+      %span.icon.is-light
+        %i.fa.fa-hdd
+    - if connection.target.instance_of? Location
+      %span.icon.is-light
+        %i.fa.fa-globe
+    = connection.target&.human_identifier
+  .tag.is-light
+    = connection.target_slot
