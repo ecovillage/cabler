@@ -1,11 +1,12 @@
 class ConnectionBranches < StandardError
 end
 
+# Decorator around a Device or location with advanced querying functionality.
 class ConnectedDevice
   include ActiveModel::Model
 
   attr_accessor :device
-  delegate :name, :human_identifier, to: :device
+  delegate :name, :human_identifier, :url, to: :device
 
   def devices_on_path port:
     connections = connections_at(port: port)

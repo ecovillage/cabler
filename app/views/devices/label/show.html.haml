@@ -31,3 +31,34 @@
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
 
+%br
+%br
+%br
+%br
+
+%table.cable-table.label-table
+  %thead
+    %tr.device_head
+      %th(colspan=4)
+        Cable
+  %tbody
+    - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
+      - if connection.nil?
+        %tr
+          %td(colspan=4)
+      - else
+        %tr
+          %td.target
+            = connection.source.human_identifier
+          %td.target_slot
+            = connection.source_slot
+          %td.target
+            = connection.target_slot
+          %td.target
+            = connection.target&.human_identifier || "[#{connection.name}]"
+            - if next_connection = connection.next_connection
+              (->#{next_connection.target.human_identifier})
+              - if next_connection = next_connection.next_connection
+                (->#{next_connection.target.human_identifier})
+
+

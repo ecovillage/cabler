@@ -1,9 +1,10 @@
+# Decorator around a Link with a direction (seen from _one_ device or location).
 class Connection
   include ActiveModel::Model
 
   attr_accessor :link, :source_slot, :source, :target_slot, :target
 
-  delegate :name, to: :link
+  delegate :name, :kind, to: :link
 
   def initialize link:, source:
     @source = source

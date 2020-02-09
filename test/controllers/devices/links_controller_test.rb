@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Devices::LinksControllerTest < ActionDispatch::IntegrationTest
-  #include Devise::Test::ControllerHelpers
   include Devise::Test::IntegrationHelpers
 
   setup do
