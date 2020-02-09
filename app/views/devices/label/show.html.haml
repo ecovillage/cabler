@@ -10,10 +10,11 @@
     %tr.link_head
       %th.own_slot
         Slot
-      %th.target_slot(colspan=2)
+      %th
+      %th.target_slot
         to
   %tbody
-    - @device.connections.sort_by{|c|c.source_slot}.each do |connection|
+    - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       - if connection.nil?
         %tr
           %td(colspan=3)
@@ -29,10 +30,4 @@
               (->#{next_connection.target.human_identifier})
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
-              
-%br
-- if @device.connections.select{|c|c.source_slot.nil?}.present?
-  %h2 Unclear
-  - @device.unslotted_links.each do |unslotted|
-    #{unslotted.one_end&.name} - #{unslotted.other_end&.name}
-    %br
+
