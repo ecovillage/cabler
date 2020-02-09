@@ -24,7 +24,7 @@ A Connection between a device and a location (or a device and a device or a loca
 
 #### The test and examplary data
 
-Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/locations.yml) etc. You can seed your database with this data using `rails fixtures:load`.
+Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/locations.yml) etc. You can seed your database with this data using `rails db:fixtures:load`.  Note that this will also create [a user](test/fixtures/users.yml).
 
 **Locations**
   - Basement

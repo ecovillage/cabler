@@ -15,13 +15,13 @@ class Devices::LinksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    sign_in users(:one)
+    sign_in users(:admin)
     get device_links_url(device_id: @device), params: { device_id: devices(:one) }
     assert_response :success
   end
 
   test "should get new" do
-    sign_in users(:one)
+    sign_in users(:admin)
     get new_device_link_url(device_id: @device), params: {device: @device}
     assert_response :success
   end
