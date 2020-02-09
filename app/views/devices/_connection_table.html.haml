@@ -8,14 +8,18 @@
       %th name
       %th
   %tbody
-    - @connected_device.connections.each do |connection|
+    - @connected_device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       %tr
         %td
           = connection.source_slot
           - if connection.kind.present?
             %small
               (#{connection.kind})
-        %td ->
+        %td
+          %span.icon
+            %i.fa.fa-long-arrow-alt-right
+          -#%span.icon
+          -#  %i.fa.fa-exchange-alt
         %td= connection.target_slot
         %td
           - if target = connection.target
