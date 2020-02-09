@@ -20,7 +20,7 @@
         - if location.images.present?
           .card-image
             %figure.image.is-4by3
-              = image_tag location.images.first.variant(resize: '320x240').processed
+              = image_tag location.images.first.variant(resize_to_fill: [320, 240]).processed
         - else
           .card-image
             .container

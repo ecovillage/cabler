@@ -15,6 +15,7 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    @connected_location = ConnectedDevice.new(device: @location)
   end
 
   # GET /locations/new

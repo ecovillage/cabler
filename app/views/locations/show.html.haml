@@ -63,27 +63,29 @@
             = link_to device.name, device
         .card-content
           .content
-            - if device.manufacturer.present?
-              .manufacturer
-                = device.manufacturer
-            - if device.model.present?
-              .model
-                = device.model
-            - if device.kind.present?
-              %small.kind
-                (#{device.kind})
-            = device.links.count
-            links
-            - if device.num_links
-              (of #{device.num_links})
-        .card-footer
-          = link_to 'Edit', edit_device_path(device), class: 'card-footer-item is-6'
-  .column.is-3
-    .card
-      .card-content
-        .content
-          = link_to 'add device at this location', new_device_path(location: @location)
+            = link_to 'add device at this location', new_device_path(location: @location)
 
-= link_to 'Edit', edit_location_path(@location)
-|
-= link_to 'Back', locations_path
+- if @location.links.present?
+  %br
+  %h2.subtitle
+    %i.fa.fa-network-wired
+    #{@location.links.count} Direct incoming Links
+  = render partial: 'connections/table', locals: {connections: @connected_location.connections}
+
+%br
+.level
+  .level-left
+    = link_to edit_location_path(@location), class: 'button level-item' do
+      %span.icon
+        %i.fa.fa-edit
+      =t('edit')
+  .level-right
+    = link_to @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+      %span.icon
+        %i.fa.fa-times
+      =t('destroy')
+-#= link_to 'Back', locations_path
+    = link_to edit_location_path(@location), class: 'button is-warning level-item' do
+      %span.icon
+        %i.fa.fa-trash
+      =t('destroy')

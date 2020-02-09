@@ -8,7 +8,7 @@
       %th name
       %th
   %tbody
-    - @connected_device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
+    - connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       %tr
         %td
           = connection.source_slot
@@ -47,17 +47,19 @@
         %td
           = connection.name
         %td.actions.buttons
-          = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
-            %span.icon
-              %i.fa.fa-times
-            = t('destroy')
-          = link_to edit_device_link_path(@device, connection.link), class: 'button is-warning' do
-            %span.icon
-              %i.fa.fa-edit
-            = t('edit')
+          - if @device
+            = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+              %span.icon
+                %i.fa.fa-times
+              = t('destroy')
+            = link_to edit_device_link_path(@device, connection.link), class: 'button is-warning' do
+              %span.icon
+                %i.fa.fa-edit
+              = t('edit')
     %tr
       %td
-        = link_to 'add link', new_device_link_path(@device), class: 'button'
+        - if @device
+          = link_to 'add link', new_device_link_path(@device), class: 'button'
       %td
       %td
       %td
