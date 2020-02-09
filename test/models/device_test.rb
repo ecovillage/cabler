@@ -41,5 +41,4 @@ class DeviceTest < ActiveSupport::TestCase
     device.model = nil
     assert_equal 'Switch Ground Floor', device.human_identifier
   end
-
 end

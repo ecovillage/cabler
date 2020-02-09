@@ -29,6 +29,5 @@ class Device < ApplicationRecord
   def link
     link_one_ends
   end
-
 end
 
