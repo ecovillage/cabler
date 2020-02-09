@@ -58,112 +58,15 @@
 -#  = render partial: 'links/link_tag', locals: {connection: connection}
 
 - if @device.num_links.to_i > 0
-  %section.section
-    .table-container
-      %table.table
-        %thead
-          %tr
-            - (1..@device.num_links).each do |idx|
-              %td=idx
-        %tbody
-          %tr
-            - (1..@device.num_links).each do |idx|
-              - connections = @connected_device.connections_at(port: idx)
-              - if connections.present?
-                %td
-                  - connections.each do |connection|
-                    - if connection.target&.human_identifier
-                      %span.tags.has-addons
-                        %span.tag.is-info
-                          %span.icon.is-light
-                            - if connection.target.instance_of? Device
-                              %i.fa.fa-hdd
-                            - else
-                              %i.fa.fa-globe
-                          = connection.target.human_identifier
-                        - if connection.target_slot
-                          %span.tag
-                            %span.icon
-                              %i.fa.fa-ethernet
-                          .tag.is-link
-                            = connection.target_slot
-
-                    - if next_connection = connection.next_connection
-                      = render partial: 'links/link_tag', locals: {connection: next_connection}
-
-                    - if connection.name.present?
-                      .tag.is-warning
-                        = connection.name
-              - else
-                %td
-                  = link_to new_device_link_path(@device, slot: idx) do
-                    %button.button
-                      %i.fa.fa-plus
-
-
+  = render partial: 'horizontal_port_table'
 
 %br
-
 
 %br
 %h2.subtitle
   %i.fa.fa-network-wired
   #{@device.links.count} Links
-%table.table.is-fullwidth.is-narrow
-  %thead
-    %tr
-      %th # this end
-      %th
-      %th # other end
-      %th other end
-      %th name
-      %th
-  %tbody
-    - @connected_device.connections.each do |connection|
-      %tr
-        %td
-          = connection.source_slot
-          - if connection.kind.present?
-            %small
-              (#{connection.kind})
-        %td ->
-        %td= connection.target_slot
-        %td
-          - if target = connection.target
-            = link_to target.human_identifier, target
-            \
-            - if (target.instance_of? Device) && target.kind.present?
-              %small
-                (#{target.kind})
-            - if (target.instance_of? Device) && target.location&.name
-              %small
-                (#{link_to target.location&.name, target.location})
-              - if target.connector?
-                %span.icon
-                  %i.fa.fa-link
-                %span.icon
-                  %i.fa.fa-arrow-right
-                -#= other_end.next_end(from: @device, slot: other_end_slot)&.name
-        %td
-          = connection.name
-        %td.actions.buttons
-          = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
-            %span.icon
-              %i.fa.fa-times
-            = t('destroy')
-          = link_to edit_device_link_path(@device, connection.link), class: 'button is-warning' do
-            %span.icon
-              %i.fa.fa-edit
-            = t('edit')
-    %tr
-      %td
-        = link_to 'add link', new_device_link_path(@device), class: 'button'
-      %td
-      %td
-      %td
-      %td
-      %td
-    
+= render partial: 'connection_table'
 
 .buttons
   = link_to edit_device_path(@device), class: 'button' do

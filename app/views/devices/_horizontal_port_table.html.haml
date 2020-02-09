@@ -1,0 +1,42 @@
+%section.section
+  .table-container
+    %table.table
+      %thead
+        %tr
+          - (1..@device.num_links).each do |idx|
+            %td=idx
+      %tbody
+        %tr
+          - (1..@device.num_links).each do |idx|
+            - connections = @connected_device.connections_at(port: idx)
+            - if connections.present?
+              %td
+                - connections.each do |connection|
+                  - if connection.target&.human_identifier
+                    %span.tags.has-addons
+                      %span.tag.is-info
+                        %span.icon.is-light
+                          - if connection.target.instance_of? Device
+                            %i.fa.fa-hdd
+                          - else
+                            %i.fa.fa-globe
+                        = connection.target.human_identifier
+                      - if connection.target_slot
+                        %span.tag
+                          %span.icon
+                            %i.fa.fa-ethernet
+                        .tag.is-link
+                          = connection.target_slot
+
+                  - if next_connection = connection.next_connection
+                    = render partial: 'links/link_tag', locals: {connection: next_connection}
+
+                  - if connection.name.present?
+                    .tag.is-warning
+                      = connection.name
+            - else
+              %td
+                = link_to new_device_link_path(@device, slot: idx) do
+                  %button.button
+                    %i.fa.fa-plus
+

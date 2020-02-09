@@ -3,16 +3,20 @@
     %tr.device_head
       %th(colspan=3)
         = @device.human_identifier
+    - if @device.url
+      %tr.device_head
+        %th(colspan=3)
+          = @device.url
     %tr.link_head
-      %th.target_slot
+      %th.own_slot
         Slot
-      %th
+      %th.target_slot(colspan=2)
         to
   %tbody
     - @device.connections.sort_by{|c|c.source_slot}.each do |connection|
       - if connection.nil?
         %tr
-          %td
+          %td(colspan=3)
       - else
         %tr
           %td.own_slot
