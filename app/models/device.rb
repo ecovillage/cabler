@@ -9,6 +9,8 @@ class Device < ApplicationRecord
   # only if not empty
   #validates :name, presence: true, length: { minimum: 2 }#, uniqueness: true
 
+  validates :num_links, numericality: {only_integer: true, greater_than: 0}, allow_nil: true
+
   validate :identifiable?
 
   def identifiable?
