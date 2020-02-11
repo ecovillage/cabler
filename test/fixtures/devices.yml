@@ -5,17 +5,13 @@ one:
   #location: one
   kind: Switch
 
-two:
-  name: MyString
-  location: two
-  kind: MyString
-
 # More complex example, see README.md
 tln1:
   manufacturer: T-Links
   name: TL-N1
   kind: Switch
   location: basement
+  num_links: 12
 
 tln2:
   name: TL-N2
