@@ -33,7 +33,7 @@
         = form.text_field :model
       .field
         = form.label :num_links
-        = form.number_field :num_links
+        = form.number_field :num_links, help: 'number of ports. If set, will also show empty ports e.g. in labels'
       .field
         .control
           -#= form.label :connector
