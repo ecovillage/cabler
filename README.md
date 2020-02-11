@@ -24,7 +24,7 @@ A Connection between a device and a location (or a device and a device or a loca
 
 #### The test and examplary data
 
-Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/locations.yml) etc. You can seed your database with this data using `rails db:fixtures:load`.  Note that this will also create [a user](test/fixtures/users.yml).
+Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/locations.yml) etc. You can seed your database with this data using `rails db:fixtures:load`.  Note that this will also create [a user (see password inside file)](test/fixtures/users.yml).
 
 **Locations**
   - Basement
@@ -81,6 +81,22 @@ Ruby on Rails 6 stack, currently using Ruby 2.6.1 .
   - run `bundle`
   - run `rails db:migrate`
   - fire up server (in dev, e.g. with `rails s`)
+  - create a User manually:
+  ```bash
+  # Fire up a rails console, and enter relevant User.create! data, exit with CTRL+D
+  $ rails c                                                                                                                    git:(master|✚15… 
+  Running via Spring preloader in process 14058
+  Loading development environment (Rails 6.0.2.1)
+  2.6.1 :001 > User.create! email: 'my@ma.il', password: 'mypassword', password_confirmation: 'mypassword'
+     (2.3ms)  SELECT sqlite_version(*)
+     (0.1ms)  begin transaction
+    User Exists? (0.5ms)  SELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?  [["email", "my@ma.il"], ["LIMIT", 1]]
+    User Create (1.1ms)  INSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["email", "my@ma.il"], ["encrypted_password", "$2a$11$hofRgWkBnjiGO6wtzkQVL.O6Jr/19FHuq1NM76focTArHx9IWAWvy"], ["created_at", "2020-02-11 09:03:12.280375"], ["updated_at", "2020-02-11 09:03:12.280375"]]
+     (2.3ms)  commit transaction
+   => #<User id: 980190964, email: "my@ma.il", created_at: "2020-02-11 09:03:12", updated_at: "2020-02-11 09:03:12"> 
+  2.6.1 :002 >
+  $
+  ```
 
 ### Configuration
 
