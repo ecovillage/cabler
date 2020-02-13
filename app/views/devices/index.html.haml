@@ -36,7 +36,7 @@
           = device.num_links
           (#{device.links.count})
         %td
-          = link_to device, class: 'button is-primary' do
+          = link_to device, class: 'button is-primary is-small' do
             %span.icon
               %i.fa.fa-eye
             = t('show')
@@ -46,12 +46,12 @@
               %i.fa.fa-edit
             = t('edit')
         %td
-          = link_to device, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+          = link_to device, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' do
             %span.icon
               %i.fa.fa-times
             = t('destroy')
         %td
-          = link_to device_label_path(device), class: 'button is-dark' do
+          = link_to device_label_path(device), class: 'button is-dark is-small' do
             %span.icon
               %i.fas.fa-tags
             %span Label
