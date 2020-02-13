@@ -1,4 +1,4 @@
-/*
+ /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -14,34 +14,36 @@
  *= require_self
  */
 
-table.label-table {
-  border: 2px solid black;
-  tr {
-    border-top: 1px solid black;
-  }
-  tr.device_head {
-    border-bottom: 3px solid black;
-  }
-  tr.link_head {
-    border-bottom: 2px solid black;
-  }
-  td.own_slot {
-    border-right: 4px solid black;
-  }
-  td.target_slot {
-    border-right: 1px solid black;
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-  }
-  td.target {
-    padding-right: 0.5em;
-    padding-left: 0.5em;
-  }
-}
+$purple: #8A4D76
+$pink: #FA7C91
 
-@import "bulma";
+$primary: #699
 
-@import "bulma-form-builder";
+$link: $pink
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+$link-hover: $purple
+$link-active: $purple
+
+$footer-padding: 2rem
+
+$navbar-padding-vertical: 0.3rem
+
+$body-background-color: #e2e2e2
+
+// don't rearrange the imports, the bulma-form-builder has to be imported after bulma
+@import "bulma"
+@import "bulma-form-builder"
+
+@import "font-awesome-sprockets"
+@import "font-awesome"
+
+// Import all partials
+@import './custom/*'
+
+html
+  overflow: auto
+
+body
+  min-height: 100vh
+  display: grid
+  grid-template-rows: max-content max-content auto

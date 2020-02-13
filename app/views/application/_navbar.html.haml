@@ -1,11 +1,4 @@
-%nav.navbar.is-dark.is-spaced{"aria-label" => "main navigation", :role => "navigation"}
-  .navbar-brand
-    %a.navbar-item{:href => "https://bulma.io"}
-      %img{:height => "28", :src => "", :width => "112"}/
-    %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "cablerNavbar", :role => "button"}
-      %span{"aria-hidden" => "true"}
-      %span{"aria-hidden" => "true"}
-      %span{"aria-hidden" => "true"}
+%nav.navbar.is-dark.is-spaced.is-fixed-top{"aria-label" => "main navigation", :role => "navigation"}
   #cablerNavbar.navbar-menu
     .navbar-start
       = link_to t('Home'), root_path, class: 'navbar-item'

@@ -6,19 +6,21 @@
       %i.fa.fa-server
     = @devices.count
     = Device.model_name.human(count: @devices.count).capitalize
-  
+
   .columns.is-multiline
     - @devices.each do |device|
       .column.is-2
-        .box
+        = link_to device, class: 'button is-fullwidth' do
           %span.icon.has-text-link
             %i.fa.fa-hdd
-          = link_to device.human_identifier, device
+          %span.has-text-link
+            = device.human_identifier
+
     .column.is-2
-      .box.has-background-light
-        = link_to new_device_path, class: 'has-text-dark' do
-          %span.icon
-            %i.fa.fa-hdd
+      = link_to new_device_path, class: 'button is-primary is-fullwidth' do
+        %span.icon
+          %i.fa.fa-plus
+        %span
           = t('.new_device')
 %br
 %section.locations
@@ -27,17 +29,20 @@
       %i.fa.fa-globe
     = @locations.count
     = Location.model_name.human(count: @locations.count).capitalize
-  
+
   .columns.is-multiline
     - @locations.each do |location|
       .column.is-2
-        .box
+
+        = link_to location, class: 'button is-fullwidth' do
           %span.icon.has-text-link
             %i.fa.fa-map-marker
-          = link_to location.name, location
+          %span.has-text-link
+            = location.name
+
     .column.is-2
-      .box.has-background-light
-        = link_to new_location_path, class: 'has-text-dark' do
-          %span.icon
-            %i.fa.fa-map-marker
+      = link_to new_location_path, class: 'button is-primary is-fullwidth' do
+        %span.icon
+          %i.fa.fa-plus
+        %span
           = t('.new_location')

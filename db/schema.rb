@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 2020_02_07_151452) do
     t.integer "num_link_rows"
     t.integer "num_link_columns"
     t.integer "num_link_blocks"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "model"
     t.string "manufacturer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "connector"
     t.string "url"
     t.index ["location_id"], name: "index_devices_on_location_id"

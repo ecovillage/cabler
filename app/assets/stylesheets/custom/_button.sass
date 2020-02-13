@@ -1,0 +1,51 @@
+@import './_variables'
+@import './_utils'
+@import "bulma"
+
+@mixin buttonHoverStyle($color)
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02)
+  background: lighten($color, 10) !important
+  transform: scale(1.1)
+
+.button
+  +notOutlined
+  transition: color $transitionTime ease, background $transitionTime ease, box-shadow $transitionTime ease, transform $transitionTime ease
+  // fix button text overflow.
+  white-space: normal !important
+  height: auto !important
+
+a.button:hover,
+a.button:focus
+  +buttonHoverStyle($light)
+
+a.button.is-success:hover,
+a.button.is-success:focus
+  +buttonHoverStyle($success)
+
+a.button.is-primary:hover,
+a.button.is-primary:focus
+  +buttonHoverStyle($primary)
+
+a.button.is-link:hover,
+a.button.is-link:focus
+  +buttonHoverStyle($link)
+
+a.button.is-danger:hover,
+a.button.is-danger:focus
+  +buttonHoverStyle($danger)
+
+a.button.is-info:hover,
+a.button.is-info:focus
+  +buttonHoverStyle($info)
+
+a.button.is-warning:hover,
+a.button.is-warning:focus
+  +buttonHoverStyle($warning)
+
+a.button.is-dark:hover,
+a.button.is-dark:focus
+  +buttonHoverStyle($dark)
+
+a.button.is-light:hover,
+a.button.is-light:focus
+  +buttonHoverStyle($light)
