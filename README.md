@@ -133,3 +133,4 @@ To make up the disadvantages of that choice, implement Classes to deal with ""di
 
 #### Problematic design decisions
 
+Using the name "Device" and the gem "Devise" ... :)

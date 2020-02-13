@@ -1,4 +1,5 @@
-= form_with(model: [@device, link], local: true, builder: BulmaFormBuilder::FormBuilder) do |form|
+= form_with(model: [@device, link], local: true, builder: BulmaFormBuilder::FormBuilder, class: 'box') do |form|
+  -# builder: BulmaFormBuilder::HorizontalBulmaFormBuilder
   - if link.errors.any?
     #error_explanation
       %h2
@@ -12,7 +13,7 @@
       -#= hidden_field device_id: @device.
       .field
         = form.label :name
-        = form.text_field :name
+        = form.text_field :name, placeholder: 'Name or info of link'
       .field
         = form.label :kind
         .field.has-addons
@@ -20,7 +21,7 @@
             %span.select
               = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
           %p.control.is-expanded
-            = form.text_field :kind
+            = form.text_field :kind, placeholder: 'Name for new kind'#, help: 'Kind of link (e.g. Ethernet, RJ11, Water)'
       .field
         = form.label :slot_this_end
         - if params[:slot]
@@ -30,7 +31,7 @@
     #whitespace.column.is-2
     #to-link.column.is-5
       .field
-        = form.label :other_end_device
+        = form.label :other_end_device_and_port
         .field.has-addons
           %p.control
             %span.select
@@ -48,7 +49,7 @@
             %span.select
               = form.collection_select :other_end_location_id, Location.all, :id, :name, prompt: 'select a location (or create new->)'
           %p.control.is-expanded
-            = form.text_field :other_end_location
+            = form.text_field :other_end_location, placeholder: 'Name of new location'
         %p.help.is-danger
           Either select a location or a device
       -#.field
@@ -56,5 +57,9 @@
       -#  = form.text_field :slot_other_end, icon_left: 'fa fa-ethernet', help: 'the slot on the other end (if applicable)'
       -#.field
       -#  = form.label :other_end_location
-  .actions
-    = form.submit class: "button is-primary"
+  .level.actions
+    .level-item
+      = form.submit class: "button is-primary"
+    .level-right
+      = link_to :back, class: 'button is-danger is-light' do
+        = t('abort')
