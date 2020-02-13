@@ -1,6 +1,6 @@
-%h1.title
+%h1.title.has-text-centered
   %i.fa.fa-ethernet
-  Editing Link (from: #{@device.name})
+  Editing Link (from: #{@device.human_identifier})
 = render 'form', link: @link
 
 = link_to 'Show', device_link_path(@device, @link)

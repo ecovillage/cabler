@@ -1,10 +1,4 @@
-%h1.title Editing Location
+%h1.title.has-text-centered
+  Editing Location
 
 = render 'form', location: @location
-
-%br
-.level
-  .level-left
-  .level-right
-    = link_to locations_path, class: 'button is-danger' do
-      =t('abort')
