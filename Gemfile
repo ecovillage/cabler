@@ -31,6 +31,8 @@ gem "bulma_form_builder", git: 'https://github.com/fwolfst/bulma_form_builder.gi
 
 gem 'font-awesome-sass', '~> 5.12.0'
 
+gem 'ruby-graphviz'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 

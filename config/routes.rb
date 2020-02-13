@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resource :label, controller: 'devices/label', only: :show
   end
   resources :locations
+
+  get 'topology', to: 'topology#show'
 end
