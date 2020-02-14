@@ -1,0 +1,35 @@
+@import './_variables'
+@import './_utils'
+@import "bulma"
+
+@mixin buttonHover($color)
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02)
+  background: lighten($color, 10) !important
+  transform: scale(1.1)
+
+@mixin buttonActive()
+  transform: scale(0.95)
+  box-shadow: none
+
+.button
+  +notOutlined
+  transition: color $transitionTime ease, background $transitionTime ease, box-shadow $transitionTime ease, transform $transitionTime ease
+  // fix button text overflow.
+  white-space: normal !important
+  height: auto !important
+
+$types: ('light': $light, 'success': $success, 'primary': $primary, 'info': $info, 'link': $link, 'danger': $danger, 'warning': $warning, 'dark': $dark)
+
+@each $type, $color in $types
+  @if ($type != 'standard')
+    a.button.is-#{$type}:hover,
+    a.button.is-#{$type}:focus
+      +buttonHover($color)
+    a.button.is-#{$type}:active
+      +buttonActive()
+
+a.button:hover,
+a.button:focus
+  +buttonHover($light)
+a.button:active
+  +buttonActive()

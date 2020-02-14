@@ -1,0 +1,23 @@
+@import './_variables'
+@import "bulma"
+
+.box
+  transition: color $transitionTime ease, background $transitionTime ease, box-shadow $transitionTime ease, transform $transitionTime ease
+  box-shadow: none
+
+a.box:hover,
+a.box:focus
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02)
+  background: lighten($light, 10) !important
+  transform: scale(1.1)
+
+.box-bg-primary
+  background: $primary !important
+
+a.box-bg-primary:hover,
+a.box-bg-primary:focus
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.2), 0 0px 0 1px rgba(10, 10, 10, 0.04)
+
+  background: desaturate(lighten($primary, 20), 20) !important
+
+  color: $black !important

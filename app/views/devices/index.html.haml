@@ -11,7 +11,7 @@
         %i.fa.fa-plus
       =t('add device')
 
-%table.table.is-fullwidth
+%table.table.is-fullwidth.is-striped
   %thead
     %tr
       %th= t('Name')
@@ -36,7 +36,9 @@
           = device.num_links
           (#{device.links.count})
         %td
-          = link_to device, class: 'button is-link is-small' do
+          = link_to device, class: 'button is-primary is-small' do
+            %span.icon
+              %i.fa.fa-eye
             = t('show')
         %td
           = link_to edit_device_path(device), class: 'button is-primary is-small' do
@@ -44,15 +46,18 @@
               %i.fa.fa-edit
             = t('edit')
         %td
-          = link_to device, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-dark is-small' do
+          = link_to device, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' do
             %span.icon
               %i.fa.fa-times
             = t('destroy')
         %td
-          = link_to device_label_path(device), class: 'button' do
+          = link_to device_label_path(device), class: 'button is-dark is-small' do
             %span.icon
-              %i.fa.fa-tags
-            Label
+              %i.fas.fa-tags
+            %span Label
 %br/
 
-= link_to 'New Device', new_device_path, class: 'button'
+= link_to new_device_path, class: 'button has-text-link' do
+  %span.icon
+    %i.fa.fa-plus
+  =t('add device')
