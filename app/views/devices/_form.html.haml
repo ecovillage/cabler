@@ -61,6 +61,19 @@
   .field
     = form.label :images
     = form.file_field :images, multiple: true
+    - if @device.images.present?
+      %p.help
+        You will loose your images if you upload new ones!
+        -# TODO (low hanging fruit) https://github.com/rails/rails/issues/35817
+
+  .field.columns.is-multiline
+    - @device.images.each do |image|
+      .column
+        = link_to url_for(image), target: '_new' do
+          = image_tag image.variant(resize_to_fill: [140,140]).processed
+          %br
+          = image.filename
+
 
   -# show the images
   
