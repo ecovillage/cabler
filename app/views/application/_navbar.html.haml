@@ -1,4 +1,12 @@
 %nav.navbar.is-dark.is-spaced.is-fixed-top{"aria-label" => "main navigation", :role => "navigation"}
+  -#.navbar-brand
+  -#  -#%a.navbar-item{:href => "https://bulma.io"}
+  -#  -#  -#%img{:height => "28", :src => "", :width => "112"}/
+  -#  -#  %i.fa.fa-server
+  -#  %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "cablerNavbar", :role => "button"}
+  -#    %span{"aria-hidden" => "true"}
+  -#    %span{"aria-hidden" => "true"}
+  -#    %span{"aria-hidden" => "true"}
   #cablerNavbar.navbar-menu
     .navbar-start
       = link_to t('Home'), root_path, class: 'navbar-item'
@@ -14,6 +22,10 @@
         %span.icon
           %i.fa.fa-vector-square
         = t('Topology')
+      = link_to topology_path, class: 'navbar-item' do
+        %span.icon
+          %i.fa.fa-tags
+        = t('Labels')
     .navbar-end
       .navbar-item
         .buttons
