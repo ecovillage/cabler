@@ -22,10 +22,10 @@ $types: ('light': $light, 'success': $success, 'primary': $primary, 'info': $inf
 
 @each $type, $color in $types
   @if ($type != 'standard')
-    a.button.is-#{$type}:hover,
-    a.button.is-#{$type}:focus
+    .button.is-#{$type}:hover,
+    .button.is-#{$type}:focus
       +buttonHover($color)
-    a.button.is-#{$type}:active
+    .button.is-#{$type}:active
       +buttonActive()
 
 a.button:hover,
