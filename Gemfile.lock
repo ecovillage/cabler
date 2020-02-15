@@ -1,5 +1,7 @@
-PATH
-  remote: /home/felix/projects/7l/fk/bulma_form_builder
+GIT
+  remote: https://github.com/fwolfst/bulma_form_builder.git
+  revision: a4a6cb077525c1b608db7fbe6f11e6131b8f47d4
+  branch: rails6
   specs:
     bulma_form_builder (0.1.0)
       rails (>= 6.0.2)
