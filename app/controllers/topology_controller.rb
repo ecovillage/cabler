@@ -56,7 +56,12 @@ class TopologyController < ApplicationController
       #g.add_edges
     end
 
-    # TODO We want this to be a controller action listening to SVG
-    @png = g.output png: String
+    respond_to do |format|
+      format.html { @png = g.output png: String }
+      format.png { render plain: g.output(png: String) }
+      format.svg { render plain: g.output(svg: String) }
+      format.dot { render plain: g.output(dot: String) }
+      #TODO better: send_data , send_file for .dot
+    end
   end
 end
