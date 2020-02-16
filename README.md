@@ -116,20 +116,34 @@ Contributions are very welcome.  Copyright-transfer of modifications to Felix Wo
 
 For fun, some of the files include comments to be compliant with [(FSFEs) reuse](https://reuse.software/).
 
-## Documentation
+## (Developer) Documentation
+
+### Principles and goals
+
+As we are dealing with models in the physical domain, following a resources based UI and API is fine (and Rails is meant to do that, allthough it is not thorrowly used in this project).
+
+Prefer good old stable setup: no hard dependency on Javascript (only progressive enhanvements), render on server side.
+
+Use solid and stable standards and conventions if available.
+
+### Included
+
+  * minimal `rails test`
+  * Could not use rails-erd succesfull with Rails 6 (https://github.com/voormedia/rails-erd/issues/322).
 
 ### Stuff used
 
-  - Ruby and Ruby on Rails
+  - [Ruby](https://www.ruby-lang.org/en/) and [Ruby on Rails](https://rubyonrails.org)
   - [bulma.io](bulma.io) as CSS framework
-  - HAML for a saner way to produce HTML
+  - [HAML](http://haml.info/) for a saner way to produce HTML
   - devise for authentication
 
 ### Design decisions
 
-No explicit modeling of "Port", instead a very loose polymorphic Link model.
-To make up the disadvantages of that choice, implement Classes to deal with ""directed" connections (for analysis).
-
+No explicit modeling of "Port"s (think of Ethernet-Switches), instead a very loose polymorphic Link model.
+To make up the disadvantages of that choice, implemented classes to deal with ""directed" connections (for analysis):
+  * [Connection](app/models/connection.rb)
+  * [ConnectedDevice](app/models/connected_device.rb)
 
 #### Problematic design decisions
 
