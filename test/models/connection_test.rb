@@ -15,39 +15,33 @@ class ConnectionTest < ActiveSupport::TestCase
     assert_equal 3, connection.target_slot
   end
 
-  test "raises if path unclear" do
-    ppb = devices(:ppb)
-
-    origin = ConnectedDevice.new(device: ppb)
-
-    assert_raises ConnectionBranches do
-      origin.devices_on_path(port: 3)
-    end
-  end
-
-  test "#next_hop returns nil for location target" do
+  test "#next_connection returns nil for location target" do
     connection = Connection.new(link: links(:floor_tln1), source: devices(:tln1))
-    refute connection.next_hop
+    refute connection.next_connection
   end
 
-  test "#next_hop returns nil for no connectors" do
+  test "#next_connection returns nil for no connectors" do
     connection = Connection.new(link: links(:tln2_ppo), source: devices(:ppo))
-    refute connection.next_hop
+    refute connection.next_connection
   end
 
 
-  test "finds next hop of connectors" do
+  test "finds connection hop of connectors" do
     connection = Connection.new(link: links(:ppb_tln1), source: devices(:tln1))
-    assert connection.next_hop
-    assert_equal links(:ppb_ppo), connection.next_hop
+    assert connection.next_connection
+    assert_equal links(:ppb_ppo), connection.next_connection.link
   end
 
-  test "finds a path" do
-    tln1 = devices(:tln1)
 
-    origin = ConnectedDevice.new(device: tln1)
-
-    assert_equal [devices(:ppb), devices(:ppo), devices(:tln2)], origin.devices_on_path(port: 2)
+  test "finds next_connection" do
+    connection = Connection.new(link: links(:ppb_tln1), source: devices(:tln1))
+    assert connection.next_connection
+    assert_equal links(:ppb_ppo), connection.next_connection.link
   end
+
+  test "next_connection throws Branches if it does" do
+    skip("implement me, create a situation where multiple connections are done to one slot")
+  end
+
 end
 
