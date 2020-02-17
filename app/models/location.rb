@@ -1,7 +1,7 @@
 class Location < ApplicationRecord
-  has_many :devices
+  include HasImages
 
-  has_many_attached :images
+  has_many :devices
 
   has_many :link_one_ends, as: :one_end, class_name: 'Link', inverse_of: :one_end
   has_many :link_other_ends, as: :other_end, class_name: 'Link', inverse_of: :other_end
