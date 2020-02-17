@@ -75,7 +75,18 @@ Find examplary data for tests in [test/fixtures/locations.yml](test/fixtures/loc
 
 ## Setup
 
-Ruby on Rails 6 stack, currently using Ruby 2.6.1 .
+
+### Prerequisites
+
+We are running a pretty default Ruby on Rails 6 stack, currently using Ruby 2.6.1 .
+That means you need have to have
+
+  - ruby installed (e.g. with [rvm](rvm.io))
+  - sqlite3 or any other db engine installed
+  - graphviz installed (`sudo apt install graphviz` in most cases)
+  - the nodejs/yarn stuff installed
+
+### Installation
 
   - clone this repository
   - run `bundle`
@@ -100,7 +111,21 @@ Ruby on Rails 6 stack, currently using Ruby 2.6.1 .
 
 ### Configuration
 
-There is nothing to configure as of yet (and no way besides editing the ruby source files and database config yml files).
+**Database** Follow the typical rails database configuration ([config/database.yml](config/database.yml)).
+
+**E-Mail** To allow password reset etc. via e-mail (**only in production**), set following environment variables.
+    HOST=yourhost.comm
+    APP_HOST=yourhost.commm # to generate absolute URLs in mails
+    SENDER_EMAIL="Cabler\ Your\ Community\ <cabler@yourhost.commm>"
+    SMTP_SERVER=yourhost.commm
+    SMTP_DOMAIN=yourhost.commm
+    SMTP_PORT=587
+    SMTP_PWD=9098asdjlker!
+    SMTP_USER=iaowur32oalks
+
+### Production deployment
+
+See above for email settings
 
 ## Development
 
