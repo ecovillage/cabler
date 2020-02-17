@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  kind           :string
+#  one_end_type   :string
+#  one_end_id     :integer
+#  other_end_type :string
+#  other_end_id   :integer
+#  slot_one_end   :integer
+#  slot_other_end :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
