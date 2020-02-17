@@ -13,8 +13,11 @@ class TopologyController < ApplicationController
       format.html { @png = g.to_png }
       format.png { render plain: g.to_png }
       format.svg { render plain: g.to_svg }
-      format.dot { render plain: g.to_dot }
-      #TODO better: send_data , send_file for .dot
+      format.dot { send_data g.to_dot,
+                     filename: 'cabler_graph.dot',
+                     type: 'text/plain',
+                     disposition: 'attachment'
+                 }
     end
   end
 end
