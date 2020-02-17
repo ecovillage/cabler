@@ -34,6 +34,8 @@ class Connection
   end
 
   def next_connection
+    return @next_connection if @next_connection
+
     if target.instance_of? Location
       return nil
     elsif !target&.connector?
@@ -44,7 +46,7 @@ class Connection
       raise ConnectionBranches.new("next hop unclear") if connections.length > 1
       return nil if connections.empty?
 
-      connection = connections.first
+      @next_connection = connections.first
     end
   end
 end
