@@ -21,6 +21,8 @@ module Cabler
       html_tag.gsub(/class="/, "class=\"field_with_errors ").html_safe
       #%Q(<div class="field_with_errors">#{html_tag}</div>).html_safe
     end
+
+    VERSION = "0.0.1".freeze
   end
 
 end
