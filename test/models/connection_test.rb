@@ -32,6 +32,12 @@ class ConnectionTest < ActiveSupport::TestCase
     assert_equal links(:ppb_ppo), connection.next_connection.link
   end
 
+  test "connection#next_connection is memoized" do
+    connection = Connection.new(link: links(:ppb_tln1), source: devices(:tln1))
+    first_call_next_connection = connection.next_connection
+    second_call_next_connection = connection.next_connection
+    assert first_call_next_connection.object_id == second_call_next_connection.object_id
+  end
 
   test "finds next_connection" do
     connection = Connection.new(link: links(:ppb_tln1), source: devices(:tln1))
