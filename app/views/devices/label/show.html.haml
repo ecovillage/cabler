@@ -12,13 +12,21 @@
         = t('.date')
         = DateTime.now
     %tr.link_head
-      %th.own_slot
-        Slot
+      - if @label_configuration.left_oriented?
+        %th.own_slot
+          Slot
+      - else
+        %th.notes
+          Notes
       %th
       %th.target_slot
         to
-      %th.notes
-        Notes
+      - if @label_configuration.left_oriented?
+        %th.notes
+          Notes
+      - else
+        %th.own_slot
+          Slot
   %tbody
     - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       - if connection.nil?
@@ -27,8 +35,11 @@
           %td
       - else
         %tr
-          %td.own_slot
-            = connection.source_slot
+          - if @label_configuration.left_oriented?
+            %td.own_slot
+              = connection.source_slot
+          - else
+            %td.notes
           %td.target_slot
             = connection.target_slot
           %td.target
@@ -37,7 +48,12 @@
               (->#{next_connection.target.human_identifier})
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
-          %td.notes
+          - if @label_configuration.left_oriented?
+            %td.notes
+          - else
+            %td.own_slot
+              = connection.source_slot
+
 
 %br
 %br
