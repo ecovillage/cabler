@@ -8,16 +8,23 @@
         %th(colspan=3)
           = @device.url
     %tr.link_head
+      %th(colspan=3)
+        = t('.date')
+        = DateTime.now
+    %tr.link_head
       %th.own_slot
         Slot
       %th
       %th.target_slot
         to
+      %th.notes
+        Notes
   %tbody
     - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       - if connection.nil?
         %tr
           %td(colspan=3)
+          %td
       - else
         %tr
           %td.own_slot
@@ -30,6 +37,7 @@
               (->#{next_connection.target.human_identifier})
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
+          %td.notes
 
 %br
 %br
