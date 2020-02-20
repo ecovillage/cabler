@@ -8,6 +8,7 @@ class Devices::LabelController < ApplicationController
   # GET /device/1/label
   def show
     # layout: pretty plain
+    @label_configuration = LabelConfiguration.new(orientation: LabelConfiguration::LEFT_ORIENTED)
     set_device
   end
 
