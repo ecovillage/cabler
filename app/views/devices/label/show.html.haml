@@ -12,7 +12,7 @@
         = t('.date')
         = DateTime.now
     %tr.link_head
-      - if @label_configuration.left_oriented?
+      - if @label_configuration.ports_left?
         %th.own_slot
           Slot
       - else
@@ -21,21 +21,21 @@
       %th
       %th.target_slot
         to
-      - if @label_configuration.left_oriented?
+      - if @label_configuration.ports_left?
         %th.notes
           Notes
       - else
         %th.own_slot
           Slot
   %tbody
-    - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
+    - @device.connections.sort_by{|c|c.source_slot.to_i * (@label_configuration.ports_top_bottom? ? 1 : -1)}.each do |connection|
       - if connection.nil?
         %tr
           %td(colspan=3)
           %td
       - else
         %tr
-          - if @label_configuration.left_oriented?
+          - if @label_configuration.ports_left?
             %td.own_slot
               = connection.source_slot
           - else
@@ -48,7 +48,7 @@
               (->#{next_connection.target.human_identifier})
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
-          - if @label_configuration.left_oriented?
+          - if @label_configuration.ports_left?
             %td.notes
           - else
             %td.own_slot
