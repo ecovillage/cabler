@@ -114,6 +114,7 @@ That means you need have to have
 **Database** Follow the typical rails database configuration ([config/database.yml](config/database.yml)).
 
 **E-Mail** To allow password reset etc. via e-mail (**only in production**), set following environment variables.
+
     HOST=yourhost.comm
     APP_HOST=yourhost.commm # to generate absolute URLs in mails
     SENDER_EMAIL="Cabler\ Your\ Community\ <cabler@yourhost.commm>"
@@ -173,3 +174,7 @@ To make up the disadvantages of that choice, implemented classes to deal with ""
 #### Problematic design decisions
 
 Using the name "Device" and the gem "Devise" ... :)
+
+#### Releasing
+
+Adjust VERSION in `config/application.rb`, `git tag -a '0.0.1' -m '0.0.1'`.
