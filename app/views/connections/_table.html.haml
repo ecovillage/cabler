@@ -48,16 +48,16 @@
           = connection.name
         %td.actions.buttons
           - if @device
-            = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+            = link_to [@device, connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' do
               %span.icon
                 %i.fa.fa-times
               = t('destroy')
-            = link_to edit_device_link_path(@device, connection.link), class: 'button is-warning' do
+            = link_to edit_device_link_path(@device, connection.link), class: 'button is-primary is-small' do
               %span.icon
                 %i.fa.fa-edit
               = t('edit')
     %tr
-      %td
+      %td.has-text-centered(colspan=7)
         - if @device
           = link_to 'add link', new_device_link_path(@device), class: 'button'
       %td
