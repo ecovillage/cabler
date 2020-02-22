@@ -173,6 +173,10 @@ To make up the disadvantages of that choice, implemented classes to deal with ""
   * [Connection](app/models/connection.rb)
   * [ConnectedDevice](app/models/connected_device.rb)
 
+### Sprockets / Webpacker
+
+In commit [#c1f38256350dfce601e8fd76e82efbbc95d3e134](https://github.com/ecovillage/cabler/commit/c1f38256350dfce601e8fd76e82efbbc95d3e134) Rails 6 shiny new webpacker asset pipeline mechanism (using webpack) was removed in favor of old stable sprockets.  This makes deployment easier but engaged JavaScript development harder.
+
 #### Problematic design decisions
 
 Using the name "Device" and the gem "Devise" ... :)
