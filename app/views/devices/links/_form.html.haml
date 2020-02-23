@@ -35,7 +35,7 @@
         .field.has-addons
           %p.control
             %span.select
-              = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :name, prompt: 'select a device (or create new->)'
+              = form.collection_select :other_end_device_id, Device.where.not(id: @device.id), :id, :human_identifier, prompt: 'select a device (or create new->)'
           %p.control.is-expanded
             = form.text_field :other_end_device
           %p.control
