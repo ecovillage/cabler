@@ -68,13 +68,14 @@
   #{@device.links.count} Links
 = render partial: 'connections/table', locals: {connections: @connected_device.connections}
 
-.buttons
-  = link_to edit_device_path(@device), class: 'button' do
-    %span.icon
-      %i.fa.fa-edit
-    = t('edit')
-
-  = link_to device_label_path(@device), class: 'button' do
-    %span.icon
-      %i.fa.fa-tags
-    =t('show label')
+.level
+  .level-left
+    = link_to edit_device_path(@device), class: 'button is-primary' do
+      %span.icon
+        %i.fa.fa-edit
+      = t('edit')
+  .level-right
+    = link_to device_label_path(@device), class: 'button is-dark' do
+      %span.icon
+        %i.fa.fa-tags
+      =t('show label')

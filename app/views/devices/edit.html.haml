@@ -1,12 +1,6 @@
-%h1.title Editing Device
+%h1.title.has-text-centered
+  %i.fa.fa-hdd
+  Editing Device (#{@device.human_identifier})
 
 = render 'form', device: @device
 
-.level
-  .level-left
-  .level-right.buttons
-    = link_to @device, class: 'button' do
-      = t('abort and show')
-    
-    = link_to devices_path, class: 'button is-danger is-light' do
-      = t('abort')
