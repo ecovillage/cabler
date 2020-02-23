@@ -59,11 +59,12 @@
       .card
         %header.card-header
           %p.card-header-title.is-centered
-            %i.fa.fa-hdd
-            = link_to device.name, device
+            %span.icon
+              %i.fa.fa-hdd
+            = t('new device')
         .card-content
           .content
-            = link_to 'add device at this location', new_device_path(location: @location)
+            = link_to 'add device at this location', new_device_path(location: @location), class: 'button is-primary'
 
 - if @location.links.present?
   %br
