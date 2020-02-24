@@ -20,9 +20,9 @@
         .field.has-addons
           %p.control
             %span.select
-              = form.select :other_kind, Device.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
+              = form.select :other_kind, Device.pluck(:kind).uniq.compact, prompt: 'Select kind (or create new->)'
           %p.control.is-expanded
-            = form.text_field :kind
+            = form.text_field :kind, placeholder: 'new kind'
         -# TODO distinct
         -# TODO only when kinds present
       .field
@@ -46,11 +46,14 @@
         .field
           = form.label :location_id
           -# TODO only when locations present
-          .select
-            = form.collection_select :location_id, Location.all, :id, :name, prompt: 'select location (or add new >)'
-          - if device.new_record?
-            = form.text_field :create_new_location
-          -#= form.label :or_new_location
+          .field.has-addons
+            %p.control
+              %span.select
+                = form.collection_select :location_id, Location.all, :id, :name, prompt: 'Select location (or create new >)'
+            - if device.new_record?
+              %p.control.is-expanded
+                = form.text_field :create_new_location, placeholder: 'new location'
+            -#= form.label :or_new_location
       .field
         = form.label :url
         = form.text_field :url, placeholder: 'https://administration.for/device'
