@@ -20,7 +20,7 @@
         .field.has-addons
           %p.control
             %span.select
-              = form.select :other_kind, Link.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
+              = form.select :other_kind, Device.pluck(:kind).uniq.compact, prompt: 'Select (or create new->)'
           %p.control.is-expanded
             = form.text_field :kind
         -# TODO distinct
