@@ -9,8 +9,9 @@
         = link_to "https://github.com/ecovillage/cabler/issues", target: "_blank", rel: "nofollow", class: 'is-light' do
           %span | report an issue
       .level-item
-        Cabler
-        = Cabler::Application::VERSION
+        = link_to changelog_path, class: 'has-text-white' do
+          Cabler
+          = Cabler::Application::VERSION
       .level-item
         .is-light
           %span.icon
