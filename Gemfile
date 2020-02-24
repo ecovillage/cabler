@@ -32,6 +32,9 @@ gem "bulma-rails", "~> 0.8"
 
 gem "bulma_form_builder", git: 'https://github.com/fwolfst/bulma_form_builder.git', branch: 'rails6'
 
+gem 'emd', '~> 0.5'
+gem 'redcarpet', '~> 3.4'
+
 gem 'font-awesome-sass', '~> 5.12.0'
 
 gem 'ruby-graphviz'

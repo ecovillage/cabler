@@ -160,6 +160,23 @@ Use solid and stable standards and conventions if available.
 
   * minimal `rails test`
   * Could not use rails-erd succesfull with Rails 6 (https://github.com/voormedia/rails-erd/issues/322).
+  * `annotate` gem
+
+### Markdown-rendering of CHANGELOG
+
+The gems `emd` and `redcarpet` help in rendering markdown. The CHANGELOG is exposed via a PageController .  The changelog file is symlinked like this:
+
+```bash
+cd app/views/pages
+ln -s ../../../CHANGELOG.md changelog.md
+```
+
+A trick is to use a markdown layout (to wrap the rendered HTML in a bulma .content) that renders the application layout. For that, an `_application.html.haml` layout was symlinked:
+
+```bash
+cd app/views/layouts
+ln -s application.html.haml _application.html.haml
+```
 
 ### Stuff used
 

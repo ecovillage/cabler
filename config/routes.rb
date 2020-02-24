@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :locations
 
   get 'topology', to: 'topology#show'
+
+  get 'changelog', to: 'pages#changelog'
 end
