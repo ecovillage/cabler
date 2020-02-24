@@ -15,6 +15,7 @@
   %thead
     %tr
       %th= t('Name')
+      %th= t('URL')
       %th= t('Location')
       %th= t('model')
       %th= t('Kind')
@@ -25,6 +26,9 @@
       %tr
         %td
           = link_to device.human_identifier, device
+        %td
+          - if device.url
+            = link_to device.url, device.url
         %td
           - if device.location
             = link_to device.location.name, device.location
