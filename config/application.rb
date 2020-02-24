@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Cabler
   class Application < Rails::Application
+    VERSION = "0.1.0".freeze
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
@@ -21,8 +23,6 @@ module Cabler
       html_tag.gsub(/class="/, "class=\"field_with_errors ").html_safe
       #%Q(<div class="field_with_errors">#{html_tag}</div>).html_safe
     end
-
-    VERSION = "0.0.1".freeze
   end
 
 end

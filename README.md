@@ -185,4 +185,8 @@ Using the name "Device" and the gem "Devise" ... :)
 
 #### Releasing
 
-Adjust VERSION in `config/application.rb`, `git tag -a '0.0.1' -m '0.0.1'`.
+E.g. for version `0.1.0`:\
+  - Adjust VERSION in `config/application.rb`,
+  - `git commit -m '0.1.0'`
+  - `git tag -a '0.1.0' -m '0.1.0'`
+  - `git push && git push --tags`.
