@@ -1,6 +1,6 @@
 # Changelog
 
-## ... ()
+## 0.1.1 (2020-02-24)
   - expose CHANGELOG
   - fix Device#kind select in device form
   - show Device#url in device overview/index table

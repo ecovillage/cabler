@@ -204,6 +204,7 @@ Using the name "Device" and the gem "Devise" ... :)
 
 E.g. for version `0.1.0`:\
   - Adjust VERSION in `config/application.rb`,
-  - `git commit -m '0.1.0'`
-  - `git tag -a '0.1.0' -m '0.1.0'`
+  - adjust CHANGELOG,
+  - `git commit -m '0.1.0'`,
+  - `git tag -a '0.1.0' -m '0.1.0'`,
   - `git push && git push --tags`.
