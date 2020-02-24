@@ -136,6 +136,8 @@ See above for email settings
 
 There are very few tests which can be run with `rails t`.  Use `rails test -f` for *fast-failing* mode (abort after first test fail).
 
+System-tests can be run with `rails test:system`.
+
 ### Contributing
 
 Own code (mostly `app/` and `test/`) is released under the AGPLv3+ (included as file [LICENSE](LICENSE) in this repository).
