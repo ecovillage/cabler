@@ -29,7 +29,7 @@
     = Device.model_name.human(count: @location.devices.count).capitalize
     at this location
   
-  .columns.multiline
+  .columns.is-multiline
     - @location.devices.find_each do |device|
       .column.is-3
         .card
