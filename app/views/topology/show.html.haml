@@ -1,3 +1,30 @@
-%h1.title Topology via graphviz
+.level
+  .level-left
+    %h1.title Topology via graphviz
+  .level-right
+    .level-item
+      = link_to topology_path(format: :dot, params: request.params) do
+        Download .dot
+    .level-item
+      = link_to topology_path(format: :svg, params: request.params), class: 'button' do
+        Download .svg
+    -#.level-item
+    -#  Change algorithm (digraph, circo, ...)
+    -#.level-item
+    -#  select center node
 
-%img(src="data:image/png;base64,#{Base64.encode64 @png}")
+.columns
+  .column.is-one-fifth
+    = form_with model: @graph_configuration, builder: BulmaFormBuilder::FormBuilder, local: true, method: :get, class: 'box is-small' do |form|
+      .field
+        = form.label :rank_dir, class: 'is-small'
+        = form.select :rank_dir, {'horizontal' => 'LR', 'vertical' => 'TB'}, class: 'is-small'
+      .field
+        = form.label :splines, class: 'is-small'
+        = form.select :splines, {'wobbly' => true, 'ortho' => 'ortho', 'curved' => 'curved', 'line' => 'line', 'polyline' => 'polyline'}
+    
+      = form.submit class: 'button is-primary', value: 'show'
+    
+  .column
+    .box
+      %img(src="data:image/png;base64,#{Base64.encode64 @png}")

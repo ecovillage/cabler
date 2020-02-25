@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :locations
 
   get 'topology', to: 'topology#show'
+  resource :topology, only: [:show], as: :graph_configurations
 
   get 'changelog', to: 'pages#changelog'
 end
