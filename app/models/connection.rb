@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2020 Felix Wolfsteller
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 # Decorator around a Link with a direction (seen from _one_ device or location).
 class Connection
   include ActiveModel::Model
