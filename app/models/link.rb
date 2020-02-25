@@ -12,4 +12,14 @@ class Link < ApplicationRecord
   belongs_to :other_end, polymorphic: true, optional: true
 
   validates :slot_one_end, :slot_other_end, numericality: { only_integer: true }, allow_blank: true
+
+  def port_for device
+    if device == one_end
+      slot_one_end
+    elsif device == other_end
+      slot_other_end
+    else
+      nil
+    end
+  end
 end
