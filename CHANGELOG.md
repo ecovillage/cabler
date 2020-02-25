@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.. ()
+  - topology view: allow configuration of spline and rankdir
+
 ## 0.1.1 (2020-02-24)
   - expose CHANGELOG
   - fix Device#kind select in device form
