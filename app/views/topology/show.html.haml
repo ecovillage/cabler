@@ -23,6 +23,12 @@
         = form.label :splines, class: 'is-small'
         = form.select :splines, {'wobbly' => true, 'ortho' => 'ortho', 'curved' => 'curved', 'line' => 'line', 'polyline' => 'polyline'}
     
+      .field
+        = form.label :show_ports
+        = form.select :show_ports, {'all' => :all, 'only filled' => 'only_filled', 'none' => 'none'}
+      .field
+        = form.check_box :box_locations, label: t('box_locations')
+    
       = form.submit class: 'button is-primary', value: 'show'
     
   .column

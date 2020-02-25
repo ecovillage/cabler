@@ -12,12 +12,14 @@ class Graph
   # see https://graphviz.gitlab.io/
   # rankdir:       Top-Bottom ('TB') or Left-Right ('LR')
   # splines:       ['ortho']
+  # show_ports     ['all', 'filled', 'none']
   def initialize(devices: nil,
-    locations: nil,
+    locations:       nil,
     group_locations: true,
-    rankdir: 'TB',
-    splines: 'line',
-    box_locations: true)
+    rankdir:         'TB',
+    splines:         'line',
+    box_locations:   true,
+    show_ports:      :only_filled)
 
     # Other popular options:
     #  type: :digraph, use: "fdp"
@@ -30,9 +32,11 @@ class Graph
 
     @g["nodesep"] = "2"
 
-    @devices   = devices || Device.all
-    @locations = locations || Location.all
-    @links     = Link.all
+    @show_ports  = show_ports
+
+    @devices     = devices || Device.all
+    @locations   = locations || Location.all
+    @links       = Link.all
 
     # Subgraphs / clusters
     @location_clusters = {}
@@ -44,7 +48,7 @@ class Graph
         c = @g.add_graph("cluster_#{location.object_id}")
         c[:label]   = location.human_identifier
         c[:rankdir] = 'TB'
-        c[:href]    = location_path(location)
+        c[:href]    = Rails.application.routes.url_helpers.location_path(location)
         @location_clusters[location] = c
       end
     end
@@ -117,18 +121,18 @@ class Graph
     # node_for would suffice
     device_node = graph_for(device.location).add_nodes(device.human_identifier, shape: 'record')
     label = device.human_identifier
-    (device.num_links || 0).times do |idx|
-      label += "|<p#{idx}> #{idx+1}"
+    if @show_ports == :all
+      (device.num_links || 0).times do |idx|
+        label += "|<p#{idx+1}> #{idx+1}"
+      end
+    end
+    if @show_ports == :only_filled || (@show_ports == :all && !device.num_links)
+      device.links.map {|l| l.port_for(device)}.compact.uniq.sort.each do |port|
+        label += "|<p#{port}> #{port}"
+      end
     end
     device_node[:label] = "{%s}" % label
     device_node[:href]  = device_path(device)
     @nodes[device] = device_node
-  end
-
-
-  def add_node
-  end
-
-  def add_edge
   end
 end
