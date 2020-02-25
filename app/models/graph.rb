@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 class Graph
+  include Rails.application.routes.url_helpers
+
   attr_reader :g
 
   # box_locations: draw a frame around locations and group
@@ -40,8 +42,9 @@ class Graph
     if box_locations
       @locations.each do |location|
         c = @g.add_graph("cluster_#{location.object_id}")
-        c[:label] = location.human_identifier
+        c[:label]   = location.human_identifier
         c[:rankdir] = 'TB'
+        c[:href]    = location_path(location)
         @location_clusters[location] = c
       end
     end
@@ -118,6 +121,7 @@ class Graph
       label += "|<p#{idx}> #{idx+1}"
     end
     device_node[:label] = "{%s}" % label
+    device_node[:href]  = device_path(device)
     @nodes[device] = device_node
   end
 
