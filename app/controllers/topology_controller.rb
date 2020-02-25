@@ -7,7 +7,9 @@ class TopologyController < ApplicationController
 
   # GET /dashboard
   def show
-    g = Graph.new
+    @graph_configuration = GraphConfiguration.new(graph_configuration_params)
+    g = Graph.new rankdir: @graph_configuration.rank_dir,
+      splines: @graph_configuration.splines
 
     respond_to do |format|
       format.html { @png = g.to_png }
@@ -19,5 +21,12 @@ class TopologyController < ApplicationController
                      disposition: 'attachment'
                  }
     end
+  end
+
+  private
+  def graph_configuration_params
+    params.fetch(:graph_configuration, {}).permit(
+      :rank_dir, :show_locations, :location_shape, :device_shape, :box_locations, :splines, :show_ports
+    )
   end
 end
