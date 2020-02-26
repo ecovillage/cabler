@@ -8,7 +8,7 @@ class GraphConfiguration
 
 
   attribute :rank_dir,         default: 'TB'
-  attribute :box_locations,    default: true
+  attribute :box_locations, :boolean, default: true
   attribute :splines,          default: true
 
   attribute :show_ports,       default: :all
