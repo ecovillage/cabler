@@ -11,16 +11,16 @@
       =t('edit')
 
 
-%section
-  - if @location.images
+- if @location.images.present?
+  %section
     %h2.subtitle Images
     - @location.images.each do |image|
       = link_to url_for(image), target: '_new' do
         %figure
           = image_tag image.variant(resize_to_fill: [180,120]).processed
     -#= link_to 'Add image', ''
+  %br
 
-%br
 %section
   %h2.subtitle
     %span.icon
