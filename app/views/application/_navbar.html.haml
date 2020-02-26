@@ -6,16 +6,16 @@
       %span{"aria-hidden" => "true"}
   #cablerNavbar.navbar-menu
     .navbar-start
-      = link_to t('Home'), root_path, class: 'navbar-item'
-      = link_to devices_path, class: 'navbar-item' do
+      = link_to t('Dashboard'), root_path, class: nav_item_classes(root_path)
+      = link_to devices_path, class: nav_item_classes(devices_path) do
         %span.icon
           %i.fa.fa-server
         = t('Devices')
-      = link_to locations_path, class: 'navbar-item' do
+      = link_to locations_path, class: nav_item_classes(locations_path) do
         %span.icon
           %i.fa.fa-globe
         = t('Locations')
-      = link_to topology_path, class: 'navbar-item' do
+      = link_to topology_path, class: nav_item_classes(topology_path) do
         %span.icon
           %i.fa.fa-vector-square
         = t('Topology')
