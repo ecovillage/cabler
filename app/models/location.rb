@@ -4,6 +4,9 @@
 
 class Location < ApplicationRecord
   include HasImages
+  extend FriendlyId
+
+  friendly_id :human_identifier, :use => [:slugged]
 
   has_many :devices
 

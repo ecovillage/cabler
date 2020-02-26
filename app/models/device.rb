@@ -4,6 +4,9 @@
 
 class Device < ApplicationRecord
   include HasImages
+  extend FriendlyId
+
+  friendly_id :human_identifier, :use => [:slugged]
 
   belongs_to :location, optional: true
 

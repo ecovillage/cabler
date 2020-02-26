@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
 
+gem 'friendly_id', '~> 5.2.4'
+
 gem "haml-rails", "~> 2.0"
 gem "bulma-rails", "~> 0.8"
 
