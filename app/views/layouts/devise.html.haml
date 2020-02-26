@@ -9,6 +9,9 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    - if user_signed_in?
+      .navbar-placeholder
+      = render "navbar"
     .content
       .hero
         .hero-body
@@ -16,4 +19,7 @@
           .columns.is-centered
             .column.is-half
               = yield
+
+    - if user_signed_in?
+      = render "footer"
 

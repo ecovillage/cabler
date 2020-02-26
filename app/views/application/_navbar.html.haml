@@ -33,14 +33,12 @@
             = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
           - else
             = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'button'
-      -# TODO link to edit user settings
-      -# = link_to 'TODO ', class: nav_item_class('TODO ') do
-      -#   %span.icon
-      -#     %i.fa.fa-cog
-      -#   %span
-      -#     Settings
-      -#   %span
-      -#     = 'TODO '
+
+      = link_to edit_user_registration_path, class: nav_item_classes(edit_user_registration_path) do
+        %span.icon
+          %i.fa.fa-cog
+        %span
+          Settings
 
 :javascript
   document.addEventListener('DOMContentLoaded', () => {
