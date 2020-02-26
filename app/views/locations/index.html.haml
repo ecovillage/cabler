@@ -32,9 +32,17 @@
               = location.devices.count
               = Device.model_name.human(count: location.devices.count).capitalize
             - location.devices.each do |device|
-              = device.human_identifier
+              = link_to device do
+                %span.icon
+                  %i.fa.fa-hdd
+                =device.human_identifier
               %br
-            = link_to 'Add device', new_device_path(location_id: location.id), class: :button
+            = link_to new_device_path(location_id: location.id), class: 'button is-primary is-small is-outlined' do
+              %span.icon
+                %i.fa.fa-plus
+              %span.icon
+                %i.fas.fa-hdd
+              = t('add new device')
         .card-footer
           = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
           = link_to 'Show', location, class: 'card-footer-item'
