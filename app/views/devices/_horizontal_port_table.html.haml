@@ -18,7 +18,7 @@
                         %i.fa.fa-hdd
                       - else
                         %i.fa.fa-globe
-                    = connection.target.human_identifier
+                    = connection.target&.human_identifier
                     - if connection.target_slot
                       %span.icon
                         %i.fa.fa-ethernet
