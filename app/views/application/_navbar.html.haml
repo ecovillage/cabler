@@ -6,16 +6,16 @@
       %span{"aria-hidden" => "true"}
   #cablerNavbar.navbar-menu
     .navbar-start
-      = link_to t('Home'), root_path, class: getNavItemClass('dashboard')
-      = link_to devices_path, class: getNavItemClass(devices_path) do
+      = link_to t('Home'), root_path, class: nav_item_class('dashboard')
+      = link_to devices_path, class: nav_item_class(devices_path) do
         %span.icon
           %i.fa.fa-server
         = t('Devices')
-      = link_to locations_path, class: getNavItemClass(locations_path) do
+      = link_to locations_path, class: nav_item_class(locations_path) do
         %span.icon
           %i.fa.fa-globe
         = t('Locations')
-      = link_to topology_path, class: getNavItemClass(topology_path) do
+      = link_to topology_path, class: nav_item_class(topology_path) do
         %span.icon
           %i.fa.fa-vector-square
         = t('Topology')
@@ -35,6 +35,14 @@
             = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
           - else
             = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'button'
+      -# TODO link to edit user settings
+      -# = link_to 'TODO ', class: nav_item_class('TODO ') do
+      -#   %span.icon
+      -#     %i.fa.fa-cog
+      -#   %span
+      -#     Settings
+      -#   %span
+      -#     = 'TODO '
 
 :javascript
   document.addEventListener('DOMContentLoaded', () => {
