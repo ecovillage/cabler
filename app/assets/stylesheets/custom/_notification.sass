@@ -1,0 +1,24 @@
+.notification-wrapper
+  position: relative
+  input
+    position: absolute
+    z-index: 2000
+    top: 10px
+    right: 10px
+
+  input:checked
+    animation: hide-notification 200ms
+    animation-fill-mode: forwards
+
+  input:checked + .notification
+    animation: hide-notification 200ms
+    animation-fill-mode: forwards
+
+@keyframes hide-notification
+  0%
+    opacity: 1
+    transform: scale(1)
+
+  100%
+    opacity: 0
+    transform: scale(0)
