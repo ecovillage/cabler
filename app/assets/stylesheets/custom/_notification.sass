@@ -1,5 +1,8 @@
+@import ./_variables
+
 .notification-wrapper
   position: relative
+
   input
     position: absolute
     z-index: 2000
@@ -7,18 +10,21 @@
     right: 10px
 
   input:checked
-    animation: hide-notification 200ms
+    animation: hide-notification $transitionTime
     animation-fill-mode: forwards
 
   input:checked + .notification
-    animation: hide-notification 200ms
+    animation: hide-notification $transitionTime
     animation-fill-mode: forwards
 
 @keyframes hide-notification
   0%
     opacity: 1
     transform: scale(1)
-
-  100%
+  99%
     opacity: 0
     transform: scale(0)
+  100%
+    transform: scale(0)
+    visibility: hidden
+    position: absolute
