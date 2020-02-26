@@ -4,10 +4,10 @@
       %i.fa.fa-globe
       Locations
   .level-right
-    = link_to new_location_path, class: 'button level-item' do
+    = link_to new_location_path, class: 'button level-item has-text-link' do
       %span.icon
         %i.fa.fa-plus
-      =t('add location')
+      =t('new location')
 
 #locations.columns.is-multiline
   - @locations.each do |location|
@@ -41,4 +41,7 @@
           = link_to 'Add device', new_device_path(location_id: location.id), class: 'card-footer-item'
           = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
 
-= link_to 'New Location', new_location_path, class: :button
+= link_to new_location_path, class: 'button has-text-link' do
+  %span.icon
+    %i.fa.fa-plus
+  =t('new location')

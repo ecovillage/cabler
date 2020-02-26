@@ -3,10 +3,10 @@
     %h1.title Topology via graphviz
   .level-right
     .level-item
-      = link_to topology_path(format: :dot, params: request.params) do
+      = link_to topology_path(format: :dot, params: request.params), class: 'button is-dark' do
         Download .dot
     .level-item
-      = link_to topology_path(format: :svg, params: request.params), class: 'button' do
+      = link_to topology_path(format: :svg, params: request.params), class: 'button is-dark' do
         Download .svg
     -#.level-item
     -#  Change algorithm (digraph, circo, ...)
