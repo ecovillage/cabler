@@ -6,10 +6,10 @@
       %i.fa.fa-server
       Devices
   .level-right
-    = link_to new_device_path, class: 'button level-item' do
+    = link_to new_device_path, class: 'button level-item has-text-link' do
       %span.icon
         %i.fa.fa-plus
-      =t('add device')
+      =t('new device')
 
 %table.table.is-fullwidth.is-striped
   %thead
@@ -64,4 +64,4 @@
 = link_to new_device_path, class: 'button has-text-link' do
   %span.icon
     %i.fa.fa-plus
-  =t('add device')
+  =t('new device')
