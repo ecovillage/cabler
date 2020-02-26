@@ -6,6 +6,8 @@ It is a prototype/hack/WIP born out of the necessary to document findings while 
 
 The own code is released under the AGPLv3+ and copyright 2020 Felix Wolfsteller.
 
+Some german incubative discussion is found at [https://meta-community.org/](https://meta-community.org/t/eigene-netzwerk-infrastruktur-dokumentations-software/387) (a German discourse forum for 'IT' people in intentional communities and like-minded).
+
 ## Usage
 
 ### Concepts
@@ -184,6 +186,7 @@ ln -s application.html.haml _application.html.haml
   - [bulma.io](bulma.io) as CSS framework
   - [HAML](http://haml.info/) for a saner way to produce HTML
   - devise for authentication
+  - friendly_id for ... friendly ids
 
 ### Design decisions
 
