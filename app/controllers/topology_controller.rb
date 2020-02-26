@@ -9,7 +9,9 @@ class TopologyController < ApplicationController
   def show
     @graph_configuration = GraphConfiguration.new(graph_configuration_params)
     g = Graph.new rankdir: @graph_configuration.rank_dir,
-      splines: @graph_configuration.splines
+      splines:       @graph_configuration.splines,
+      box_locations: @graph_configuration.box_locations,
+      show_ports:    @graph_configuration.show_ports.to_sym
 
     respond_to do |format|
       format.html { @png = g.to_png }
