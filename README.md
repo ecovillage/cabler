@@ -154,7 +154,7 @@ For fun, some of the files include comments to be compliant with [(FSFEs) reuse]
 
 As we are dealing with models in the physical domain, following a resources based UI and API is fine (and Rails is meant to do that, allthough it is not thorrowly used in this project).
 
-Prefer good old stable setup: no hard dependency on Javascript (only progressive enhanvements), render on server side.
+Prefer good old stable setup: no hard dependency on Javascript (only progressive enhancements), render on server side.
 
 Use solid and stable standards and conventions if available.
 
@@ -185,8 +185,9 @@ ln -s application.html.haml _application.html.haml
   - [Ruby](https://www.ruby-lang.org/en/) and [Ruby on Rails](https://rubyonrails.org)
   - [bulma.io](bulma.io) as CSS framework
   - [HAML](http://haml.info/) for a saner way to produce HTML
-  - devise for authentication
-  - friendly_id for ... friendly ids
+  - [devise](https://github.com/heartcombo/devise) for authentication
+  - [friendly_id](https://github.com/norman/friendly_id/) for ... friendly ids
+  - many others ...
 
 ### Design decisions
 
