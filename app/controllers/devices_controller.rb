@@ -22,7 +22,7 @@ class DevicesController < ApplicationController
   def new
     @device = Device.new
     if params[:location]
-      @location = Location.find params[:location]
+      @location = Location.friendly.find params[:location]
       @device.location = @location
     end
   end
