@@ -3,7 +3,7 @@
     %i.fa.fa-arrow-right
   %span.icon
     %i.fa.fa-ethernet
-  = connection.source_slot
+  = connection.source_port
   = connection.target&.human_identifier
   - if connection.target.instance_of? Device
     %span.icon.is-link
@@ -12,5 +12,5 @@
     %span.icon.is-light
       %i.fa.fa-globe
   [
-  = connection.target_slot
+  = connection.target_port
   ]

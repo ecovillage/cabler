@@ -23,11 +23,11 @@
           %p.control.is-expanded
             = form.text_field :kind, placeholder: 'Name for new kind'#, help: 'Kind of link (e.g. Ethernet, RJ11, Water)'
       .field
-        = form.label :slot_this_end
-        - if params[:slot]
-          = form.text_field :slot_one_end, help: 'the slot on this end', icon_left: 'fa fa-ethernet', readonly: 'readonly'
+        = form.label :port_this_end
+        - if params[:port]
+          = form.text_field :port_one_end, help: 'the port on this end', icon_left: 'fa fa-ethernet', readonly: 'readonly'
         - else
-          = form.text_field :slot_one_end, help: 'the slot on this end', icon_left: 'fa fa-ethernet'
+          = form.text_field :port_one_end, help: 'the port on this end', icon_left: 'fa fa-ethernet'
     #whitespace.column.is-2
     #to-link.column.is-5
       .field
@@ -39,7 +39,7 @@
           %p.control.is-expanded
             = form.text_field :other_end_device
           %p.control
-            = form.text_field :slot_other_end, placeholder: "slot number"
+            = form.text_field :port_other_end, placeholder: "port number"
         %p.help.is-danger
           Either select a location or a device
       .field
@@ -53,8 +53,8 @@
         %p.help.is-danger
           Either select a location or a device
       -#.field
-      -#  = form.label :slot_other_end
-      -#  = form.text_field :slot_other_end, icon_left: 'fa fa-ethernet', help: 'the slot on the other end (if applicable)'
+      -#  = form.label :port_other_end
+      -#  = form.text_field :port_other_end, icon_left: 'fa fa-ethernet', help: 'the port on the other end (if applicable)'
       -#.field
       -#  = form.label :other_end_location
   .level.actions

@@ -19,11 +19,11 @@
                       - else
                         %i.fa.fa-globe
                     = connection.target&.human_identifier
-                    - if connection.target_slot
+                    - if connection.target_port
                       %span.icon
                         %i.fa.fa-ethernet
                       .is-link
-                        = connection.target_slot
+                        = connection.target_port
 
                   - if next_connection = connection.next_connection
                     = render partial: 'links/link_tag', locals: {connection: next_connection}
@@ -35,7 +35,7 @@
                       = connection.name
             - else
               %td
-                = link_to new_device_link_path(@device, slot: idx) do
+                = link_to new_device_link_path(@device, port: idx) do
                   %button.button
                     %i.fa.fa-plus
 
