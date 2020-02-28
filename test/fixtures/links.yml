@@ -9,8 +9,8 @@
 #  one_end_id     :integer
 #  other_end_type :string
 #  other_end_id   :integer
-#  port_one_end   :integer
-#  port_other_end :integer
+#  slot_one_end   :integer
+#  slot_other_end :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -30,28 +30,28 @@ tln1_ppb:
 tln1_router:
   one_end: router (Device)
   other_end: tln1 (Device)
-  port_one_end: 2
-  port_other_end: 1
+  slot_one_end: 2
+  slot_other_end: 1
 
 ppb_tln1:
   one_end: ppb (Device)
-  port_one_end: 3
+  slot_one_end: 3
   other_end: tln1 (Device)
-  port_other_end: 2
+  slot_other_end: 2
 
 floor_tln1:
   one_end: floor (Location)
   other_end: tln1 (Device)
-  port_other_end: 5
+  slot_other_end: 5
 
 ppb_ppo:
   one_end: ppb (Device)
-  port_one_end: 3
+  slot_one_end: 3
   other_end: ppo (Device)
-  port_other_end: 4
+  slot_other_end: 4
 
 tln2_ppo:
   one_end: tln2 (Device)
-  port_one_end: 1
+  slot_one_end: 1
   other_end: ppo (Device)
-  port_other_end: 4
+  slot_other_end: 4

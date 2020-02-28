@@ -13,7 +13,7 @@
       %th
       %th name
   %tbody
-    - connections.group_by{|c|c.source_port.to_i}.each do |port, connections|
+    - connections.group_by{|c|c.source_slot.to_i}.each do |port, connections|
       - if connections.count < 3
         - in_connection, out_connection = connections
       - elsif connections.count > 2
@@ -59,7 +59,7 @@
                 = link_to next_connection.target&.human_identifier, next_connection.target
 
         %td.in
-          = in_connection.target_port
+          = in_connection.target_slot
         %td.in
           %span.icon
             %i.fa.fa-exchange-alt{data: {"fa-transform" => "flip-h"}}
@@ -67,14 +67,14 @@
           - if in_connection.kind.present?
             %small
               (#{in_connection.kind})
-          = in_connection.source_port
+          = in_connection.source_slot
           - if out_connection&.kind.present?
             %small
               (#{out_connection&.kind})
         %td
           %span.icon
             %i.fa.fa-exchange-alt
-        %td= out_connection&.target_port
+        %td= out_connection&.target_slot
         %td
           - if target = out_connection&.target
             = link_to target&.human_identifier, target

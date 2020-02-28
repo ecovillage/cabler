@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_151452) do
     t.integer "one_end_id"
     t.string "other_end_type"
     t.integer "other_end_id"
-    t.integer "port_one_end"
-    t.integer "port_other_end"
+    t.integer "slot_one_end"
+    t.integer "slot_other_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["one_end_type", "one_end_id"], name: "index_links_on_one_end_type_and_one_end_id"

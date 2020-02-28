@@ -9,8 +9,8 @@ class CreateLinks < ActiveRecord::Migration[6.0]
       t.references :one_end, polymorphic: true
       t.references :other_end, polymorphic: true
 
-      t.integer :port_one_end
-      t.integer :port_other_end
+      t.integer :slot_one_end
+      t.integer :slot_other_end
 
       t.timestamps
     end

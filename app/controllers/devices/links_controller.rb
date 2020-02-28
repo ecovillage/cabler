@@ -22,8 +22,8 @@ class Devices::LinksController < ApplicationController
   # GET /links/new
   def new
     @link = @device.links.build
-    if params[:port]
-      @link.port_one_end = params[:port]
+    if params[:slot]
+      @link.slot_one_end = params[:slot]
     end
   end
 
@@ -110,6 +110,6 @@ class Devices::LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:device_id, :name, :other_end_id, :one_end_id, :port_other_end, :port_one_end, :kind)
+      params.require(:link).permit(:device_id, :name, :other_end_id, :one_end_id, :slot_other_end, :slot_one_end, :kind)
     end
 end

@@ -5,14 +5,14 @@ class ConnectionTest < ActiveSupport::TestCase
     connection = Connection.new link: links(:tln1_router), source: devices(:router)
 
     assert_equal devices(:tln1), connection.target
-    assert_equal 2, connection.source_port
-    assert_equal 1, connection.target_port
+    assert_equal 2, connection.source_slot
+    assert_equal 1, connection.target_slot
 
     connection = Connection.new link: links(:ppb_tln1), source: devices(:tln1)
 
     assert_equal devices(:ppb), connection.target
-    assert_equal 2, connection.source_port
-    assert_equal 3, connection.target_port
+    assert_equal 2, connection.source_slot
+    assert_equal 3, connection.target_slot
   end
 
   test "#next_connection returns nil for location target" do
@@ -46,7 +46,7 @@ class ConnectionTest < ActiveSupport::TestCase
   end
 
   test "next_connection throws Branches if it does" do
-    skip("implement me, create a situation where multiple connections are done to one port")
+    skip("implement me, create a situation where multiple connections are done to one slot")
   end
 
 end

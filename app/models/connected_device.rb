@@ -19,10 +19,10 @@ class ConnectedDevice
   def connections_at port:, incoming_link: nil
     if incoming_link
       connections.select do |connection|
-        connection.source_port == port && connection.link != incoming_link
+        connection.source_slot == port && connection.link != incoming_link
       end
     else
-      connections.select{|connection| connection.source_port == port}
+      connections.select{|connection| connection.source_slot == port}
     end
   end
 

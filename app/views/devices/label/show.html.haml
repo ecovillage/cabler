@@ -13,22 +13,22 @@
         = DateTime.now
     %tr.link_head
       - if @label_configuration.ports_left?
-        %th.own_port
+        %th.own_slot
           Slot
       - else
         %th.notes
           Notes
       %th
-      %th.target_port
+      %th.target_slot
         to
       - if @label_configuration.ports_left?
         %th.notes
           Notes
       - else
-        %th.own_port
+        %th.own_slot
           Slot
   %tbody
-    - @device.connections.sort_by{|c|c.source_port.to_i * (@label_configuration.ports_top_bottom? ? 1 : -1)}.each do |connection|
+    - @device.connections.sort_by{|c|c.source_slot.to_i * (@label_configuration.ports_top_bottom? ? 1 : -1)}.each do |connection|
       - if connection.nil?
         %tr
           %td(colspan=3)
@@ -36,12 +36,12 @@
       - else
         %tr
           - if @label_configuration.ports_left?
-            %td.own_port
-              = connection.source_port
+            %td.own_slot
+              = connection.source_slot
           - else
             %td.notes
-          %td.target_port
-            = connection.target_port
+          %td.target_slot
+            = connection.target_slot
           %td.target
             = connection.target&.human_identifier || "[#{connection.name}]"
             - if next_connection = connection.next_connection
@@ -51,8 +51,8 @@
           - if @label_configuration.ports_left?
             %td.notes
           - else
-            %td.own_port
-              = connection.source_port
+            %td.own_slot
+              = connection.source_slot
 
 
 %br
@@ -66,7 +66,7 @@
       %th(colspan=4)
         Cable
   %tbody
-    - @device.connections.sort_by{|c|c.source_port.to_i}.each do |connection|
+    - @device.connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       - if connection.nil?
         %tr
           %td(colspan=4)
@@ -74,10 +74,10 @@
         %tr
           %td.target
             = connection.source.human_identifier
-          %td.target_port
-            = connection.source_port
+          %td.target_slot
+            = connection.source_slot
           %td.target
-            = connection.target_port
+            = connection.target_slot
           %td.target
             = connection.target&.human_identifier || "[#{connection.name}]"
             - if next_connection = connection.next_connection

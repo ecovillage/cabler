@@ -8,10 +8,10 @@
       %th name
       %th
   %tbody
-    - connections.sort_by{|c|c.source_port.to_i}.each do |connection|
+    - connections.sort_by{|c|c.source_slot.to_i}.each do |connection|
       %tr
         %td
-          = connection.source_port
+          = connection.source_slot
           - if connection.kind.present?
             %small
               (#{connection.kind})
@@ -20,7 +20,7 @@
             %i.fa.fa-long-arrow-alt-right
           -#%span.icon
           -#  %i.fa.fa-exchange-alt
-        %td= connection.target_port
+        %td= connection.target_slot
         %td
           - if target = connection.target
             = link_to target.human_identifier, target

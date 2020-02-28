@@ -77,8 +77,8 @@ class Graph
     @links.each do |link|
       if link.one_end && link.other_end
         edge = @g.add_edges(
-          {node_for(link.one_end)   => "p#{link.port_one_end}"},
-          {node_for(link.other_end) => "p#{link.port_other_end}"}
+          {node_for(link.one_end)   => "p#{link.slot_one_end}"},
+          {node_for(link.other_end) => "p#{link.slot_other_end}"}
         )
         edge[:label]     = link.name
         edge[:arrowhead] = "normal"

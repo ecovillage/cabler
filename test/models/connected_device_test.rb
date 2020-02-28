@@ -6,7 +6,7 @@ class ConnectedDeviceTest < ActiveSupport::TestCase
     assert_equal 4, device.connections.count
   end
 
-  test 'finds connection at port' do
+  test 'finds connection at slot' do
     device = ConnectedDevice.new(device: devices(:tln1))
     connections = device.connections_at port: 1
 
@@ -16,7 +16,7 @@ class ConnectedDeviceTest < ActiveSupport::TestCase
     assert_equal devices(:router), connection.target
   end
 
-  test 'finds connections at port' do
+  test 'finds connections at slot' do
     device = ConnectedDevice.new(device: devices(:ppb))
     connections = device.connections_at port: 3
 
