@@ -1,6 +1,6 @@
 = form_with(model: location, local: true, builder: BulmaFormBuilder::FormBuilder, class: 'box') do |form|
   - if location.errors.any?
-    #error_explanation
+    #error_explanation.notification.is-danger
       %h2
         = pluralize(location.errors.count, "error")
         prohibited this location from being saved:

@@ -1,7 +1,7 @@
 = form_with(model: [@device, link], local: true, builder: BulmaFormBuilder::FormBuilder, class: 'box') do |form|
   -# builder: BulmaFormBuilder::HorizontalBulmaFormBuilder
   - if link.errors.any?
-    #error_explanation
+    #error_explanation.notification.is-danger
       %h2
         = pluralize(link.errors.count, "error")
         prohibited this link from being saved:
