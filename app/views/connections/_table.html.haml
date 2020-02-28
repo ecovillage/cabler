@@ -56,10 +56,11 @@
               %span.icon
                 %i.fa.fa-edit
               = t('edit')
+  %tfoot
     %tr
       %td.has-text-centered(colspan=7)
         - if @device
-          = link_to new_device_link_path(@device), class: 'button is-primary is-small' do
+          = link_to new_device_link_path(@device), class: 'button is-primary is-small is-outlined' do
             %span.icon
               %i.fa.fa-plus
             = t('add link')

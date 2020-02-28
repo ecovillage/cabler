@@ -1,0 +1,124 @@
+%table.table.is-fullwidth.is-narrow.is-hoverable
+  %thead
+    %tr
+      %th name
+      %th 
+      %th other end
+      %th Port
+      %th
+      %th.middle.is-dark local port
+      %th
+      %th Port
+      %th other end
+      %th
+      %th name
+  %tbody
+    - connections.group_by{|c|c.source_slot.to_i}.each do |port, connections|
+      - if connections.count < 3
+        - in_connection, out_connection = connections
+      - elsif connections.count > 2
+        %span.icon
+          %i.fa.fa-exclamation-triangle
+      %tr
+        %td.in
+          = in_connection.name
+        %td.actions.in
+          - if @device
+            .buttons
+              = link_to [@device, in_connection.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' do
+                %span.icon
+                  %i.fa.fa-times
+                = t('destroy')
+              = link_to edit_device_link_path(@device, in_connection.link), class: 'button is-warning is-small' do
+                %span.icon
+                  %i.fa.fa-edit
+                = t('edit')
+        %td.in
+          - if target = in_connection.target
+            = link_to target.human_identifier, target
+            -# TODO need kind of a connection.path.reverse
+            \
+            - if (target.instance_of? Device)
+              - if target.kind.present?
+                %small
+                  (#{target.kind})
+              - if target.location&.name
+                %small
+                  (#{link_to target.location.name, target.location})
+            - if next_connection = in_connection.next_connection
+              %span.icon.has-text-light
+                %i.fa.fa-link
+              %span.icon
+                %i.fa.fa-arrow-right
+              = link_to next_connection.target&.human_identifier, next_connection.target
+              - if next_connection = next_connection.next_connection
+                %span.icon.has-text-light
+                  %i.fa.fa-link
+                %span.icon
+                  %i.fa.fa-arrow-right
+                = link_to next_connection.target&.human_identifier, next_connection.target
+
+        %td.in
+          = in_connection.target_slot
+        %td.in
+          %span.icon
+            %i.fa.fa-exchange-alt{data: {"fa-transform" => "flip-h"}}
+        %td.middle.is-dark.has-text-centered
+          - if in_connection.kind.present?
+            %small
+              (#{in_connection.kind})
+          = in_connection.source_slot
+          - if out_connection&.kind.present?
+            %small
+              (#{out_connection&.kind})
+        %td
+          %span.icon
+            %i.fa.fa-exchange-alt
+        %td= out_connection&.target_slot
+        %td
+          - if target = out_connection&.target
+            = link_to target&.human_identifier, target
+            \
+            - if (target.instance_of? Device) && target.kind.present?
+              %small
+                (#{target.kind})
+            - if (target.instance_of? Device) && target.location&.name
+              %small
+                (#{link_to target.location&.name, target.location})
+            - if next_connection = out_connection&.next_connection
+              %span.icon.has-text-light
+                %i.fa.fa-link
+              %span.icon
+                %i.fa.fa-arrow-right
+              = link_to next_connection.target&.human_identifier, next_connection.target
+              - if next_connection = next_connection.next_connection
+                %span.icon.has-text-light
+                  %i.fa.fa-link
+                %span.icon
+                  %i.fa.fa-arrow-right
+                = link_to next_connection.target&.human_identifier, next_connection.target
+
+        %td.actions
+          - if @device && out_connection
+            .buttons
+              = link_to [@device, out_connection&.link], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' do
+                %span.icon
+                  %i.fa.fa-times
+                = t('destroy')
+              - if out_connection
+                = link_to edit_device_link_path(@device, out_connection&.link), class: 'button is-warning is-small' do
+                  %span.icon
+                    %i.fa.fa-edit
+                  = t('edit')
+        %td
+          = out_connection&.name
+  %tbody
+    %tr
+      %td.has-text-centered(colspan=14)
+    %tr
+      %td.has-text-centered(colspan=14)
+        - if @device
+          = link_to new_device_link_path(@device), class: 'button is-primary is-small is-outlined' do
+            %span.icon
+              %i.fa.fa-plus
+            = t('add link')
