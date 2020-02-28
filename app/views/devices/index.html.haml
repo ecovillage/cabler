@@ -11,9 +11,12 @@
         %i.fa.fa-plus
       =t('new device')
 
-%table.table.is-fullwidth.is-striped
+%table.table.is-fullwidth.is-striped.is-hoverable
   %thead
     %tr
+      %th.has-text-centered
+        %span.icon
+          %i.fas.fa-eye
       %th= t('Name')
       %th= t('URL')
       %th= t('Location')
@@ -24,6 +27,10 @@
   %tbody
     - @devices.each do |device|
       %tr
+        %td
+          - if device.images.first
+            %figure.image.is-48x48
+              = image_tag device.images.first.variant(resize_to_fill: [48,48]).processed, class: 'is-rounded'
         %td
           = link_to device.human_identifier, device
         %td
