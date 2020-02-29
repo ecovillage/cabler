@@ -144,6 +144,8 @@ There are very few tests which can be run with `rails t`.  Use `rails test -f` f
 
 System-tests can be run with `rails test:system`.
 
+To run tests automatically on filechange, run `bundle exec guard -g test` . For this to exclude system tests, all tests with the name "System" in it are skipped (kind of a guard-minitest bug).
+
 ### Contributing
 
 Own code (mostly `app/` and `test/`) is released under the AGPLv3+ (included as file [LICENSE](LICENSE) in this repository).

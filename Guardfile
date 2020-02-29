@@ -16,6 +16,37 @@
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
 
+group 'test' do
+  guard :minitest, spring: 'bin/rails test', test_folders: ['test/models', 'test/controllers'] , cli: '--exclude "/.*system.*/"' do
+    # with Minitest::Unit
+    watch(%r{^test/(.*)\/?test_(.*)\.rb$})
+    watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
+    watch(%r{^app/(.+)\.rb$}) { 'test' }
+    watch(%r{^test/test_helper\.rb$})      { 'test' }
+  
+    # with Minitest::Spec
+    # watch(%r{^spec/(.*)_spec\.rb$})
+    # watch(%r{^lib/(.+)\.rb$})         { |m| "spec/#{m[1]}_spec.rb" }
+    # watch(%r{^spec/spec_helper\.rb$}) { 'spec' }
+  
+    # Rails 4
+    # watch(%r{^app/(.+)\.rb$})                               { |m| "test/#{m[1]}_test.rb" }
+    # watch(%r{^app/controllers/application_controller\.rb$}) { 'test/controllers' }
+    # watch(%r{^app/controllers/(.+)_controller\.rb$})        { |m| "test/integration/#{m[1]}_test.rb" }
+    # watch(%r{^app/views/(.+)_mailer/.+})                    { |m| "test/mailers/#{m[1]}_mailer_test.rb" }
+    # watch(%r{^lib/(.+)\.rb$})                               { |m| "test/lib/#{m[1]}_test.rb" }
+    # watch(%r{^test/.+_test\.rb$})
+    # watch(%r{^test/test_helper\.rb$}) { 'test' }
+  end
+end
+
+#Guard::Minitest::Runner.module_eval do
+#  def run_all
+#    paths = inspector.clean_all.reject{|p| p.include?('/system/') }
+#    run(paths, all: true)
+#  end
+#end
+
 group 'livereload' do
   guard 'livereload' do
     extensions = {
