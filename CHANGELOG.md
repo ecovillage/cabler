@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.. ()
+  - 
+
 ## 0.1.2 (2020-02-28)
   - topology view: allow configuration of spline, rankdir, ports and boxes
   - friendly_id for nicer URLS (https://.../devicename instead of ../23123)
