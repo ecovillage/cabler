@@ -1,5 +1,5 @@
 .section
-  %h2 Log in
+  %h2.title.is-3.has-text-centered.has-text-dark Log in
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .field
       %p.control.has-icons-left
@@ -18,7 +18,7 @@
         = f.check_box :remember_me
         &nbsp;
         = f.label :remember_me
-    .actions
-      = f.submit "Log in", :class => "button is-primary"
+    .actions.has-text-centered
+      = f.submit "Log in", :class => "button is-primary is-fullwidth"
     %br/
   = render "devise/shared/links"

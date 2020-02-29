@@ -9,17 +9,18 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    - if user_signed_in?
-      .navbar-placeholder
-      = render "navbar"
-    .content
-      .hero
-        .hero-body
-          = render 'flashs'
-          .columns.is-centered
-            .column.is-half
-              = yield
+    %section.hero.is-primary.is-fullheight.is-bold
+      .hero-head
+        - if user_signed_in?
+          .navbar-placeholder
+          = render "navbar"
+      .hero-body.columns.is-centered
+        .column.is-one-third
+          .box
+            = render 'flashs'
+            = yield
 
-    - if user_signed_in?
-      = render "footer"
+      .hero-foot
+        - if user_signed_in?
+          = render "footer"
 

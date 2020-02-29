@@ -1,10 +1,11 @@
-%h2 Forgot your password?
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+%h2.title.is-4.has-text-centered.has-text-dark Forgot your password?
+%hr
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, builder: BulmaFormBuilder::FormBuilder) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'input'
   .actions
-    = f.submit "Send me reset password instructions"
+    = f.submit "Send me reset password instructions", class: 'button is-fullwidth is-primary'
+%br
 = render "devise/shared/links"

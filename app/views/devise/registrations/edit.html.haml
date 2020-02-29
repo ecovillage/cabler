@@ -1,42 +1,43 @@
-%h2 Settings
-= form_for(resource, as: resource_name, url: user_registration_path(), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email", :class => "input"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password", :class => "input"
-    - if @minimum_password_length
+.box
+  %h2.title Settings
+  %hr
+  = form_for(resource, as: resource_name, url: user_registration_path(), html: { method: :put }, class: 'form', builder: BulmaFormBuilder::FormBuilder) do |f|
+    = devise_error_messages!
+    .field
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: "email", :class => "input"
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    .field
+      = f.label :password
+      %i (leave blank if you don't want to change it)
       %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password", :class => "input"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password", :class => "input"
-
-  .level.mt-2
-    .level-left
-      = f.submit "Update", :class => "button is-primary"
-    .level-right
-      = link_to "Back", :back, :class => "button is-dark"
-
+      = f.password_field :password, autocomplete: "new-password", :class => "input"
+      - if @minimum_password_length
+        %br/
+        %p.help.em
+          = @minimum_password_length
+          characters minimum
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "new-password", :class => "input"
+    .field
+      = f.label :current_password
+      %i (we need your current password to confirm your changes)
+      %br/
+      = f.password_field :current_password, autocomplete: "current-password", :class => "input"
+  
+    .level.mt-2
+      .level-left
+        = f.submit "Update", :class => "button is-primary"
+      .level-right
+        = link_to "Back", :back, :class => "button is-dark"
 
 .mt-10
-  %h2.has-text-danger Danger Zone
-  .mb-2
-  = link_to "Delete account", user_registration_path(), data: { confirm: "Are you sure?" }, method: :delete, :class => "button is-danger"
-
+  .box
+    %h2.has-text-danger Danger Zone
+    %hr
+    .mb-2
+    = link_to "Delete account", user_registration_path(), data: { confirm: "Are you sure?" }, method: :delete, :class => "button is-danger"
+  

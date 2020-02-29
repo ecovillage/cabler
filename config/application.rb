@@ -23,6 +23,14 @@ module Cabler
       html_tag.gsub(/class="/, "class=\"field_with_errors ").html_safe
       #%Q(<div class="field_with_errors">#{html_tag}</div>).html_safe
     end
-  end
 
+    config.to_prepare do
+      Devise::SessionsController.layout "devise"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }
+      Devise::ConfirmationsController.layout "devise"
+      Devise::UnlocksController.layout "devise"
+      Devise::PasswordsController.layout "devise"
+    end
+
+  end
 end
