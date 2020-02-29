@@ -134,6 +134,10 @@ See above for email settings
 
 ## Development
 
+### Live Reload
+
+A [Guardfile](Guardfile) and the respective gems for `livereloading` are set up. That means if you want your browser window to automaticall trigger a rerender when you changed some files, you can run `guard -g livereload` (in a separate shell).
+
 ### Tests
 
 There are very few tests which can be run with `rails t`.  Use `rails test -f` for *fast-failing* mode (abort after first test fail).
