@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_151452) do
+ActiveRecord::Schema.define(version: 2020_02_28_171956) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,7 +48,20 @@ ActiveRecord::Schema.define(version: 2020_02_07_151452) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "connector"
     t.string "url"
+    t.string "slug"
     t.index ["location_id"], name: "index_devices_on_location_id"
+    t.index ["slug"], name: "index_devices_on_slug", unique: true
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -62,14 +75,18 @@ ActiveRecord::Schema.define(version: 2020_02_07_151452) do
     t.integer "port_other_end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["one_end_type", "one_end_id"], name: "index_links_on_one_end_type_and_one_end_id"
     t.index ["other_end_type", "other_end_id"], name: "index_links_on_other_end_type_and_other_end_id"
+    t.index ["slug"], name: "index_links_on_slug", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_locations_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|
