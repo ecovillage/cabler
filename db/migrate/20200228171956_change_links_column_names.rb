@@ -1,4 +1,4 @@
-class FixSlotColumnName < ActiveRecord::Migration[6.0]
+class ChangeLinksColumnNames < ActiveRecord::Migration[6.0]
   def change
     change_table :links do |t|
       t.rename :slot_one_end, :port_one_end
