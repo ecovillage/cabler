@@ -32,24 +32,28 @@ tln1:
   name: TL-N1
   kind: Switch
   location: basement
-  num_links: 12
+  num_links: 5
 
 tln2:
   name: TL-N2
   kind: Switch
   location: office
+  num_links: 4
 
 ppb:
   kind: Patchpanel
   connector: true
   location: basement
+  num_links: 6
 
 ppo:
   kind: Patchpanel
   connector: true
   location: office
+  num_links: 4
 
 router:
   name: pfSense Router
   kind: router
   location: basement
+  num_links: 3
