@@ -10,7 +10,7 @@ class ConnectedDevice
   include ActiveModel::Model
 
   attr_accessor :device
-  delegate :id, :name, :human_identifier, :url, to: :device
+  delegate :id, :name, :human_identifier, :location, :url, to: :device
 
   def connections
     @connections ||= load_connections
