@@ -13,9 +13,16 @@ class DevicesController < ApplicationController
   end
 
   # GET /devices/1
-  # GET /devices/1.json
+  # GET /devices/1.svg
   def show
     @connected_device = ConnectedDevice.new(device: @device)
+    @graph = SingleDeviceGraph.new device: @device#@connected_device
+    @png   = @graph.to_png
+
+    respond_to do |format|
+      format.html
+      format.svg { render plain: @graph.to_svg }
+    end
   end
 
   # GET /devices/new

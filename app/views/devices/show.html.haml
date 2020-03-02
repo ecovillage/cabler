@@ -82,3 +82,8 @@
       %span.icon
         %i.fa.fa-tags
       =t('show label')
+
+%section.section.box
+  %h3.title.is-4
+    = t('graph')
+  != @graph.to_svg
