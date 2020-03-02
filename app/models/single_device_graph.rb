@@ -61,7 +61,12 @@ class SingleDeviceGraph
   end
 
   def to_svg
-    (@g.output svg: String).force_encoding 'UTF-8'
+    # Modify to use width = 100%
+    svg = (@g.output svg: String).force_encoding 'UTF-8'
+    xml = Nokogiri.XML(svg)
+    xml.at('svg')['width'] = "100%"
+    #shape-rendering="crispEdges" for the rectangle, "auto" for others
+    xml
   end
 
   def to_png
