@@ -1,4 +1,9 @@
+-# SPDX-FileCopyrightText: 2020 Felix Wolfsteller
+-#
+-# SPDX-License-Identifier: AGPL-3.0-or-later
+
 = form_with(model: device, local: true, builder: BulmaFormBuilder::FormBuilder, class: 'box') do |form|
+  = yield
   - if device.errors.any?
     #error_explanation.notification.is-danger
       %h2

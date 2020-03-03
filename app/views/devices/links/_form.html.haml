@@ -1,3 +1,7 @@
+-# SPDX-FileCopyrightText: 2020 Felix Wolfsteller
+-#
+-# SPDX-License-Identifier: AGPL-3.0-or-later
+
 = form_with(model: [@device, link], local: true, builder: BulmaFormBuilder::FormBuilder, class: 'box') do |form|
   -# builder: BulmaFormBuilder::HorizontalBulmaFormBuilder
   - if link.errors.any?
