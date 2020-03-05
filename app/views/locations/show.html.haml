@@ -13,11 +13,19 @@
 
 - if @location.images.present?
   %section
-    %h2.subtitle Images
-    - @location.images.each do |image|
-      = link_to url_for(image), target: '_new' do
-        %figure
-          = image_tag image.variant(resize_to_fill: [180,120]).processed
+    %h2.subtitle
+      %i.fa.fa-image
+      = @location.images.count
+      - if @location.images.count == 1
+        Image
+      - else
+        Images
+    .columns.is-multiline
+      - @location.images.each do |image|
+        .column.is-narrow
+          = link_to url_for(image), target: '_new' do
+            %figure.image
+              = image_tag image.variant(resize_to_fill: [180,120]).processed
     -#= link_to 'Add image', ''
   %br
 
