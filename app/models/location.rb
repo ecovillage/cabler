@@ -6,6 +6,8 @@ class Location < ApplicationRecord
   include HasImages
   extend FriendlyId
 
+  acts_as_tree order: "name"
+
   friendly_id :human_identifier, :use => [:slugged]
 
   has_many :devices
