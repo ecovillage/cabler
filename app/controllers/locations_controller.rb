@@ -20,7 +20,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new
+    @location = Location.new (location_params)
   end
 
   # GET /locations/1/edit
@@ -73,8 +73,8 @@ class LocationsController < ApplicationController
       @location = Location.friendly.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def location_params
-      params.require(:location).permit(:name, images: [])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def location_params
+    params.fetch(:location, {}).permit(:name, :parent_id, images: [])
+  end
 end

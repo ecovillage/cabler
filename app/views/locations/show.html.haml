@@ -5,11 +5,23 @@
       Location
       = @location.name
   .level-right
-    = link_to edit_location_path(@location), class: 'button level-item' do
+    = link_to edit_location_path(@location), class: 'button level-item is-primary' do
       %span.icon
         %i.fa.fa-edit
       =t('edit')
+    = link_to @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+      %span.icon
+        %i.fa.fa-times
+      =t('destroy')
 
+- if @location.parent
+  %section
+    %h2.subtitle
+      %span.icon
+        %i.fa.fa-globe
+      Parent Location
+      = link_to @location.parent.name, @location.parent
+  %br
 
 - if @location.images.present?
   %section
@@ -37,7 +49,7 @@
     = Device.model_name.human(count: @location.devices.count).capitalize
     at this location
   
-  .columns.is-multiline
+  .columns.is-multiline.is-vcentered
     - @location.devices.find_each do |device|
       .column.is-3
         .card
@@ -64,15 +76,12 @@
           .card-footer
             = link_to 'Edit', edit_device_path(device), class: 'card-footer-item is-6'
     .column.is-3
-      .card
-        %header.card-header
-          %p.card-header-title.is-centered
-            %span.icon
-              %i.fa.fa-hdd
-            = t('new device')
-        .card-content
-          .content
-            = link_to 'add device at this location', new_device_path(location: @location), class: 'button is-primary'
+      = link_to new_device_path(location: @location), class: 'button is-fullwidth is-primary is-outlined' do
+        %span.icon
+          %i.fa.fa-plus
+        %span.icon
+          %i.fas.fa-hdd
+        %span New device at this location
 
 - if @location.links.present?
   %br
@@ -82,19 +91,30 @@
   = render partial: 'connections/table', locals: {connections: @connected_location.connections}
 
 %br
-.level
-  .level-left
-    = link_to edit_location_path(@location), class: 'button level-item' do
-      %span.icon
-        %i.fa.fa-edit
-      =t('edit')
-  .level-right
-    = link_to @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
-      %span.icon
-        %i.fa.fa-times
-      =t('destroy')
--#= link_to 'Back', locations_path
-    = link_to edit_location_path(@location), class: 'button is-warning level-item' do
-      %span.icon
-        %i.fa.fa-trash
-      =t('destroy')
+-# .level
+-#   .level-left
+-#     = link_to edit_location_path(@location), class: 'button level-item is-primary' do
+-#       %span.icon
+-#         %i.fa.fa-edit
+-#       =t('edit')
+-#     = link_to @location, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger' do
+-#       %span.icon
+-#         %i.fa.fa-times
+-#       =t('destroy')
+
+- if @location.children.present?
+  %section
+    %h1.subtitle
+      %i.fa.fa-map-marker-alt
+      = @location.children.count
+      Child
+      = Location.model_name.human(count: @location.children.count)
+  %br
+  .columns.is-multiline
+    - @location.children.each do |child|
+      = render 'location_card', location: child
+
+  = link_to new_location_path(location: {parent_id: @location.id}), class: 'button is-primary is-outlined' do
+    %span.icon
+      %i.fa.fa-plus
+    %span New Child
