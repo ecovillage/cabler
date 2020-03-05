@@ -25,7 +25,7 @@
         .column.is-narrow
           = link_to url_for(image), target: '_new' do
             %figure.image
-              = image_tag image.variant(resize_to_fill: [180,120]).processed
+              = image_tag image.variant(resize_to_fill: [180,120]).processed, class: 'has-rounded-corners is-hoverable'
     -#= link_to 'Add image', ''
   %br
 
