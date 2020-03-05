@@ -1,0 +1,56 @@
+.column.is-one-third
+  .card
+    %header.card-header
+      %p.card-header-title.is-centered
+        = link_to location, class: 'is-dark' do
+          = location.name
+    - if location.images.present?
+      .card-image
+        %figure.image.is-4by3
+          = image_tag location.images.first.variant(resize_to_fill: [320, 240]).processed
+    - else
+      .card-image
+        .container
+          %i.fas.fa-globe.card-placeholder-icon
+          -#= image_tag '', placeholder: 'none yet'
+    .card-content
+      .content
+        %h5
+          = location.devices.count
+          = Device.model_name.human(count: location.devices.count).capitalize
+        - location.devices.each do |device|
+          = link_to device do
+            %span.icon
+              %i.fa.fa-hdd
+            =device.human_identifier
+          %br
+    
+        = link_to new_device_path(location_id: location.id), class: 'button is-primary is-small is-outlined' do
+          %span.icon
+            %i.fa.fa-plus
+          %span.icon
+            %i.fas.fa-hdd
+          = t('add new device')
+        %br
+        %br
+        %h5
+          = location.children.count
+          = Location.model_name.human(count: location.children.count).capitalize
+        - location.children.each do |child|
+          = link_to child do
+            %span.icon
+              %i.fa.fa-map-marker-alt
+            =child.human_identifier
+          %br
+    
+        = link_to new_location_path(location: {parent_id: location.id}), class: 'button is-primary is-small is-outlined' do
+          %span.icon
+            %i.fa.fa-plus
+          %span.icon
+            %i.fas.fa-map-marker-alt
+          = t('add new location')
+    .card-footer
+      = link_to 'Edit', edit_location_path(location), class: 'card-footer-item'
+      = link_to 'Show', location, class: 'card-footer-item'
+      = link_to 'Add device', new_device_path(location_id: location.id), class: 'card-footer-item'
+      = link_to 'Delete', location, method: :delete, data: {confirm: 'Are you sure?'}, class: 'has-text-danger card-footer-item'
