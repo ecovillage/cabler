@@ -2,6 +2,15 @@
 -#
 -# SPDX-License-Identifier: AGPL-3.0-or-later
 
+= form_with model: @label_configuration, url: device_label_path(device_id: @device.id), builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, method: :get do |form|
+  .field.is-horizontal
+    .field-label
+      = form.label :port_orientation, class: 'field-label'
+    .field-body
+      = form.select :port_orientation, ['left', 'right'], class: 'field-body'
+      = form.submit
+
+
 %table.label-table
   %thead
     %tr.device_head

@@ -17,4 +17,8 @@ class Devices::LabelController < ApplicationController
     device = Device.find params[:device_id]
     @device = ConnectedDevice.new(device: device)
   end
+
+  def label_configuration_params
+    params.fetch(:label_configuration, {}).permit(:port_orientation)
+  end
 end
