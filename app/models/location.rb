@@ -23,6 +23,17 @@ class Location < ApplicationRecord
     link_one_ends
   end
 
+  def parents
+    parents = []
+    location = self
+
+    while (location = location.parent)
+      parents << location
+    end
+
+    parents
+  end
+
   validates :name, presence: true, uniqueness: true
 
   def human_identifier

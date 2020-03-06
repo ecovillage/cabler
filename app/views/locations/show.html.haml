@@ -1,11 +1,11 @@
 .level
   .level-left
 
-    %nav.breadcrumb.has-arrow-separator.is-large
+    %nav.breadcrumb.has-arrow-separator.is-large.title
       %ul
-        - get_parents(@location).each do |t|
+        - @location.parents.each do |parent_location|
           %li
-            = link_to t.name, t
+            = link_to parent_location.name, parent_location
 
         %li.is-active
           %span.ml-1
