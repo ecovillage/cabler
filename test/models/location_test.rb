@@ -15,6 +15,8 @@ class LocationTest < ActiveSupport::TestCase
     street  = village.children.create(name: 'street')
     house   =  street.children.create(name: 'house')
 
+    continent = Location.create(name: 'continent')
+
     # direct child
     country.parent = village
     assert_equal false, country.valid?
@@ -22,5 +24,8 @@ class LocationTest < ActiveSupport::TestCase
     # grandchild
     country.parent = street
     assert_equal false, country.valid?
+
+    country.parent = continent
+    assert_equal true, country.valid?
   end
 end
