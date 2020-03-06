@@ -3,7 +3,7 @@
 
     %nav.breadcrumb.has-arrow-separator.is-large
       %ul
-        - (get_parents @location).each do |t|
+        - get_parents(@location).each do |t|
           %li
             = link_to t.name, t
 
@@ -24,11 +24,8 @@
   %section
     %h2.subtitle
       %i.fa.fa-image
-      = @location.images.count
-      - if @location.images.count == 1
-        Image
-      - else
-        Images
+      = pluralize(@location.images.count, "Image")
+
     .columns.is-multiline
       - @location.images.each do |image|
         .column.is-narrow
@@ -104,7 +101,7 @@
   %h1.subtitle
     %i.fa.fa-map-marker-alt
     = @location.children.count
-    Child
+    Sub
     = Location.model_name.human(count: @location.children.count)
 %br
 .columns.is-multiline
@@ -114,4 +111,4 @@
 = link_to new_location_path(location: {parent_id: @location.id}), class: 'button is-primary is-outlined' do
   %span.icon
     %i.fa.fa-plus
-  %span New Child
+  %span New Sub Location
