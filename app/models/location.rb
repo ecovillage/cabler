@@ -40,10 +40,18 @@ class Location < ApplicationRecord
 
   def parent_cannot_be_own_child
     if parent.present?
-      if self.children.exists? parent.id
+      if self.all_children(include_self: false).include? parent
         errors.add(:parent_id, 'Location cannot be sub location and parent location at the same time')
       end
     end
+  end
+
+  def all_children include_self: true
+    me = include_self ? [self] : []
+
+    return me if children.empty?
+
+    me + children.flat_map(&:all_children)
   end
 
   def human_identifier
