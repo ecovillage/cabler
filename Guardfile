@@ -1,21 +1,11 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-## Uncomment and set this to only include directories you want to watch
-# directories %w(app lib config test spec features) \
-#  .select{|d| Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist")}
-
-## Note: if you are using the `directories` clause above and you are not
-## watching the project directory ('.'), then you will want to move
-## the Guardfile to a watched dir and symlink it back, e.g.
+# SPDX-FileCopyrightText: 2020 Felix Wolfsteller
 #
-#  $ mkdir config
-#  $ mv Guardfile config/
-#  $ ln -s config/Guardfile .
-#
-# and, you'll have to watch "config/Guardfile" instead of "Guardfile"
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Guard file for livereload and minitest
+# More general info at https://github.com/guard/guard#readme
 
+# run minitest but exclude tests with "System" in their name (kind of a workaround, we do not want system tests to run at every file change)
 group 'test' do
   guard :minitest, spring: 'bin/rails test', test_folders: ['test/models', 'test/controllers'] , cli: '--exclude "/.*system.*/"' do
     # with Minitest::Unit
@@ -39,13 +29,6 @@ group 'test' do
     # watch(%r{^test/test_helper\.rb$}) { 'test' }
   end
 end
-
-#Guard::Minitest::Runner.module_eval do
-#  def run_all
-#    paths = inspector.clean_all.reject{|p| p.include?('/system/') }
-#    run(paths, all: true)
-#  end
-#end
 
 group 'livereload' do
   guard 'livereload' do
