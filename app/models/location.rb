@@ -36,6 +36,16 @@ class Location < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  validate :parent_cannot_be_own_child
+
+  def parent_cannot_be_own_child
+    if parent.present?
+      if self.children.exists? parent.id
+        errors.add(:parent_id, 'Location cannot be sub location and parent location at the same time')
+      end
+    end
+  end
+
   def human_identifier
     name
   end
