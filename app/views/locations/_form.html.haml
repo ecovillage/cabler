@@ -26,6 +26,10 @@
   -#        Choose a file
   -#    %span.file-name
 
+  .field
+    = form.label :parent_id
+    = form.collection_select :parent_id, Location.where.not(id: @location.id), :id, :human_identifier, prompt: 'select a parent locatation'
+
   .actions
     .level
       .level-item
