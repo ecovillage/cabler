@@ -14,7 +14,7 @@ Some german incubative discussion is found at [https://meta-community.org/](http
 
 #### Locations
 
-Locations should help you understand where e.g. cables end or where devices can be found.
+Locations should help you understand where e.g. cables end or where devices can be found. Locations can be nested (a location can have a *parent* and multiple *child* locations, like a place can have some buildings which can have some rooms).
 
 #### Devices
 
