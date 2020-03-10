@@ -2,7 +2,7 @@
   "name": "cabler",
   "private": true,
   "scripts": {
-    "start": "concurrently \"rails s\" \"guard -i -g livereload\""
+    "dev": "concurrently \"rails s\" \"guard -i -g livereload\""
   },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

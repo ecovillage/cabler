@@ -93,7 +93,7 @@ That means you need have to have
   - clone this repository
   - run `bundle`
   - run `rails db:migrate`
-  - fire up server (in dev, e.g. with `rails s`)
+  - fire up server (in dev, e.g. with `yarn dev` )
   - create a User manually:
   ```bash
   # Fire up a rails console, and enter relevant User.create! data, exit with CTRL+D
