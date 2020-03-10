@@ -29,6 +29,7 @@ one:
   name: Blue Switch
   #location: one
   kind: Switch
+  slug: blue-switch
 
 # More complex example, see README.md
 tln1:

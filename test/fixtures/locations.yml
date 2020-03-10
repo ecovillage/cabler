@@ -16,6 +16,7 @@
 
 one:
   name: Ground Floor
+  slug: ground-floor
 
 two:
   name: Upper Floor
