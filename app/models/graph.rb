@@ -82,14 +82,29 @@ class Graph
         )
         edge[:label]     = link.name
         edge[:arrowhead] = "normal"
+        if @label_edge_ends
+          edge[:headlabel] = link.slot_other_end
+          edge[:taillabel] = link.slot_one_end
+        end
         edge[:arrowtail] = "normal"
         edge[:dir]       = "both"
+        edge[:labeltooltip] = "tooltip"
       end
     end
   end
 
-  def to_svg
-    @g.output svg: String
+  # scale shall be in percent (e.g. '100%')
+  def to_svg(scale: nil)
+    svg = @g.output svg: String
+    if scale.nil?
+      svg
+    else
+      xml = Nokogiri.XML(svg)
+      xml.at('svg')['width']  = scale
+      xml.at('svg')['height'] = scale
+      xml.at('svg')['class']  = 'pannable'
+      xml
+    end
   end
 
   def to_png
