@@ -32,5 +32,9 @@
       = form.submit class: 'button is-primary', value: 'show'
     
   .column
-    .box
-      %img(src="data:image/png;base64,#{Base64.encode64 @png}")
+    .box.wh100p
+      #topology-svg-viewport.wh100p
+        != @graph.to_svg(scale: '100%')
+        :javascript
+          var panZoomTiger = svgPanZoom('.pannable', {contain: true, controlIconsEnabled: true, fit: false});
+
