@@ -193,6 +193,8 @@ ln -s application.html.haml _application.html.haml
   - [HAML](http://haml.info/) for a saner way to produce HTML
   - [devise](https://github.com/heartcombo/devise) for authentication
   - [friendly_id](https://github.com/norman/friendly_id/) for ... friendly ids
+  - [svg-pan-zoom](https://github.com/ariutta/svg-pan-zoom) JS for interating
+    with a SVG similar to a map
   - many others ...
 
 ### Design decisions
