@@ -14,8 +14,11 @@ class TopologyController < ApplicationController
       show_ports:    @graph_configuration.show_ports.to_sym
 
     respond_to do |format|
-      format.html { @png = @graph.to_png }
-      format.png { render plain: @graph.to_png } # send_data , type: 'image/png', disposition: 'inline'
+      format.html
+      format.png { send_data @graph.to_png,
+                     type: 'image/png',
+                     filename: 'cabler-%s.png' % DateTime.now.strftime('%F'),
+                     disposition: 'attachment' }
       format.svg { render plain: @graph.to_svg }
       format.dot { send_data @graph.to_dot,
                      filename: 'cabler_graph.dot',
