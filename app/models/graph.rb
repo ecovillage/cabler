@@ -86,6 +86,7 @@ class Graph
           edge[:headlabel] = link.slot_other_end
           edge[:taillabel] = link.slot_one_end
         end
+        edge[:fontname]  = "Arial"
         edge[:arrowtail] = "normal"
         edge[:dir]       = "both"
         edge[:labeltooltip] = "tooltip"
@@ -147,7 +148,10 @@ class Graph
       end
     end
     device_node[:label] = "{%s}" % label
+    device_node[:fontname] = 'Arial'
     device_node[:href]  = device_path(device)
+    device_node[:style]     = 'filled'
+    device_node[:fillcolor] = '#fefefe'
     @nodes[device] = device_node
   end
 end
