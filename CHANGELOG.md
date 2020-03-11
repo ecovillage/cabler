@@ -1,7 +1,11 @@
 # Changelog
 
-## 0.. ()
-  - 
+## 0.1.3 ()
+  - various visual improvements and fixes
+  - show graph (topology) in device and location views
+  - make topology view use svg, pan- and zoomable
+  - make locations nestable (a location can have many sublocations)
+  - rename slots to ports everywhere (issue #7)
 
 ## 0.1.2 (2020-02-28)
   - topology view: allow configuration of spline, rankdir, ports and boxes
