@@ -15,15 +15,28 @@
         %span.icon
           %i.fa.fa-server
         = t('Devices')
-      = link_to locations_path, class: nav_item_classes(locations_path) do
-        %span.icon
-          %i.fa.fa-globe
-        = t('Locations')
+
+      %div{class: "#{nav_item_classes(locations_path)} navbar-submenu" }
+        = link_to locations_path, class: 'has-text-light' do
+          %span.icon
+            %i.fa.fa-globe
+          =  t('Locations')
+        .navbar-submenu-content.has-background-dark
+          .menu
+            %ul.menu-list
+              %li
+              - @locations.each do |location|
+                %li
+                  = link_to location, onclick: "((e) => (e.stopPropagation())).call({}, ...arguments)" do
+                    %span.icon
+                      %i.fa.fa-map-marker
+                    %span
+                      = location.name
+
       = link_to topology_path, class: nav_item_classes(topology_path) do
         %span.icon
           %i.fa.fa-vector-square
         = t('Topology')
-
 
       -#= link_to topology_path, class: 'navbar-item' do
       -#  %span.icon
@@ -31,12 +44,11 @@
       -#  = t('Labels')
 
     .navbar-end
-      .navbar-item
-        .buttons
-          - if user_signed_in?
-            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
-          - else
-            = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'button'
+
+      - if user_signed_in?
+        = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "navbar-item"
+      - else
+        = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'navbar-item'
 
       = link_to edit_user_registration_path, class: nav_item_classes(edit_user_registration_path) do
         %span.icon
