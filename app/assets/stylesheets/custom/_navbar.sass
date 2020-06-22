@@ -3,6 +3,32 @@
 
 .navbar-item
   transition: background $transitionTime ease
+  @extend a.navbar-item
 
 .navbar-placeholder
   height: $navbar-height
+
+.navbar-submenu
+  position: relative
+  &-content
+    top: 100%
+    left: 0
+    padding: 1rem
+    position: absolute
+    opacity: 0
+    pointer-events: none
+    border-radius: 5px
+    transition: opacity $transitionTime ease
+    max-height: 60vh
+    overflow: auto
+    width: max-content
+
+  &:hover .navbar-submenu-content,
+  &-content:hover,
+    // background: red !important
+    opacity: 1
+    pointer-events: all
+
+  // fix color change on hover
+  .has-text-light:hover span
+    color: $light

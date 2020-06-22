@@ -2,6 +2,27 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# == Schema Information
+#
+# Table name: devices
+#
+#  id               :integer          not null, primary key
+#  name             :string
+#  location_id      :integer
+#  kind             :string
+#  description      :text
+#  num_links        :integer
+#  num_link_rows    :integer
+#  num_link_columns :integer
+#  num_link_blocks  :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  model            :string
+#  manufacturer     :string
+#  connector        :boolean
+#  url              :string
+#
+
 require 'test_helper'
 
 class DeviceTest < ActiveSupport::TestCase

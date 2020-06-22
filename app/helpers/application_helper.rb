@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   # def log(text)
   #   logger.debug(colored_string(text, {'r' => '255', 'g' => '20', 'b' => '90'}))
   # end
