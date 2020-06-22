@@ -13,29 +13,29 @@ class Graph
   # rankdir:       Top-Bottom ('TB') or Left-Right ('LR')
   # splines:       ['ortho']
   # show_ports     ['all', 'filled', 'none']
-  def initialize(devices: nil,
-    locations:       nil,
-    group_locations: true,
+  def initialize(group_locations: true,
     rankdir:         'TB',
     splines:         'line',
     box_locations:   true,
+    algorithm:       'dot',
+    label_edge_ends: true,
     show_ports:      :only_filled)
 
     # Other popular options:
     #  type: :digraph, use: "fdp"
     #  type: :digraph, use: "circo"
     #  ...
-    @g = GraphViz.new(:G, type: :graph, use: "dot")
+    @g = GraphViz.new(:G, type: :graph, use: algorithm)
 
     @g["rankdir"] = rankdir
     @g["splines"] = splines
 
     @g["nodesep"] = "2"
 
-    @show_ports  = show_ports
+    @show_ports      = show_ports
+    @label_edge_ends = label_edge_ends
 
-    @devices     = devices || Device.all
-    @locations   = locations || Location.all
+    @devices     = Device.all
     @links       = Link.all
 
     # Subgraphs / clusters
@@ -43,17 +43,9 @@ class Graph
 
     @nodes = {}
 
-    if box_locations
-      @locations.each do |location|
-        c = @g.add_graph("cluster_#{location.object_id}")
-        c[:label]   = location.human_identifier
-        c[:rankdir] = 'TB'
-        c[:href]    = Rails.application.routes.url_helpers.location_path(location)
-        @location_clusters[location] = c
-      end
-    end
+    create_location_clusers(box_locations)
 
-    @devices.each do |device|
+    @devices.includes(:location).find_each do |device|
       add_device_node_with_ports device
       #device_node = @g.add_nodes(device.human_identifier)
       ##device_node[:shape] = 'box3d'
@@ -74,7 +66,7 @@ class Graph
     #  end
     #end
 
-    @links.each do |link|
+    @links.includes(:one_end, :other_end).find_each do |link|
       if link.one_end && link.other_end
         edge = @g.add_edges(
           {node_for(link.one_end)   => "p#{link.port_one_end}"},
@@ -95,7 +87,7 @@ class Graph
   end
 
   # scale shall be in percent (e.g. '100%')
-  def to_svg(scale: nil)
+  def to_svg(scale: nil, id: nil, classes: 'pannable')
     svg = @g.output svg: String
     if scale.nil?
       svg
@@ -103,7 +95,10 @@ class Graph
       xml = Nokogiri.XML(svg)
       xml.at('svg')['width']  = scale
       xml.at('svg')['height'] = scale
-      xml.at('svg')['class']  = 'pannable'
+      xml.at('svg')['class']  = classes
+      if id
+        xml.at('svg')['id']  = id
+      end
       xml
     end
   end
@@ -129,6 +124,11 @@ class Graph
         #location_node[:shape]='ellipse'
         #location_node[:href]='ellipse'
       node = graph_for(object).add_nodes(object.human_identifier)
+      node[:style] = 'filled'
+      node[:fillcolor] = '#ffffff'
+      @nodes[object] = node
+    else
+      node = graph_for(object).add_nodes(object.human_identifier)
       @nodes[object] = node
     end
   end
@@ -153,5 +153,37 @@ class Graph
     device_node[:style]     = 'filled'
     device_node[:fillcolor] = '#fefefe'
     @nodes[device] = device_node
+  end
+
+  def create_location_clusers(box_locations)
+    if box_locations
+      Location.roots.find_each do |location|
+        c = @g.add_graph("cluster_#{location.object_id}")
+        c[:label]   = location.human_identifier
+        c[:style]     = 'filled'
+        c[:fillcolor] = '#f2f2f2'
+        c[:fontname] = 'Arial'
+        c[:rankdir] = 'TB'
+        c[:href]    = Rails.application.routes.url_helpers.location_path(location)
+        @location_clusters[location] = c
+
+        add_child_locations(location)
+      end
+    end
+  end
+
+  def add_child_locations location
+    location.children.find_each do |child_location|
+      Rails.logger.debug 'bla'
+      c = graph_for(location).add_graph("cluster_#{child_location.object_id}")
+      c[:label]   = child_location.human_identifier
+      c[:style]     = 'filled'
+      c[:fillcolor] = '#f9f9f9'
+      c[:fontname] = 'Arial'
+      c[:rankdir] = 'TB'
+      c[:href]    = Rails.application.routes.url_helpers.location_path(child_location)
+      @location_clusters[child_location] = c
+      add_child_locations(child_location)
+    end
   end
 end
