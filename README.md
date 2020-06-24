@@ -154,6 +154,11 @@ Contributions are very welcome.  Copyright-transfer of modifications to Felix Wo
 
 For fun, some of the files include comments to be compliant with [(FSFEs) reuse](https://reuse.software/).
 
+### Mails
+
+`gem install mailcatcher && mailcatcher && xdg-open localhost:1080` to install,
+start and open mailcatcher. Should work out of the box in development mode.
+
 ## (Developer) Documentation
 
 ### Principles and goals
