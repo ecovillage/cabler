@@ -2,7 +2,7 @@
 -#
 -# SPDX-License-Identifier: AGPL-3.0-or-later
 
-%h1.title Dashboard Cabler
+%h1.title.has-text-centered Dashboard
 
 %section.devices
   %h2.subtitle
@@ -20,6 +20,7 @@
           %span.has-text-link
             = device.human_identifier
 
+  .columns.is-vcentered.is-centered
     .column.is-2
       = link_to new_device_path, class: 'button is-primary is-fullwidth' do
         %span.icon
@@ -44,6 +45,7 @@
           %span.has-text-link
             = location.name
 
+  .columns.is-vcentered.is-centered
     .column.is-2
       = link_to new_location_path, class: 'button is-primary is-fullwidth' do
         %span.icon
