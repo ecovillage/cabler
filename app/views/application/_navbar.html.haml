@@ -25,13 +25,20 @@
           .menu
             %ul.menu-list
               %li
-              - @locations.each do |location|
+              - @nav_locations.each do |location|
                 %li
                   = link_to location, onclick: "((e) => (e.stopPropagation())).call({}, ...arguments)" do
                     %span.icon
                       %i.fa.fa-map-marker
                     %span
                       = location.name
+              %hr.navbar-divider
+              %li
+                = link_to new_location_path do
+                  %span.icon
+                    %i.fa.fa-plus
+                  %span
+                    = t('new_location')
 
       = link_to topology_path, class: nav_item_classes(topology_path) do
         %span.icon
