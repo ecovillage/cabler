@@ -12,37 +12,55 @@
 .columns
   .column
     %h2.subtitle Properties
-    - if @device.location
-      %p
-        %strong Location:
-        %i.fa.fa-globe
-        = link_to @device.location.name, @device.location
-    - if @device.kind.present?
-      %p
-        %strong Kind:
-        = @device.kind
-    - if @device.description.present?
-      %p
-        %strong Description:
-        = @device.description
-    - if @device.num_links.present?
-      %p
-        %strong Number Links:
-        = @device.num_links
-    - if @device.model.present?
-      %p
-        %strong Model:
-        = @device.model
-    - if @device.manufacturer.present?
-      %p
-        %strong Manufacturer:
-        = @device.manufacturer
-    - if @device.url.present?
-      %p
-        %strong URL
-        = link_to @device.url, @device.url, target: '_new'
+    %table.table
+      %tbody
+        - if @device.location
+          %tr
+            %td
+              %strong Location
+            %td
+              %span.icon
+                %i.fa.fa-globe
+              = link_to @device.location.name, @device.location
+        - if @device.kind.present?
+          %tr
+            %td
+              %strong Kind
+            %td
+              = @device.kind
+        - if @device.description.present?
+          %tr
+            %td
+              %strong Description
+            %td
+              = @device.description
+        - if @device.num_links.present?
+          %tr
+            %td
+              %strong Number Links
+            %td
+              = @device.num_links
+        - if @device.model.present?
+          %tr
+            %td
+              %strong Model
+            %td
+              = @device.model
+        - if @device.manufacturer.present?
+          %tr
+            %td
+              %strong Manufacturer
+            %td
+              = @device.manufacturer
+        - if @device.url.present?
+          %tr
+            %td
+              %strong URL
+            %td
+              = link_to @device.url, @device.url, target: '_new'
+
   .column
-    - if @device.images
+    - if @device.images.present?
       %h2.subtitle Images
       .columns
         .column
