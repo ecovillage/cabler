@@ -14,7 +14,7 @@
     %tr.link_head
       %th(colspan=3)
         = t('.date')
-        = DateTime.now
+        = l(DateTime.current, format: '%Y-%m-%d %H:%M')
     %tr.link_head
       - if @label_configuration.ports_left?
         %th.own_port
@@ -89,4 +89,10 @@
               - if next_connection = next_connection.next_connection
                 (->#{next_connection.target.human_identifier})
 
+%br
 
+= link_to '', :onclick => 'window.print();return false;', class: 'button printhide has-text-link' do
+  %span.icon
+    %i.fas.fa-print
+  %span
+    = t('print')
