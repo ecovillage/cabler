@@ -44,9 +44,10 @@ class DevicesController < ApplicationController
     @device = Device.new(device_params)
 
     if params.dig(:device, :create_new_location).present?
-      location = Location.create! name: params.dig(:device, :create_new_location)
+      location = Location.find_or_create_by! name: params.dig(:device, :create_new_location)
       @device.location = location
     end
+
     if params.dig(:device, :other_kind).present?
       @device.kind = params.dig(:device, :other_kind)
     end

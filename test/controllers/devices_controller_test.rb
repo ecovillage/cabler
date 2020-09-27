@@ -63,4 +63,20 @@ class DevicesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to devices_url
   end
+
+  test "should allow tricky new location creation (assign location by name)" do
+    sign_in users(:admin)
+
+    assert_difference('Device.count', 1) do
+      post devices_url, params: {
+        device: {
+          kind: @device.kind,
+          create_new_location: 'Office',
+          name: @device.name + "_unique" } }
+    end
+
+    new_device = Device.last
+    assert_redirected_to device_url(new_device)
+    assert_equal locations(:office), new_device.location
+  end
 end
