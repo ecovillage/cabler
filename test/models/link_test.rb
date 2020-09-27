@@ -30,6 +30,6 @@ class LinkTest < ActiveSupport::TestCase
   test "#port_for answers correctly" do
     assert_equal 1, links(:tln1_router).port_for(devices(:tln1))
     assert_equal 2, links(:tln1_router).port_for(devices(:router))
-    assert_equal nil, links(:tln1_router).port_for(devices(:tln2))
+    assert_nil links(:tln1_router).port_for(devices(:tln2))
   end
 end
