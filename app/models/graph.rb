@@ -174,7 +174,7 @@ class Graph
 
   def create_location_clusers
     Location.roots.find_each do |location|
-      c = @g.add_graph("cluster_#{location.object_id}")
+      c = @g.add_graph(Graph::Node.cluster_name location)
       c[:label]     = location.human_identifier
       c[:style]     = 'filled'
       c[:fillcolor] = '#f2f2f2'
@@ -190,7 +190,7 @@ class Graph
   def add_child_locations location
     location.children.find_each do |child_location|
       Rails.logger.debug 'bla'
-      c = graph_for(location).add_graph("cluster_#{child_location.object_id}")
+      c = graph_for(location).add_graph(Graph::Node.cluster_name location)
       c[:label]     = child_location.human_identifier
       c[:style]     = 'filled'
       c[:fillcolor] = '#f9f9f9'

@@ -14,6 +14,21 @@ class GraphTest < ActiveSupport::TestCase
 
     assert_equal 7, graph.nodes.count
 
+    subgraphs = []
+    graph.g.each_graph do |g|
+      subgraphs << g
+    end
+
+    exp_cluster_names = [locations(:one),
+                         locations(:office),
+                         locations(:floor),
+                         locations(:basement),
+                         locations(:two)].map{|l| Graph::Node.cluster_name l}
+
+    assert_equal exp_cluster_names.sort, subgraphs.sort
+
+    assert_equal 7, graph.nodes.count
+
     assert_equal 7, graph.g.graph_count
 
     # count nodes and edges over all nested graphs
