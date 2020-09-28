@@ -49,16 +49,7 @@ class Graph
       create_location_clusers
     end
 
-    @devices.includes(:location).find_each do |device|
-      add_device_node_with_ports device
-      #device_node = @g.add_nodes(device.human_identifier)
-      ##device_node[:shape] = 'box3d'
-      #device_node[:shape]='record'
-      #device_node[:label] = "{#{device.human_identifier}|<p0> 1|<p1> 2|<p2> 3|<p3> 4|<p4> 5|<p5> 6}"
-      #device_nodes[device] = device_node
-      #nodes[device] = device_node
-    end
-
+    add_device_nodes(@devices.includes(:location))
 
     # if show_locations
     #@devices.each do |device|
@@ -70,24 +61,7 @@ class Graph
     #  end
     #end
 
-    @links.includes(:one_end, :other_end).find_each do |link|
-      if link.one_end && link.other_end
-        edge = @g.add_edges(
-          {node_for(link.one_end)   => "p#{link.port_one_end}"},
-          {node_for(link.other_end) => "p#{link.port_other_end}"}
-        )
-        edge[:label]     = link.name
-        edge[:arrowhead] = "normal"
-        if @label_edge_ends
-          edge[:headlabel] = link.slot_other_end
-          edge[:taillabel] = link.slot_one_end
-        end
-        edge[:fontname]  = "Arial"
-        edge[:arrowtail] = "normal"
-        edge[:dir]       = "both"
-        edge[:labeltooltip] = "tooltip"
-      end
-    end
+    add_links(@links.includes(:one_end, :other_end))
   end
 
   # scale shall be in percent (e.g. '100%')
@@ -137,6 +111,18 @@ class Graph
     end
   end
 
+  def add_device_nodes(devices)
+    devices.find_each do |device|
+      add_device_node_with_ports device
+      #device_node = @g.add_nodes(device.human_identifier)
+      ##device_node[:shape] = 'box3d'
+      #device_node[:shape]='record'
+      #device_node[:label] = "{#{device.human_identifier}|<p0> 1|<p1> 2|<p2> 3|<p3> 4|<p4> 5|<p5> 6}"
+      #device_nodes[device] = device_node
+      #nodes[device] = device_node
+    end
+  end
+
   def add_device_node_with_ports device
     # node_for would suffice
     device_node = graph_for(device.location).add_nodes(device.human_identifier, shape: 'record')
@@ -157,6 +143,27 @@ class Graph
     device_node[:style]     = 'filled'
     device_node[:fillcolor] = '#fefefe'
     @nodes[device] = device_node
+  end
+
+  def add_links(links)
+    links.find_each do |link|
+      if link.one_end && link.other_end
+        edge = @g.add_edges(
+          {node_for(link.one_end)   => "p#{link.port_one_end}"},
+          {node_for(link.other_end) => "p#{link.port_other_end}"}
+        )
+        edge[:label]     = link.name
+        edge[:arrowhead] = "normal"
+        if @label_edge_ends
+          edge[:headlabel] = link.port_other_end
+          edge[:taillabel] = link.port_one_end
+        end
+        edge[:fontname]  = "Arial"
+        edge[:arrowtail] = "normal"
+        edge[:dir]       = "both"
+        edge[:labeltooltip] = "tooltip"
+      end
+    end
   end
 
   def create_location_clusers
