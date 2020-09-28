@@ -45,7 +45,9 @@ class Graph
 
     @nodes = {}
 
-    create_location_clusers(box_locations)
+    if box_locations
+      create_location_clusers
+    end
 
     @devices.includes(:location).find_each do |device|
       add_device_node_with_ports device
@@ -157,20 +159,18 @@ class Graph
     @nodes[device] = device_node
   end
 
-  def create_location_clusers(box_locations)
-    if box_locations
-      Location.roots.find_each do |location|
-        c = @g.add_graph("cluster_#{location.object_id}")
-        c[:label]   = location.human_identifier
-        c[:style]     = 'filled'
-        c[:fillcolor] = '#f2f2f2'
-        c[:fontname] = 'Arial'
-        c[:rankdir] = 'TB'
-        c[:href]    = Rails.application.routes.url_helpers.location_path(location)
-        @location_clusters[location] = c
+  def create_location_clusers
+    Location.roots.find_each do |location|
+      c = @g.add_graph("cluster_#{location.object_id}")
+      c[:label]   = location.human_identifier
+      c[:style]     = 'filled'
+      c[:fillcolor] = '#f2f2f2'
+      c[:fontname] = 'Arial'
+      c[:rankdir] = 'TB'
+      c[:href]    = Rails.application.routes.url_helpers.location_path(location)
+      @location_clusters[location] = c
 
-        add_child_locations(location)
-      end
+      add_child_locations(location)
     end
   end
 
