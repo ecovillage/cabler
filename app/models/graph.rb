@@ -11,10 +11,11 @@ class Graph
 
   # box_locations: draw a frame around locations and group
   #                devices in them
-  # see https://graphviz.gitlab.io/
   # rankdir:       Top-Bottom ('TB') or Left-Right ('LR')
   # splines:       ['ortho']
   # show_ports     ['all', 'filled', 'none']
+  #
+  # see https://graphviz.gitlab.io/
   def initialize(group_locations: true,
     rankdir:         'TB',
     splines:         'line',
@@ -92,17 +93,20 @@ class Graph
   private
 
   # Allow locations to be in clusters (or not)
+  # If so, nodes need to be added to a subgraph (so far, only location_clusters)
   def graph_for object
     @location_clusters[object] || @g
   end
 
+  # Either returns memoized node or creates and adds a new node
   def node_for object
     return @nodes[object] if @nodes[object]
+
     if object.instance_of? Location
         #location_node[:shape]='ellipse'
         #location_node[:href]='ellipse'
       node = graph_for(object).add_nodes(object.human_identifier)
-      node[:style] = 'filled'
+      node[:style]     = 'filled'
       node[:fillcolor] = '#ffffff'
       @nodes[object] = node
     else
@@ -137,9 +141,9 @@ class Graph
         label += "|<p#{port}> #{port}"
       end
     end
-    device_node[:label] = "{%s}" % label
-    device_node[:fontname] = 'Arial'
-    device_node[:href]  = device_path(device)
+    device_node[:label]     = "{%s}" % label
+    device_node[:fontname]  = 'Arial'
+    device_node[:href]      = device_path(device)
     device_node[:style]     = 'filled'
     device_node[:fillcolor] = '#fefefe'
     @nodes[device] = device_node
@@ -155,12 +159,14 @@ class Graph
         edge[:label]     = link.name
         edge[:arrowhead] = "normal"
         if @label_edge_ends
+          #edge[:headlabel] = link.slot_other_end
+          #edge[:taillabel] = link.slot_one_end
           edge[:headlabel] = link.port_other_end
           edge[:taillabel] = link.port_one_end
         end
-        edge[:fontname]  = "Arial"
-        edge[:arrowtail] = "normal"
-        edge[:dir]       = "both"
+        edge[:fontname]     = "Arial"
+        edge[:arrowtail]    = "normal"
+        edge[:dir]          = "both"
         edge[:labeltooltip] = "tooltip"
       end
     end
@@ -169,12 +175,12 @@ class Graph
   def create_location_clusers
     Location.roots.find_each do |location|
       c = @g.add_graph("cluster_#{location.object_id}")
-      c[:label]   = location.human_identifier
+      c[:label]     = location.human_identifier
       c[:style]     = 'filled'
       c[:fillcolor] = '#f2f2f2'
-      c[:fontname] = 'Arial'
-      c[:rankdir] = 'TB'
-      c[:href]    = Rails.application.routes.url_helpers.location_path(location)
+      c[:fontname]  = 'Arial'
+      c[:rankdir]   = 'TB'
+      c[:href]      = Rails.application.routes.url_helpers.location_path(location)
       @location_clusters[location] = c
 
       add_child_locations(location)
@@ -185,12 +191,12 @@ class Graph
     location.children.find_each do |child_location|
       Rails.logger.debug 'bla'
       c = graph_for(location).add_graph("cluster_#{child_location.object_id}")
-      c[:label]   = child_location.human_identifier
+      c[:label]     = child_location.human_identifier
       c[:style]     = 'filled'
       c[:fillcolor] = '#f9f9f9'
-      c[:fontname] = 'Arial'
-      c[:rankdir] = 'TB'
-      c[:href]    = Rails.application.routes.url_helpers.location_path(child_location)
+      c[:fontname]  = 'Arial'
+      c[:rankdir]   = 'TB'
+      c[:href]      = Rails.application.routes.url_helpers.location_path(child_location)
       @location_clusters[child_location] = c
       add_child_locations(child_location)
     end
