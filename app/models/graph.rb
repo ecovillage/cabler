@@ -2,10 +2,12 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Implementation is a total hack
+# still need to figure out how a sensible output would look like
 class Graph
   include Rails.application.routes.url_helpers
 
-  attr_reader :g
+  attr_reader :g, :nodes
 
   # box_locations: draw a frame around locations and group
   #                devices in them
